@@ -8,7 +8,6 @@ export default function ContinueWithGoogle() {
             bg={"transparent"}
             p={"6"}
             variant="outline"
-            color={"gray.600"}
         >
             <Image
                 src="/google.png"

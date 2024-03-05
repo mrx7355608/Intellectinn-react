@@ -3,9 +3,12 @@ import { VStack, Text } from "@chakra-ui/react";
 import EmailInput from "../../components/form/EmailInput";
 import PasswordInput from "../../components/form/PasswordInput";
 import FormSubmitButton from "../../components/form/FormSubmitButton";
+import fetchFromServer from "../../utils/fetchFromServer";
+import ShowApiError from "../../components/form/ShowApiError";
 
 export default function LoginForm() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [apiError, setApiError] = useState<string>("");
     const [creds, setCreds] = useState({
         email: "",
         password: "",
@@ -13,6 +16,7 @@ export default function LoginForm() {
 
     return (
         <VStack as="form" onSubmit={onSubmitHandler} w="full">
+            {apiError && <ShowApiError error={apiError} />}
             <EmailInput onChangeHandler={onChangeHandler} />
             <PasswordInput onChangeHandler={onChangeHandler} />
             <Text
@@ -32,10 +36,27 @@ export default function LoginForm() {
         setCreds({ ...creds, [name]: value });
     }
 
-    function onSubmitHandler(e: FormEvent<HTMLDivElement>) {
+    async function onSubmitHandler(e: FormEvent<HTMLDivElement>) {
         e.preventDefault();
         setIsLoading(true);
-        console.log(creds);
-        setTimeout(() => setIsLoading(false), 3000);
+        setApiError("");
+        await login();
+        setIsLoading(false);
+    }
+
+    async function login() {
+        const response = await fetchFromServer("/api/auth/login", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(creds),
+        });
+        if (response.error) {
+            setApiError(response.error);
+            return setTimeout(() => setApiError(""), 4000);
+        }
+        console.log({ data: response.data });
     }
 }
