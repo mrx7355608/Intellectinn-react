@@ -13,7 +13,7 @@ export default function Signup() {
             <SignupForm />
             <Divider my="7" />
             <ContinueWithGoogle />
-            <Text color="gray.400" mt={"4"}>
+            <Text mt={"4"}>
                 Already a member?{" "}
                 <Link to="/auth/login">
                     <Text as="span" fontWeight={"medium"} color="teal">

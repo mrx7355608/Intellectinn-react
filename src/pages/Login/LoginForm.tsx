@@ -17,7 +17,6 @@ export default function LoginForm() {
             <PasswordInput onChangeHandler={onChangeHandler} />
             <Text
                 cursor={"pointer"}
-                color={"gray.400"}
                 fontWeight={"medium"}
                 fontSize={"sm"}
                 ml={"auto"}
