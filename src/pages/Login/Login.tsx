@@ -1,6 +1,7 @@
-import { Heading, VStack, Divider } from "@chakra-ui/react";
+import { Heading, VStack, Divider, Text } from "@chakra-ui/react";
 import LoginForm from "./LoginForm";
 import ContinueWithGoogle from "../../components/form/ContinueWithGoogle";
+import { Link } from "react-router-dom";
 
 export default function Login() {
     return (
@@ -11,6 +12,14 @@ export default function Login() {
             <LoginForm />
             <Divider my="7" />
             <ContinueWithGoogle />
+            <Text color="gray.400" mt={"4"}>
+                Not a member?{" "}
+                <Link to="/auth/signup">
+                    <Text as="span" fontWeight={"medium"} color="teal">
+                        Signup
+                    </Text>
+                </Link>
+            </Text>
         </VStack>
     );
 }
