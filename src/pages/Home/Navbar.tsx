@@ -15,6 +15,8 @@ export default function Navbar() {
             w={"full"}
             pos={"fixed"}
             top={"0"}
+            borderBottom={"1px"}
+            color={"black"}
         >
             <Heading ml={"9"} fontWeight={"bold"} fontSize={"2xl"}>
                 Intellect-Inn
