@@ -8,7 +8,11 @@ export default function DarkModeToggle() {
 
     return (
         <Button onClick={toggleColorMode} bg="transparent">
-            {colorMode === "light" ? <IoMoonSharp /> : <FaSun />}
+            {colorMode === "light" ? (
+                <IoMoonSharp size={18} />
+            ) : (
+                <FaSun size={18} color="#000" />
+            )}
         </Button>
     );
 }
