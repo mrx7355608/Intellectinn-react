@@ -7,8 +7,11 @@ import FullnameInput from "../../components/form/FullnameInput";
 import ConfirmPasswordInput from "../../components/form/ConfirmPasswordInput";
 import ShowApiError from "../../components/form/ShowApiError";
 import fetchFromServer from "../../utils/fetchFromServer";
+import { IUser } from "../../types/user";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupForm() {
+    const navTo = useNavigate();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [apiError, setApiError] = useState<string>("");
     const [creds, setCreds] = useState({
@@ -42,7 +45,7 @@ export default function SignupForm() {
     }
 
     async function signup() {
-        const response = await fetchFromServer("/api/auth/signup", {
+        const response = await fetchFromServer<IUser>("/api/auth/signup", {
             method: "POST",
             credentials: "include",
             headers: {
@@ -54,6 +57,9 @@ export default function SignupForm() {
             setApiError(response.error);
             return setTimeout(() => setApiError(""), 4000);
         }
-        console.log(response);
+        // TODO: show a success toast
+
+        // Redirect to login page
+        navTo("/auth/login");
     }
 }
