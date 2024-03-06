@@ -6,13 +6,7 @@ import {
     Dispatch,
     SetStateAction,
 } from "react";
-
-interface IUser {
-    name: string;
-    password: string;
-    email: string;
-    profilePicture: string;
-}
+import { IUser } from "../types/user";
 
 interface IAuthContext {
     user: IUser | null;
