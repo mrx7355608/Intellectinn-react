@@ -29,13 +29,17 @@ export default function Navbar() {
                 mr={"9"}
             >
                 <Link to={"/"}>
-                    <Text>Home</Text>
+                    <Text _hover={{ color: "teal.500" }}>Home</Text>
                 </Link>
                 <Link to={"/"}>
-                    <Text mx="1">Write</Text>
+                    <Text mx="1" _hover={{ color: "teal.500" }}>
+                        Write
+                    </Text>
                 </Link>
                 <Link to={"/auth/login"}>
-                    <Text mx="1">Login</Text>
+                    <Text mx="1" _hover={{ color: "teal.500" }}>
+                        Login
+                    </Text>
                 </Link>
                 <Link to={"/auth/Signup"}>
                     <Button
