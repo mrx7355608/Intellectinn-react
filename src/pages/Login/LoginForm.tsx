@@ -5,8 +5,11 @@ import PasswordInput from "../../components/form/PasswordInput";
 import FormSubmitButton from "../../components/form/FormSubmitButton";
 import fetchFromServer from "../../utils/fetchFromServer";
 import ShowApiError from "../../components/form/ShowApiError";
+import { useAuthContext } from "../../context/auth";
+import { IUser } from "../../types/user";
 
 export default function LoginForm() {
+    const { setUser } = useAuthContext();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [apiError, setApiError] = useState<string>("");
     const [creds, setCreds] = useState({
@@ -45,7 +48,7 @@ export default function LoginForm() {
     }
 
     async function login() {
-        const response = await fetchFromServer("/api/auth/login", {
+        const response = await fetchFromServer<IUser>("/api/auth/login", {
             method: "POST",
             credentials: "include",
             headers: {
@@ -57,6 +60,6 @@ export default function LoginForm() {
             setApiError(response.error);
             return setTimeout(() => setApiError(""), 4000);
         }
-        console.log({ data: response.data });
+        setUser(response.data);
     }
 }
