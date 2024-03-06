@@ -31,7 +31,7 @@ export default function Navbar() {
                 <Link to={"/"}>
                     <Text _hover={{ color: "teal.500" }}>Home</Text>
                 </Link>
-                <Link to={"/"}>
+                <Link to={"/write"}>
                     <Text mx="1" _hover={{ color: "teal.500" }}>
                         Write
                     </Text>

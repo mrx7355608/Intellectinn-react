@@ -9,6 +9,7 @@ import fetchFromServer from "./utils/fetchFromServer";
 import { useAuthContext } from "./context/auth";
 import { IUser } from "./types/user";
 import { Spinner, Text, Box } from "@chakra-ui/react";
+import Writepage from "./pages/Write/Writepage";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />,
+            },
+            {
+                path: "/write",
+                element: <Writepage />,
             },
         ],
     },
