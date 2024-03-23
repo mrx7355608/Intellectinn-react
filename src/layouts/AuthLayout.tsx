@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
-import { Container, Spinner } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 import { Suspense } from "react";
+import AuthlayoutSpinner from "../components/Spinners/AuthlayoutSpinner";
 
 export default function AuthLayout() {
     return (
-        <Suspense fallback={<Spinner />}>
+        <Suspense fallback={<AuthlayoutSpinner />}>
             <Container
                 minH="100vh"
                 maxW="md"
