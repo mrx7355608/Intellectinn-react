@@ -2,7 +2,7 @@ import { Heading, Box, Text, Image } from "@chakra-ui/react";
 
 export default function TitleAndSummary() {
     return (
-        <Box py="4">
+        <Box py="2">
             <Box
                 display="flex"
                 alignItems="start"
@@ -14,11 +14,16 @@ export default function TitleAndSummary() {
                     <Text mt="2">
                         This is an article's summary. This is an article's
                         summary. This is an article's summary. This is an
-                        article's summary. This is an article's summary. This is
-                        an article's summary.
+                        summary.
                     </Text>
                 </Box>
-                <Image src="/hero.jpg" alt="thumbnail" w="150px" h="full" />
+                <Image
+                    src="/hero.jpg"
+                    alt="thumbnail"
+                    w="150px"
+                    h="full"
+                    ml="7"
+                />
             </Box>
         </Box>
     );
