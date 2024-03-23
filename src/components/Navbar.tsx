@@ -19,7 +19,7 @@ export default function Navbar() {
             top={"0"}
             borderBottom={"1px"}
             color={"black"}
-            borderColor={"gray.600"}
+            borderColor={pathname === "/" ? "gray.600" : "gray.200"}
             zIndex={3}
         >
             <Box
