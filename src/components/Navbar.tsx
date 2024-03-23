@@ -39,6 +39,7 @@ export default function Navbar() {
                 justifyContent={"center"}
                 gap={"5"}
                 mr={"9"}
+                fontSize={"sm"}
             >
                 <Link to={"/"}>
                     <Text _hover={{ color: "teal.500" }}>Home</Text>
@@ -59,6 +60,7 @@ export default function Navbar() {
                         px={"5"}
                         pb={"0.5"}
                         colorScheme="teal"
+                        size={"sm"}
                     >
                         Signup
                     </Button>
