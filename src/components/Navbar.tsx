@@ -1,26 +1,38 @@
 import { Box, Text, Heading, Button } from "@chakra-ui/react";
 import DarkModeToggle from "./DarkModeToggle";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import Searchbar from "./Searchbar";
 
 export default function Navbar() {
+    const { pathname } = useLocation();
     return (
         <Box
             display={"flex"}
             alignItems={"center"}
             justifyContent={"space-between"}
             px={"14"}
-            py={"5"}
+            py={"3"}
             shadow={"sm"}
-            bg={"transparent"}
+            bg={pathname === "/" ? "transparent" : "white"}
             w={"full"}
             pos={"fixed"}
             top={"0"}
             borderBottom={"1px"}
             color={"black"}
+            borderColor={"gray.600"}
+            zIndex={3}
         >
-            <Heading ml={"9"} fontWeight={"bold"} fontSize={"2xl"}>
-                Intellect-Inn
-            </Heading>
+            <Box
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                gap={"3"}
+            >
+                <Heading ml={"9"} fontWeight={"bold"} fontSize={"2xl"}>
+                    Intellect-Inn
+                </Heading>
+                {pathname === "/" ? null : <Searchbar />}
+            </Box>
             <Box
                 display={"flex"}
                 alignItems={"center"}
