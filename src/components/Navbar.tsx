@@ -1,5 +1,5 @@
 import { Box, Text, Heading, Button } from "@chakra-ui/react";
-import DarkModeToggle from "../../components/DarkModeToggle";
+import DarkModeToggle from "./DarkModeToggle";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
