@@ -1,27 +1,19 @@
-import { Outlet, useNavigate } from "react-router-dom";
-import { Container } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { useAuthContext } from "../context/auth";
+import { Outlet } from "react-router-dom";
+import { Container, Spinner } from "@chakra-ui/react";
+import { Suspense } from "react";
 
 export default function AuthLayout() {
-    const { user } = useAuthContext();
-    const navTo = useNavigate();
-
-    useEffect(() => {
-        if (user) {
-            navTo("/");
-        }
-    }, [user, navTo]);
-
     return (
-        <Container
-            minH="100vh"
-            maxW="md"
-            display={"flex"}
-            justifyContent={"center"}
-            alignItems={"center"}
-        >
-            <Outlet />
-        </Container>
+        <Suspense fallback={<Spinner />}>
+            <Container
+                minH="100vh"
+                maxW="md"
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+            >
+                <Outlet />
+            </Container>
+        </Suspense>
     );
 }
