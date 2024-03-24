@@ -7,7 +7,7 @@ export default function Author() {
             <Image
                 src="/vite.svg"
                 alt="author profile picture"
-                w="22px"
+                w="19px"
                 rounded="full"
                 objectFit="cover"
             />

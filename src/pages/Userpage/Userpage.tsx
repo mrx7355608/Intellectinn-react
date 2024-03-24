@@ -7,6 +7,8 @@ import {
     TabPanel,
     Text,
     Heading,
+    Image,
+    Button,
 } from "@chakra-ui/react";
 import ArticlesList from "../../components/Articles/ArticlesList";
 import Author from "../../components/Articles/Author";
@@ -27,7 +29,7 @@ export default function Userpage() {
     ];
     return (
         <Box minH="100vh" display="flex" alignItems="start" p="0">
-            <Box w="70vw" p="12">
+            <Box w="68vw" p="12">
                 <Tabs size={"sm"} mt="12">
                     <TabList overflowY="hidden" height={"full"}>
                         {tags.map((t) => (
@@ -51,50 +53,207 @@ export default function Userpage() {
                 flexDirection="column"
                 p="10"
                 borderLeft="1px"
-                borderColor="gray.400"
+                borderColor="gray.200"
                 minH="100vh"
             >
                 {/* editor's pick */}
                 <Box mt="16" mb="10">
-                    <Heading fontSize="xl">Editor's pick</Heading>
+                    <Heading fontSize="md" mb="7">
+                        Staff picks
+                    </Heading>
                     <Box mt="6">
                         <Author />
-                        <Heading fontSize="lg" mt="2" color="gray.700">
+                        <Heading fontSize="md" mt="2" color="gray.700">
                             How typescript can be haunting for some people
                         </Heading>
                     </Box>
 
                     <Box mt="6">
                         <Author />
-                        <Heading fontSize="lg" mt="2" color="gray.700">
+                        <Heading fontSize="md" mt="2" color="gray.700">
                             Why people feel inferiority complex and compare
+                        </Heading>
+                    </Box>
+
+                    <Box mt="6">
+                        <Author />
+                        <Heading fontSize="md" mt="2" color="gray.700">
+                            The future of poetry
                         </Heading>
                     </Box>
                 </Box>
 
                 {/* write articles */}
-                <Box w="full" p="6" rounded="lg" bg="teal.50">
-                    <Text fontWeight="bold" fontSize="lg">
-                        Write on Intellect-inn
-                    </Text>
-                    <Text>
-                        Start your writing career with us. Share your valuable
-                        knowledge, skills and experiences with people around the
-                        globe
-                    </Text>
-                    <Link to="/write">
+                <Box w="full" mt="10">
+                    <Heading fontSize="md" mb="5">
+                        Recommended topics
+                    </Heading>
+                    <Box display="flex" flexWrap="wrap" gap="2">
                         <Text
-                            mt="4"
-                            textDecoration="underline"
-                            color="teal.800"
+                            rounded="full"
+                            bg="gray.100"
+                            px="5"
+                            py="2"
+                            color="gray.600"
+                            fontSize="sm"
+                            fontWeight={"medium"}
                         >
-                            Start writing
+                            Philosophy
                         </Text>
-                    </Link>
+
+                        <Text
+                            rounded="full"
+                            bg="gray.100"
+                            px="5"
+                            py="2"
+                            color="gray.600"
+                            fontSize="sm"
+                            fontWeight={"medium"}
+                        >
+                            Cryptocurrency
+                        </Text>
+                        <Text
+                            rounded="full"
+                            bg="gray.100"
+                            px="5"
+                            py="2"
+                            color="gray.600"
+                            fontSize="sm"
+                            fontWeight={"medium"}
+                        >
+                            Web 3.0
+                        </Text>
+                        <Text
+                            rounded="full"
+                            bg="gray.100"
+                            px="5"
+                            py="2"
+                            color="gray.600"
+                            fontSize="sm"
+                            fontWeight={"medium"}
+                        >
+                            Human psychology
+                        </Text>
+                        <Text
+                            rounded="full"
+                            bg="gray.100"
+                            px="5"
+                            py="2"
+                            color="gray.600"
+                            fontSize="sm"
+                            fontWeight={"medium"}
+                        >
+                            Self improvement
+                        </Text>
+                        <Text
+                            rounded="full"
+                            bg="gray.100"
+                            px="5"
+                            py="2"
+                            color="gray.600"
+                            fontSize="sm"
+                            fontWeight={"medium"}
+                        >
+                            Machine learning
+                        </Text>
+                        <Text
+                            rounded="full"
+                            bg="gray.100"
+                            px="5"
+                            py="2"
+                            color="gray.600"
+                            fontSize="sm"
+                            fontWeight={"medium"}
+                        >
+                            Exercise
+                        </Text>
+                        <Text
+                            rounded="full"
+                            bg="gray.100"
+                            px="5"
+                            py="2"
+                            color="gray.600"
+                            fontSize="sm"
+                            fontWeight={"medium"}
+                        >
+                            Anatomy
+                        </Text>
+                    </Box>
                 </Box>
 
                 {/* users to follow */}
+                <Box display="flex" mt="12" flexDirection={"column"}>
+                    <Heading fontSize="md" mb="5">
+                        Who to follow
+                    </Heading>
+                    {/* Writers */}
+                    <Box
+                        display="flex"
+                        alignItems="start"
+                        justifyContent="start"
+                        gap="4"
+                    >
+                        <Image
+                            w="25px"
+                            src="/vite.svg"
+                            rounded="full"
+                            objectFit={"cover"}
+                        />
+                        <Box ml="4">
+                            <Text fontWeight={"bold"}>Kashif Khan</Text>
+                            <Text fontSize={"sm"} color="gray.500">
+                                Tech enthusiast, Game hacker, Experienced in
+                                multipl...
+                            </Text>
+                        </Box>
+                        <Button
+                            variant="outline"
+                            rounded="full"
+                            borderColor="black"
+                            px="6"
+                            py="2"
+                            pt="2.5"
+                            size="sm"
+                            my="auto"
+                        >
+                            Follow
+                        </Button>
+                    </Box>
 
+                    <Box
+                        mt="5"
+                        display="flex"
+                        alignItems="start"
+                        justifyContent="start"
+                        gap="4"
+                    >
+                        <Image
+                            w="25px"
+                            src="/vite.svg"
+                            rounded="full"
+                            objectFit={"cover"}
+                        />
+                        <Box ml="4">
+                            <Text fontWeight={"bold"}>Kashif Khan</Text>
+                            <Text fontSize={"sm"} color="gray.500">
+                                Tech enthusiast, Game hacker, Experienced in
+                                multipl...
+                            </Text>
+                        </Box>
+                        <Button
+                            variant="outline"
+                            rounded="full"
+                            borderColor="black"
+                            px="6"
+                            py="2"
+                            pt="2.5"
+                            size="sm"
+                            my="auto"
+                        >
+                            Follow
+                        </Button>
+                    </Box>
+                </Box>
             </Box>
         </Box>
     );
