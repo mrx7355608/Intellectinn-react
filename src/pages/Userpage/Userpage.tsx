@@ -6,8 +6,10 @@ import {
     TabPanels,
     TabPanel,
     Text,
+    Heading,
 } from "@chakra-ui/react";
 import ArticlesList from "../../components/Articles/ArticlesList";
+import Author from "../../components/Articles/Author";
 import { Link } from "react-router-dom";
 
 export default function Userpage() {
@@ -53,6 +55,23 @@ export default function Userpage() {
                 minH="100vh"
             >
                 {/* editor's pick */}
+                <Box mt="16" mb="10">
+                    <Heading fontSize="xl">Editor's pick</Heading>
+                    <Box mt="6">
+                        <Author />
+                        <Heading fontSize="lg" mt="2" color="gray.700">
+                            How typescript can be haunting for some people
+                        </Heading>
+                    </Box>
+
+                    <Box mt="6">
+                        <Author />
+                        <Heading fontSize="lg" mt="2" color="gray.700">
+                            Why people feel inferiority complex and compare
+                        </Heading>
+                    </Box>
+                </Box>
+
                 {/* write articles */}
                 <Box w="full" p="6" rounded="lg" bg="teal.50">
                     <Text fontWeight="bold" fontSize="lg">
@@ -73,7 +92,9 @@ export default function Userpage() {
                         </Text>
                     </Link>
                 </Box>
+
                 {/* users to follow */}
+
             </Box>
         </Box>
     );
