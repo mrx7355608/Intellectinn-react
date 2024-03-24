@@ -91,7 +91,7 @@ export default function Userpage() {
                     </Box>
                 </Box>
 
-                {/* write articles */}
+                {/* recommended topics */}
                 <Box w="full" mt="10">
                     <Heading fontSize="md" mb="5">
                         Recommended topics
