@@ -18,6 +18,8 @@ const Settings = lazy(() => import("./pages/Settings/Settings"));
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 const Searchpage = lazy(() => import("./pages/Searchpage/Searchpage"));
 const Userpage = lazy(() => import("./pages/Userpage/Userpage"));
+const PeopleList = lazy(() => import("./pages/Searchpage/PeopleList"));
+const TopicsList = lazy(() => import("./pages/Searchpage/TopicsList"));
 
 // Routes
 const router = createBrowserRouter([
@@ -37,6 +39,16 @@ const router = createBrowserRouter([
             {
                 path: "search",
                 element: <Searchpage />,
+                children: [
+                    {
+                        path: "people",
+                        element: <PeopleList />,
+                    },
+                    {
+                        path: "topics",
+                        element: <TopicsList />,
+                    },
+                ],
             },
             {
                 path: "profile",
