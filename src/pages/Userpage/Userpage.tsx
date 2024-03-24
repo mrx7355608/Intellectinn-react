@@ -4,15 +4,15 @@ import {
     Tab,
     Box,
     TabPanels,
-    TabPanel,
     Text,
     Heading,
     Image,
     Button,
 } from "@chakra-ui/react";
-import ArticlesList from "../../components/Articles/ArticlesList";
 import Author from "../../components/Articles/Author";
-import { Outlet, Link, useSearchParams } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
+import NestedLayoutsSpinner from "../../components/Spinners/NestedLayoutsSpinner";
+import { Suspense } from "react";
 
 export default function Userpage() {
     const tags = [
@@ -48,7 +48,9 @@ export default function Userpage() {
                     </TabList>
 
                     <TabPanels py="10">
-                        <Outlet />
+                        <Suspense fallback={<NestedLayoutsSpinner />}>
+                            <Outlet />
+                        </Suspense>
                     </TabPanels>
                 </Tabs>
             </Box>
