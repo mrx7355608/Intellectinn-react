@@ -15,6 +15,11 @@ export default function Searchpage() {
 
             <Tabs size={"sm"} mt="8">
                 <TabList overflowY="hidden" height={"full"}>
+                    <Link to={`/search?query=${searchParams.get("query")}`}>
+                        <Tab py="2" whiteSpace={"nowrap"} m="0">
+                            Articles
+                        </Tab>
+                    </Link>
                     <Link
                         to={`/search/people?query=${searchParams.get("query")}`}
                     >
