@@ -15,11 +15,16 @@ const ArticlesByTags = lazy(
     () => import("./pages/ArticlesByTags/ArticlesByTags"),
 );
 const Settings = lazy(() => import("./pages/Settings/Settings"));
-const Profile = lazy(() => import("./pages/Profile/Profile"));
-const Searchpage = lazy(() => import("./pages/Searchpage/Searchpage"));
 const Userpage = lazy(() => import("./pages/Userpage/Userpage"));
+
+const Searchpage = lazy(() => import("./pages/Searchpage/Searchpage"));
 const PeopleList = lazy(() => import("./pages/Searchpage/PeopleList"));
 const TopicsList = lazy(() => import("./pages/Searchpage/TopicsList"));
+const Articles = lazy(() => import("./pages/Searchpage/Articles"));
+
+const Profile = lazy(() => import("./pages/Profile/Profile"));
+const About = lazy(() => import("./pages/Profile/About"));
+const Publications = lazy(() => import("./pages/Profile/Publications"));
 
 // Routes
 const router = createBrowserRouter([
@@ -41,6 +46,10 @@ const router = createBrowserRouter([
                 element: <Searchpage />,
                 children: [
                     {
+                        index: true,
+                        element: <Articles />,
+                    },
+                    {
                         path: "people",
                         element: <PeopleList />,
                     },
@@ -53,6 +62,16 @@ const router = createBrowserRouter([
             {
                 path: "profile",
                 element: <Profile />,
+                children: [
+                    {
+                        index: true,
+                        element: <Publications />,
+                    },
+                    {
+                        path: "about",
+                        element: <About />,
+                    },
+                ],
             },
             {
                 path: "user",
