@@ -1,15 +1,7 @@
 import { Suspense } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Outlet, Link } from "react-router-dom";
-import {
-    Tabs,
-    TabList,
-    Tab,
-    Box,
-    TabPanels,
-    Heading,
-    Spinner,
-} from "@chakra-ui/react";
+import { Tabs, TabList, Tab, Box, TabPanels, Heading } from "@chakra-ui/react";
 import NestedLayoutsSpinner from "../../components/Spinners/NestedLayoutsSpinner";
 
 export default function Searchpage() {
@@ -23,12 +15,16 @@ export default function Searchpage() {
 
             <Tabs size={"sm"} mt="8">
                 <TabList overflowY="hidden" height={"full"}>
-                    <Link to={`/search/people`}>
+                    <Link
+                        to={`/search/people?query=${searchParams.get("query")}`}
+                    >
                         <Tab py="2" whiteSpace={"nowrap"} m="0">
                             People
                         </Tab>
                     </Link>
-                    <Link to={`/search/topics`}>
+                    <Link
+                        to={`/search/topics?query=${searchParams.get("query")}`}
+                    >
                         <Tab py="2" whiteSpace={"nowrap"} m="0">
                             Topics
                         </Tab>
