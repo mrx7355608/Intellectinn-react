@@ -1,5 +1,14 @@
-import { Tabs, TabList, Tab, Box, TabPanels, TabPanel } from "@chakra-ui/react";
+import {
+    Tabs,
+    TabList,
+    Tab,
+    Box,
+    TabPanels,
+    TabPanel,
+    Text,
+} from "@chakra-ui/react";
 import ArticlesList from "../../components/Articles/ArticlesList";
+import { Link } from "react-router-dom";
 
 export default function Userpage() {
     const tags = [
@@ -15,22 +24,57 @@ export default function Userpage() {
         "Economics",
     ];
     return (
-        <Box w="70vw" h="100vh" mx="auto">
-            <Tabs size={"sm"} mt="12" p="12" px="16" whiteSpace={"nowrap"}>
-                <TabList overflowY="hidden" height={"full"}>
-                    {tags.map((t) => (
-                        <Tab py="2">{t}</Tab>
-                    ))}
-                </TabList>
+        <Box minH="100vh" display="flex" alignItems="start" p="0">
+            <Box w="70vw" p="12">
+                <Tabs size={"sm"} mt="12">
+                    <TabList overflowY="hidden" height={"full"}>
+                        {tags.map((t) => (
+                            <Tab py="2" whiteSpace={"nowrap"}>
+                                {t}
+                            </Tab>
+                        ))}
+                    </TabList>
 
-                <TabPanels>
-                    {tags.map((t) => (
-                        <TabPanel py="12">
-                            <ArticlesList tag={t} />
-                        </TabPanel>
-                    ))}
-                </TabPanels>
-            </Tabs>
+                    <TabPanels>
+                        {tags.map((t) => (
+                            <TabPanel py="10">
+                                <ArticlesList tag={t} />
+                            </TabPanel>
+                        ))}
+                    </TabPanels>
+                </Tabs>
+            </Box>
+            <Box
+                display="flex"
+                flexDirection="column"
+                p="10"
+                borderLeft="1px"
+                borderColor="gray.400"
+                minH="100vh"
+            >
+                {/* editor's pick */}
+                {/* write articles */}
+                <Box w="full" p="6" rounded="lg" bg="teal.50">
+                    <Text fontWeight="bold" fontSize="lg">
+                        Write on Intellect-inn
+                    </Text>
+                    <Text>
+                        Start your writing career with us. Share your valuable
+                        knowledge, skills and experiences with people around the
+                        globe
+                    </Text>
+                    <Link to="/write">
+                        <Text
+                            mt="4"
+                            textDecoration="underline"
+                            color="teal.800"
+                        >
+                            Start writing
+                        </Text>
+                    </Link>
+                </Box>
+                {/* users to follow */}
+            </Box>
         </Box>
     );
 }
