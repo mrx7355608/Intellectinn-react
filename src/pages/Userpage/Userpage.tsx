@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import ArticlesList from "../../components/Articles/ArticlesList";
 import Author from "../../components/Articles/Author";
-import { Link } from "react-router-dom";
+import { Outlet, Link, useSearchParams } from "react-router-dom";
 
 export default function Userpage() {
     const tags = [
@@ -27,27 +27,33 @@ export default function Userpage() {
         "Philosophy",
         "Economics",
     ];
+
     return (
         <Box minH="100vh" display="flex" alignItems="start" p="0">
             <Box w="68vw" p="12">
                 <Tabs size={"sm"} mt="12">
                     <TabList overflowY="hidden" height={"full"}>
-                        {tags.map((t) => (
-                            <Tab py="2" whiteSpace={"nowrap"}>
-                                {t}
+                        <Link to={`/user`}>
+                            <Tab py="2" whiteSpace={"nowrap"} m="0">
+                                For you
                             </Tab>
+                        </Link>
+                        {tags.map((t) => (
+                            <Link to={`/user?tag=${t}`}>
+                                <Tab py="2" whiteSpace={"nowrap"} m="0">
+                                    {t}
+                                </Tab>
+                            </Link>
                         ))}
                     </TabList>
 
-                    <TabPanels>
-                        {tags.map((t) => (
-                            <TabPanel py="10">
-                                <ArticlesList tag={t} />
-                            </TabPanel>
-                        ))}
+                    <TabPanels py="10">
+                        <Outlet />
                     </TabPanels>
                 </Tabs>
             </Box>
+
+            {/* side content */}
             <Box
                 display="flex"
                 flexDirection="column"
