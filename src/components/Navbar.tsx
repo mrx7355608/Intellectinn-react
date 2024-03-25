@@ -54,14 +54,28 @@ export default function Navbar() {
                 </Link>
 
                 {user ? (
-                    <Image
-                        src="/hero.jpg"
-                        alt="user profile picture"
-                        w="40px"
-                        h="40px"
-                        objectFit="cover"
-                        rounded="full"
-                    />
+                    <Box display="flex" gap="5" alignItems="center">
+                        <Link to="/user">
+                            <Text
+                                fontSize="sm"
+                                fontWeight="medium"
+                                _hover={{
+                                    textDecoration: "underline",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                {user.name}
+                            </Text>
+                        </Link>
+                        <Image
+                            src={user.profilePicture}
+                            alt="user profile picture"
+                            w="40px"
+                            h="40px"
+                            objectFit="cover"
+                            rounded="full"
+                        />
+                    </Box>
                 ) : (
                     <>
                         <Link to={"/auth/login"}>
