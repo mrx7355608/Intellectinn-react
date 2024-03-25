@@ -7,9 +7,8 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <ChakraProvider theme={theme}>
-        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <AuthProvider>
             <App />
         </AuthProvider>
-    </ChakraProvider>
+    </ChakraProvider>,
 );
