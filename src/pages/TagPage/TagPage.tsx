@@ -51,7 +51,7 @@ export default function TagPage() {
                     145 articles
                 </Text>
             </Box>
-            <Divider />
+            <Divider mb="12" />
 
             {/* articles */}
             <Box

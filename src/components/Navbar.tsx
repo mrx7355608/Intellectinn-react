@@ -1,10 +1,12 @@
-import { Box, Text, Heading, Button } from "@chakra-ui/react";
-import DarkModeToggle from "./DarkModeToggle";
+import { Box, Text, Heading, Button, Image } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import Searchbar from "./Searchbar";
+import { useAuthContext } from "../context/auth";
 
 export default function Navbar() {
     const { pathname } = useLocation();
+    const { user } = useAuthContext();
+
     return (
         <Box
             display={"flex"}
@@ -44,28 +46,42 @@ export default function Navbar() {
                 <Link to={"/"}>
                     <Text _hover={{ color: "teal.500" }}>Home</Text>
                 </Link>
+
                 <Link to={"/write"}>
                     <Text mx="1" _hover={{ color: "teal.500" }}>
                         Write
                     </Text>
                 </Link>
-                <Link to={"/auth/login"}>
-                    <Text mx="1" _hover={{ color: "teal.500" }}>
-                        Login
-                    </Text>
-                </Link>
-                <Link to={"/auth/Signup"}>
-                    <Button
-                        rounded={"full"}
-                        px={"5"}
-                        pb={"0.5"}
-                        colorScheme="teal"
-                        size={"sm"}
-                    >
-                        Signup
-                    </Button>
-                </Link>
-                <DarkModeToggle />
+
+                {user ? (
+                    <Image
+                        src="/hero.jpg"
+                        alt="user profile picture"
+                        w="40px"
+                        h="40px"
+                        objectFit="cover"
+                        rounded="full"
+                    />
+                ) : (
+                    <>
+                        <Link to={"/auth/login"}>
+                            <Text mx="1" _hover={{ color: "teal.500" }}>
+                                Login
+                            </Text>
+                        </Link>
+                        <Link to={"/auth/Signup"}>
+                            <Button
+                                rounded={"full"}
+                                px={"5"}
+                                pb={"0.5"}
+                                colorScheme="teal"
+                                size={"sm"}
+                            >
+                                Signup
+                            </Button>
+                        </Link>
+                    </>
+                )}
             </Box>
         </Box>
     );

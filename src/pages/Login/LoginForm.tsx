@@ -3,10 +3,10 @@ import { VStack, Text } from "@chakra-ui/react";
 import EmailInput from "../../components/form/EmailInput";
 import PasswordInput from "../../components/form/PasswordInput";
 import FormSubmitButton from "../../components/form/FormSubmitButton";
-import fetchFromServer from "../../utils/fetchFromServer";
+// import fetchFromServer from "../../utils/fetchFromServer";
 import ShowApiError from "../../components/form/ShowApiError";
 import { useAuthContext } from "../../context/auth";
-import { IUser } from "../../types/user";
+// import { IUser } from "../../types/user";
 
 export default function LoginForm() {
     const { setUser } = useAuthContext();
@@ -41,25 +41,23 @@ export default function LoginForm() {
 
     async function onSubmitHandler(e: FormEvent<HTMLDivElement>) {
         e.preventDefault();
-        setIsLoading(true);
-        setApiError("");
         await login();
-        setIsLoading(false);
     }
 
     async function login() {
-        const response = await fetchFromServer<IUser>("/api/auth/login", {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(creds),
-        });
-        if (response.error) {
-            setApiError(response.error);
-            return setTimeout(() => setApiError(""), 4000);
-        }
-        setUser(response.data);
+        setIsLoading(true);
+        const mockUser = {
+            name: "Fawad Imran",
+            email: "fwd@gmail.com",
+            profilePicture: "/hero.jpg",
+            _id: "66014ee6e93f3cd0e0a11a4d",
+            followers: [],
+            following: [],
+            about: "MERN stack developer | Love Nextjs | Pursuing Bachelors in Computer science",
+        };
+        setTimeout(() => {
+            setIsLoading(false);
+            setUser(mockUser);
+        }, 3000);
     }
 }
