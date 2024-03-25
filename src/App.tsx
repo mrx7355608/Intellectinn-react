@@ -26,6 +26,8 @@ const Profile = lazy(() => import("./pages/Profile/Profile"));
 const About = lazy(() => import("./pages/Profile/About"));
 const Publications = lazy(() => import("./pages/Profile/Publications"));
 
+const TagsPage = lazy(() => import("./pages/TagPage/TagPage"));
+
 // Routes
 const router = createBrowserRouter([
     {
@@ -89,7 +91,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "tags/:tag",
-                element: <ArticlesByTags />,
+                element: <TagsPage />,
             },
         ],
     },
