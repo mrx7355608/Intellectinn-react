@@ -97,95 +97,23 @@ export default function Userpage() {
                         Recommended topics
                     </Heading>
                     <Box display="flex" flexWrap="wrap" gap="2">
-                        <Text
-                            rounded="full"
-                            bg="gray.100"
-                            px="5"
-                            py="2"
-                            color="gray.600"
-                            fontSize="sm"
-                            fontWeight={"medium"}
-                        >
-                            Philosophy
-                        </Text>
-
-                        <Text
-                            rounded="full"
-                            bg="gray.100"
-                            px="5"
-                            py="2"
-                            color="gray.600"
-                            fontSize="sm"
-                            fontWeight={"medium"}
-                        >
-                            Cryptocurrency
-                        </Text>
-                        <Text
-                            rounded="full"
-                            bg="gray.100"
-                            px="5"
-                            py="2"
-                            color="gray.600"
-                            fontSize="sm"
-                            fontWeight={"medium"}
-                        >
-                            Web 3.0
-                        </Text>
-                        <Text
-                            rounded="full"
-                            bg="gray.100"
-                            px="5"
-                            py="2"
-                            color="gray.600"
-                            fontSize="sm"
-                            fontWeight={"medium"}
-                        >
-                            Human psychology
-                        </Text>
-                        <Text
-                            rounded="full"
-                            bg="gray.100"
-                            px="5"
-                            py="2"
-                            color="gray.600"
-                            fontSize="sm"
-                            fontWeight={"medium"}
-                        >
-                            Self improvement
-                        </Text>
-                        <Text
-                            rounded="full"
-                            bg="gray.100"
-                            px="5"
-                            py="2"
-                            color="gray.600"
-                            fontSize="sm"
-                            fontWeight={"medium"}
-                        >
-                            Machine learning
-                        </Text>
-                        <Text
-                            rounded="full"
-                            bg="gray.100"
-                            px="5"
-                            py="2"
-                            color="gray.600"
-                            fontSize="sm"
-                            fontWeight={"medium"}
-                        >
-                            Exercise
-                        </Text>
-                        <Text
-                            rounded="full"
-                            bg="gray.100"
-                            px="5"
-                            py="2"
-                            color="gray.600"
-                            fontSize="sm"
-                            fontWeight={"medium"}
-                        >
-                            Anatomy
-                        </Text>
+                        {tags.map((t) => {
+                            return (
+                                <Link to={`/tags/${t}`}>
+                                    <Text
+                                        rounded="full"
+                                        bg="gray.100"
+                                        px="5"
+                                        py="2"
+                                        color="gray.600"
+                                        fontSize="sm"
+                                        fontWeight={"medium"}
+                                    >
+                                        {t}
+                                    </Text>
+                                </Link>
+                            );
+                        })}
                     </Box>
                 </Box>
 
