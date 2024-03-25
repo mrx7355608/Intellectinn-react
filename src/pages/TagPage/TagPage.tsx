@@ -60,157 +60,58 @@ export default function TagPage() {
                 gap="12"
                 flexWrap="wrap"
             >
-                <Box display="flex" flexDirection={"column"} maxW="48%" mb="12">
-                    <Image src="/hero.jpg" objectFit="cover" w="full" mb="8" />
-                    <Author />
-                    <Heading mt="5" fontSize="2xl">
-                        The future of poetry
-                    </Heading>
-                    <Text color="gray.600" mt="2">
-                        And today is a great day to reach out to them
-                    </Text>
-                    <Box fontSize="sm" mt="7">
-                        <Text as="span" color="gray.600">
-                            3 min read
-                        </Text>
-                        <Text as="span" color="gray.600" mx="1">
-                            &middot;
-                        </Text>
-                        <Text as="span" color="gray.600">
-                            Programming
-                        </Text>
-                    </Box>
-                    <Box display="flex" justifyContent={"space-between"}>
-                        <Box>
-                            <Button display="inline">
-                                <FaHeart />
-                            </Button>
-                            <Button display="inline">
-                                <FaCommentAlt />
-                            </Button>
-                        </Box>
+                <Article />
+                <Article />
+                <Article />
+                <Article />
+            </Box>
+        </Box>
+    );
+}
 
-                        <Box>
-                            <Button display="inline">
-                                <FaRegBookmark />
-                            </Button>
-                            <Button display="inline">Menu</Button>
-                        </Box>
-                    </Box>
+function Article() {
+    return (
+        <Box
+            display="flex"
+            flexDirection={"column"}
+            flex="1"
+            minW="45%"
+            mb="12"
+        >
+            <Image src="/hero.jpg" objectFit="cover" w="full" mb="8" />
+            <Author />
+            <Heading mt="5" fontSize="2xl">
+                The future of poetry
+            </Heading>
+            <Text color="gray.600" mt="2">
+                And today is a great day to reach out to them
+            </Text>
+            <Box fontSize="sm" mt="7">
+                <Text as="span" color="gray.600">
+                    3 min read
+                </Text>
+                <Text as="span" color="gray.600" mx="1">
+                    &middot;
+                </Text>
+                <Text as="span" color="gray.600">
+                    Programming
+                </Text>
+            </Box>
+            <Box display="flex" justifyContent={"space-between"}>
+                <Box>
+                    <Button display="inline">
+                        <FaHeart />
+                    </Button>
+                    <Button display="inline">
+                        <FaCommentAlt />
+                    </Button>
                 </Box>
-                <Box display="flex" flexDirection={"column"} maxW="48%" mb="12">
-                    <Image src="/hero.jpg" objectFit="cover" w="full" mb="8" />
-                    <Author />
-                    <Heading mt="5" fontSize="2xl">
-                        The future of poetry
-                    </Heading>
-                    <Text color="gray.600" mt="2">
-                        And today is a great day to reach out to them
-                    </Text>
-                    <Box fontSize="sm" mt="7">
-                        <Text as="span" color="gray.600">
-                            3 min read
-                        </Text>
-                        <Text as="span" color="gray.600" mx="1">
-                            &middot;
-                        </Text>
-                        <Text as="span" color="gray.600">
-                            Programming
-                        </Text>
-                    </Box>
-                    <Box display="flex" justifyContent={"space-between"}>
-                        <Box>
-                            <Button display="inline">
-                                <FaHeart />
-                            </Button>
-                            <Button display="inline">
-                                <FaCommentAlt />
-                            </Button>
-                        </Box>
 
-                        <Box>
-                            <Button display="inline">
-                                <FaRegBookmark />
-                            </Button>
-                            <Button display="inline">Menu</Button>
-                        </Box>
-                    </Box>
-                </Box>
-                <Box display="flex" flexDirection={"column"} maxW="48%" mb="12">
-                    <Image src="/hero.jpg" objectFit="cover" w="full" mb="8" />
-                    <Author />
-                    <Heading mt="5" fontSize="2xl">
-                        The future of poetry
-                    </Heading>
-                    <Text color="gray.600" mt="2">
-                        And today is a great day to reach out to them
-                    </Text>
-                    <Box fontSize="sm" mt="7">
-                        <Text as="span" color="gray.600">
-                            3 min read
-                        </Text>
-                        <Text as="span" color="gray.600" mx="1">
-                            &middot;
-                        </Text>
-                        <Text as="span" color="gray.600">
-                            Programming
-                        </Text>
-                    </Box>
-                    <Box display="flex" justifyContent={"space-between"}>
-                        <Box>
-                            <Button display="inline">
-                                <FaHeart />
-                            </Button>
-                            <Button display="inline">
-                                <FaCommentAlt />
-                            </Button>
-                        </Box>
-
-                        <Box>
-                            <Button display="inline">
-                                <FaRegBookmark />
-                            </Button>
-                            <Button display="inline">Menu</Button>
-                        </Box>
-                    </Box>
-                </Box>
-                <Box display="flex" flexDirection={"column"} maxW="48%" mb="12">
-                    <Image src="/hero.jpg" objectFit="cover" w="full" mb="8" />
-                    <Author />
-                    <Heading mt="5" fontSize="2xl">
-                        The future of poetry
-                    </Heading>
-                    <Text color="gray.600" mt="2">
-                        And today is a great day to reach out to them
-                    </Text>
-                    <Box fontSize="sm" mt="7">
-                        <Text as="span" color="gray.600">
-                            3 min read
-                        </Text>
-                        <Text as="span" color="gray.600" mx="1">
-                            &middot;
-                        </Text>
-                        <Text as="span" color="gray.600">
-                            Programming
-                        </Text>
-                    </Box>
-                    <Box display="flex" justifyContent={"space-between"}>
-                        <Box>
-                            <Button display="inline">
-                                <FaHeart />
-                            </Button>
-                            <Button display="inline">
-                                <FaCommentAlt />
-                            </Button>
-                        </Box>
-
-                        <Box>
-                            <Button display="inline">
-                                <FaRegBookmark />
-                            </Button>
-                            <Button display="inline">Menu</Button>
-                        </Box>
-                    </Box>
+                <Box>
+                    <Button display="inline">
+                        <FaRegBookmark />
+                    </Button>
+                    <Button display="inline">Menu</Button>
                 </Box>
             </Box>
         </Box>
