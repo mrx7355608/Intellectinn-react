@@ -12,7 +12,7 @@ export default function MainLayout() {
         if (!user) {
             navTo("/auth/login");
         }
-    }, [navTo, user])
+    }, [navTo, user]);
 
     return (
         <Suspense fallback={<MainlayoutSpinner />}>

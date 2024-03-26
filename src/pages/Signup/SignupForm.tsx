@@ -9,6 +9,7 @@ import ShowApiError from "../../components/form/ShowApiError";
 import fetchFromServer from "../../utils/fetchFromServer";
 import { IUser } from "../../types/user";
 import { useNavigate } from "react-router-dom";
+import { signup } from "../../api/auth";
 
 export default function SignupForm() {
     const navTo = useNavigate();
@@ -40,26 +41,16 @@ export default function SignupForm() {
     async function onSubmitHandler(e: FormEvent<HTMLDivElement>) {
         e.preventDefault();
         setIsLoading(true);
-        await signup();
-        setIsLoading(false);
-    }
-
-    async function signup() {
-        const response = await fetchFromServer<IUser>("/api/auth/signup", {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(creds),
-        });
-        if (response.error) {
-            setApiError(response.error);
-            return setTimeout(() => setApiError(""), 4000);
+        try {
+            const { error } = await signup(creds);
+            if (error) {
+                return setApiError(error);
+            }
+            return navTo("/auth/login");
+        } catch (err) {
+            setApiError("Internal server error");
+        } finally {
+            setIsLoading(false);
         }
-        // TODO: show a success toast
-
-        // Redirect to login page
-        navTo("/auth/login");
     }
 }

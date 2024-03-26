@@ -3,10 +3,9 @@ import { VStack, Text } from "@chakra-ui/react";
 import EmailInput from "../../components/form/EmailInput";
 import PasswordInput from "../../components/form/PasswordInput";
 import FormSubmitButton from "../../components/form/FormSubmitButton";
-// import fetchFromServer from "../../utils/fetchFromServer";
 import ShowApiError from "../../components/form/ShowApiError";
 import { useAuthContext } from "../../context/auth";
-// import { IUser } from "../../types/user";
+import { login } from "../../api/auth";
 
 export default function LoginForm() {
     const { setUser } = useAuthContext();
@@ -41,23 +40,21 @@ export default function LoginForm() {
 
     async function onSubmitHandler(e: FormEvent<HTMLDivElement>) {
         e.preventDefault();
-        await login();
-    }
-
-    async function login() {
+        setApiError(""); // Disappear the previous error message
         setIsLoading(true);
-        const mockUser = {
-            name: "Fawad Imran",
-            email: "fwd@gmail.com",
-            profilePicture: "/hero.jpg",
-            _id: "66014ee6e93f3cd0e0a11a4d",
-            followers: [],
-            following: [],
-            about: "MERN stack developer | Love Nextjs | Pursuing Bachelors in Computer science",
-        };
-        setTimeout(() => {
+        try {
+            const { data, error } = await login(creds);
+            if (error) {
+                return setApiError(error);
+            }
+            // set user in auth context
+            setUser(data);
+        } catch (err) {
+            // It's an internal server error because axios will
+            // only throw errors with 500 and aboves status code
+            setApiError("Internal server error");
+        } finally {
             setIsLoading(false);
-            setUser(mockUser);
-        }, 3000);
+        }
     }
 }

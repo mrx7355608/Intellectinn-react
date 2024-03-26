@@ -19,7 +19,7 @@ export default function Profile() {
     return (
         <Box minH="100vh" display="flex" alignItems="start" p="0">
             <Box w="68vw" p="12" mt="16">
-                <Heading>{user?.name}</Heading>
+                <Heading>{user?.fullname}</Heading>
                 <Tabs size={"sm"} mt="8">
                     <TabList overflowY="hidden" height={"full"}>
                         <Link to="/profile">
@@ -50,7 +50,7 @@ export default function Profile() {
                     rounded="full"
                 />
                 <Text fontWeight="bold" mt="5">
-                    {user?.name}
+                    {user?.fullname}
                 </Text>
                 <Link to="/settings">
                     <Text

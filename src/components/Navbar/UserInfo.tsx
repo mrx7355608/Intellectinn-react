@@ -9,7 +9,7 @@ export default function UserInfo() {
 
     return (
         <Box display="flex" gap="5" alignItems="center">
-            <Link to="/user">
+            <Link to="/profile">
                 <Text
                     fontSize="sm"
                     fontWeight="medium"
@@ -18,7 +18,7 @@ export default function UserInfo() {
                         cursor: "pointer",
                     }}
                 >
-                    {user?.name}
+                    {user?.fullname}
                 </Text>
             </Link>
             <Image
