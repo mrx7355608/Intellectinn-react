@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Box, Input, Button, Spinner, Textarea, Text } from "@chakra-ui/react";
 const TinymceEditor = lazy(() => import("./TinymceEditor"));
+import ThumbnailSelector from "./ThumbnailSelector";
 
 export default function Writepage() {
     return (
@@ -29,7 +30,7 @@ export default function Writepage() {
             </Suspense>
 
             {/* Tag input box */}
-            <Text mt="8" color="gray.500" mt="12">
+            <Text color="gray.500" mt="12">
                 Tag
             </Text>
             <Input variant={"flushed"} size="md" fontSize={"xl"} />
@@ -44,6 +45,9 @@ export default function Writepage() {
                 fontSize={"xl"}
                 rows={2}
             ></Textarea>
+
+            {/* Select thumbnail */}
+            <ThumbnailSelector />
 
             {/* Action buttons */}
             <Box
