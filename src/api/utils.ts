@@ -5,6 +5,7 @@ const axiosAgent = axios.create({
     validateStatus: function (status) {
         return status < 500;
     },
+    withCredentials: true,
 });
 
 export default axiosAgent;
