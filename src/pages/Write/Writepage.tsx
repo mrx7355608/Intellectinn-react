@@ -1,35 +1,44 @@
+// UI imports
 import { lazy, Suspense, useState, useRef } from "react";
 import { Editor as TinyEditor } from "tinymce";
 import {
     Box,
     Input,
-    Button,
     Spinner,
     Textarea,
     Text,
     useToast,
 } from "@chakra-ui/react";
-const TinymceEditor = lazy(() => import("./TinymceEditor"));
+
+// Components
 import ThumbnailSelector from "./ThumbnailSelector";
 import TagInput from "./TagInput";
+import PublishButton from "./PublishButton";
+import SaveAsDraftButton from "./SaveAsDraftButton";
+const TinymceEditor = lazy(() => import("./TinymceEditor"));
+
+// Api functions
 import { createArticle } from "../../api/articles";
 
 export default function Writepage() {
     const editorRef = useRef<TinyEditor | null>(null);
-    const [error, setError] = useState("");
-    const [tags, setTags] = useState<string[]>([]);
-    const [articleData, setArticleData] = useState({
-        title: "",
-        summary: "",
+    const toast = useToast({
+        duration: 4000,
+        isClosable: true,
     });
+
+    // Api loading and error states
+    const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState({
         isPublishing: false,
         isSavingAsDraft: false,
     });
 
-    const toast = useToast({
-        duration: 4000,
-        isClosable: true,
+    // Article data states
+    const [tags, setTags] = useState<string[]>([]);
+    const [articleData, setArticleData] = useState({
+        title: "",
+        summary: "",
     });
 
     return (
@@ -96,31 +105,11 @@ export default function Writepage() {
                 mt="10"
                 gap="8"
             >
-                <Button
-                    variant="outline"
-                    rounded="full"
-                    px="5"
-                    size="lg"
-                    borderColor="gray.800"
-                    flex="1"
-                >
-                    Save as draft
-                </Button>
-                <Button
-                    bg="gray.800"
-                    color="white"
-                    rounded="full"
-                    flex="1"
-                    px="5"
-                    size="lg"
-                    onClick={publish}
-                    _hover={{
-                        bg: "gray.900",
-                        color: "white",
-                    }}
-                >
-                    {isLoading.isPublishing ? <Spinner /> : "Publish"}
-                </Button>
+                <SaveAsDraftButton />
+                <PublishButton
+                    isLoading={isLoading.isPublishing}
+                    publish={publish}
+                />
             </Box>
         </Box>
     );
@@ -132,28 +121,45 @@ export default function Writepage() {
         setArticleData({ ...articleData, [name]: value });
     }
 
+    function createArticleObject() {
+        const article = Object.assign({}, articleData, {
+            tags,
+            content: editorRef.current?.getContent() || "",
+            is_published: true,
+        });
+        return article;
+    }
+
     async function publish() {
         setError("");
         setIsLoading({ ...isLoading, isPublishing: true });
+        const article = createArticleObject();
+
         try {
-            const article = Object.assign({}, articleData, {
-                tags,
-                content: editorRef.current?.getContent() || "",
-                is_published: true,
-            });
             const { error: err } = await createArticle(article);
             if (err) {
                 return setError(err);
             }
-            // Show success toast
+            showSuccessToast("Article published successfully");
         } catch (err) {
-            // Show error toast
-            toast({
-                status: "error",
-                description: (err as Error).message,
-            });
+            showErrorToast("Internal server error");
         } finally {
             setIsLoading({ ...isLoading, isPublishing: false });
         }
+    }
+
+    // TODO: move the below 2 functions in a separate file to use the globally
+    function showSuccessToast(message: string) {
+        toast({
+            status: "success",
+            description: message,
+        });
+    }
+
+    function showErrorToast(message: string) {
+        toast({
+            status: "error",
+            description: message,
+        });
     }
 }
