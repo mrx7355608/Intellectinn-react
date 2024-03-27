@@ -1,5 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { lazy } from "react";
+import { lazy, useEffect, useState } from "react";
+import { useAuthContext } from "./context/auth";
+import { getUser } from "./api/user";
+import { Box, Spinner } from "@chakra-ui/react";
 
 // Layouts
 import MainLayout from "./layouts/MainLayout";
@@ -112,6 +115,35 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+    const [loading, setLoading] = useState(true);
+    const { setUser } = useAuthContext();
+
+    // Fetch user on every page refresh / reload
+    useEffect(() => {
+        console.log("fetching user...");
+        getUser()
+            .then((resp) => {
+                if (resp.ok && resp.data) {
+                    setUser(resp.data);
+                }
+            })
+            .finally(() => setLoading(false));
+    }, [setUser]);
+
+    if (loading) {
+        return (
+            <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                w="full"
+                h="100vh"
+            >
+                <Spinner />
+            </Box>
+        );
+    }
+
     return <RouterProvider router={router} />;
 }
 
