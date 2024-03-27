@@ -1,9 +1,17 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Box, Input, Button, Spinner, Textarea, Text } from "@chakra-ui/react";
 const TinymceEditor = lazy(() => import("./TinymceEditor"));
 import ThumbnailSelector from "./ThumbnailSelector";
+import TagInput from "./TagInput";
 
 export default function Writepage() {
+    const [tags, setTags] = useState<string[]>([]);
+    const [articleData, setArticleData] = useState({
+        title: "",
+        summary: "",
+        content: "",
+    });
+
     return (
         <Box
             display={"flex"}
@@ -16,12 +24,15 @@ export default function Writepage() {
             py={"12"}
             mt="16"
         >
+            {/* Title input */}
             <Input
                 size={"lg"}
                 variant={"flushed"}
                 placeholder="Title"
                 fontSize={"2xl"}
                 mb="14"
+                onChange={onChangeHandler}
+                name="title"
             />
 
             {/* Tinymce editor */}
@@ -29,11 +40,11 @@ export default function Writepage() {
                 <TinymceEditor />
             </Suspense>
 
-            {/* Tag input box */}
+            {/* Tags */}
             <Text color="gray.500" mt="12">
                 Tag
             </Text>
-            <Input variant={"flushed"} size="md" fontSize={"xl"} />
+            <TagInput tags={tags} setTags={setTags} />
 
             {/* Summary textarea */}
             <Text color="gray.500" mt="12">
@@ -44,6 +55,8 @@ export default function Writepage() {
                 size="lg"
                 fontSize={"xl"}
                 rows={2}
+                onChange={onChangeHandler}
+                name="summary"
             ></Textarea>
 
             {/* Select thumbnail */}
@@ -69,16 +82,33 @@ export default function Writepage() {
                     Save as draft
                 </Button>
                 <Button
-                    bg="gray.700"
+                    bg="gray.800"
                     color="white"
                     rounded="full"
                     flex="1"
                     px="5"
                     size="lg"
+                    onClick={publish}
+                    _hover={{
+                        bg: "gray.900",
+                        color: "white",
+                    }}
                 >
                     Publish
                 </Button>
             </Box>
         </Box>
     );
+
+    function onChangeHandler(
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) {
+        const { name, value } = e.target;
+        setArticleData({ ...articleData, [name]: value });
+    }
+
+    function publish() {
+        const data = Object.assign({}, articleData, { tags });
+        console.log(data);
+    }
 }
