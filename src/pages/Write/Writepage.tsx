@@ -1,15 +1,33 @@
-import { lazy, Suspense, useState } from "react";
-import { Box, Input, Button, Spinner, Textarea, Text } from "@chakra-ui/react";
+import { lazy, Suspense, useState, useRef, forwardRef } from "react";
+import {
+    Box,
+    Input,
+    Button,
+    Spinner,
+    Textarea,
+    Text,
+    useToast,
+} from "@chakra-ui/react";
 const TinymceEditor = lazy(() => import("./TinymceEditor"));
 import ThumbnailSelector from "./ThumbnailSelector";
 import TagInput from "./TagInput";
+import { createArticle } from "../../api/articles";
 
 export default function Writepage() {
+    const [isLoading, setIsLoading] = useState({
+        isPublishing: false,
+        isSavingAsDraft: false,
+    });
+    const [error, setError] = useState("");
     const [tags, setTags] = useState<string[]>([]);
     const [articleData, setArticleData] = useState({
         title: "",
         summary: "",
-        content: "",
+    });
+    const editorRef = forwardRef(TinymceEditor);
+    const toast = useToast({
+        duration: 4000,
+        isClosable: true,
     });
 
     return (
@@ -37,7 +55,7 @@ export default function Writepage() {
 
             {/* Tinymce editor */}
             <Suspense fallback={<Spinner />}>
-                <TinymceEditor />
+                <TinymceEditor editorRef={editorRef} />
             </Suspense>
 
             {/* Tags */}
@@ -62,13 +80,18 @@ export default function Writepage() {
             {/* Select thumbnail */}
             <ThumbnailSelector />
 
+            {/* Error messages */}
+            <Text color="red.500" mt="8">
+                {error}
+            </Text>
+
             {/* Action buttons */}
             <Box
                 display="flex"
                 w="full"
                 alignItems="center"
                 justifyContent="center"
-                mt="16"
+                mt="10"
                 gap="8"
             >
                 <Button
@@ -94,7 +117,7 @@ export default function Writepage() {
                         color: "white",
                     }}
                 >
-                    Publish
+                    {isLoading.isPublishing ? <Spinner /> : "Publish"}
                 </Button>
             </Box>
         </Box>
@@ -107,8 +130,28 @@ export default function Writepage() {
         setArticleData({ ...articleData, [name]: value });
     }
 
-    function publish() {
-        const data = Object.assign({}, articleData, { tags });
-        console.log(data);
+    async function publish() {
+        setError("");
+        setIsLoading({ ...isLoading, isPublishing: true });
+        try {
+            const article = Object.assign({}, articleData, {
+                tags,
+                content: editorRef.editor.getContent() || "",
+                is_published: true,
+            });
+            const { error: err } = await createArticle(article);
+            if (err) {
+                return setError(err);
+            }
+            // Show success toast
+        } catch (err) {
+            // Show error toast
+            toast({
+                status: "error",
+                description: (err as Error).message,
+            });
+        } finally {
+            setIsLoading({ ...isLoading, isPublishing: false });
+        }
     }
 }

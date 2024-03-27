@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { lazy, useEffect, useState } from "react";
 import { useAuthContext } from "./context/auth";
 import { getUser } from "./api/user";
-import { Box, Spinner } from "@chakra-ui/react";
+import { Box, Spinner, Heading } from "@chakra-ui/react";
 
 // Layouts
 import MainLayout from "./layouts/MainLayout";
@@ -116,11 +116,12 @@ const router = createBrowserRouter([
 
 function App() {
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
     const { setUser } = useAuthContext();
 
     // Fetch user on every page refresh / reload
     useEffect(() => {
-        console.log("fetching user...");
+        // TODO: handle network errors
         getUser()
             .then((resp) => {
                 if (resp.ok && resp.data) {
@@ -140,6 +141,22 @@ function App() {
                 h="100vh"
             >
                 <Spinner />
+            </Box>
+        );
+    }
+
+    if (error) {
+        return (
+            <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                w="full"
+                h="100vh"
+            >
+                <Heading fontSize="2xl" color="red.700">
+                    {error}
+                </Heading>
             </Box>
         );
     }
