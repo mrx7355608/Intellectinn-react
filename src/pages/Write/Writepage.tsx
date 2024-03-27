@@ -1,4 +1,5 @@
-import { lazy, Suspense, useState, useRef, forwardRef } from "react";
+import { lazy, Suspense, useState, useRef } from "react";
+import { Editor as TinyEditor } from "tinymce";
 import {
     Box,
     Input,
@@ -14,17 +15,18 @@ import TagInput from "./TagInput";
 import { createArticle } from "../../api/articles";
 
 export default function Writepage() {
-    const [isLoading, setIsLoading] = useState({
-        isPublishing: false,
-        isSavingAsDraft: false,
-    });
+    const editorRef = useRef<TinyEditor | null>(null);
     const [error, setError] = useState("");
     const [tags, setTags] = useState<string[]>([]);
     const [articleData, setArticleData] = useState({
         title: "",
         summary: "",
     });
-    const editorRef = forwardRef(TinymceEditor);
+    const [isLoading, setIsLoading] = useState({
+        isPublishing: false,
+        isSavingAsDraft: false,
+    });
+
     const toast = useToast({
         duration: 4000,
         isClosable: true,
@@ -55,7 +57,7 @@ export default function Writepage() {
 
             {/* Tinymce editor */}
             <Suspense fallback={<Spinner />}>
-                <TinymceEditor editorRef={editorRef} />
+                <TinymceEditor ref={editorRef} />
             </Suspense>
 
             {/* Tags */}
@@ -136,7 +138,7 @@ export default function Writepage() {
         try {
             const article = Object.assign({}, articleData, {
                 tags,
-                content: editorRef.editor.getContent() || "",
+                content: editorRef.current?.getContent() || "",
                 is_published: true,
             });
             const { error: err } = await createArticle(article);
