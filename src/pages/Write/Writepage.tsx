@@ -39,6 +39,8 @@ export default function Writepage() {
     const [articleData, setArticleData] = useState({
         title: "",
         summary: "",
+        thumbnail: "",
+        timeToReadInMinutes: 0,
     });
 
     return (
@@ -70,14 +72,25 @@ export default function Writepage() {
             </Suspense>
 
             {/* Tags */}
-            <Text color="gray.500" mt="12">
-                Tag
+            <Text color="gray.800" mt="12">
+                Tags:
             </Text>
             <TagInput tags={tags} setTags={setTags} />
 
+            {/* Time to read */}
+            <Text color="gray.800" mt="12">
+                Time to read in minutes:
+            </Text>
+            <Input
+                variant={"flushed"}
+                fontSize={"xl"}
+                onChange={onChangeHandler}
+                name="timeToReadInMinutes"
+            />
+
             {/* Summary textarea */}
-            <Text color="gray.500" mt="12">
-                Summary
+            <Text color="gray.800" mt="12">
+                Summary:
             </Text>
             <Textarea
                 variant={"flushed"}
@@ -89,7 +102,7 @@ export default function Writepage() {
             ></Textarea>
 
             {/* Select thumbnail */}
-            <ThumbnailSelector />
+            <ThumbnailSelector setArticleData={setArticleData} />
 
             {/* Error messages */}
             <Text color="red.500" mt="8">
@@ -133,13 +146,12 @@ export default function Writepage() {
     async function publish() {
         setError("");
         setIsLoading({ ...isLoading, isPublishing: true });
-        const article = createArticleObject();
 
         try {
+            const article = createArticleObject();
+            console.log(article);
             const { error: err } = await createArticle(article);
-            if (err) {
-                return setError(err);
-            }
+            if (err) return setError(err);
             showSuccessToast("Article published successfully");
         } catch (err) {
             showErrorToast("Internal server error");

@@ -22,6 +22,8 @@ export async function uploadThumbnailToCloudinary(file: File) {
     formData.append("upload_preset", uploadPreset);
 
     const cloudinaryURL = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
-    const response = await axiosAgent.post(cloudinaryURL, formData);
-    console.log(response);
+    const response = await axiosAgent.post(cloudinaryURL, formData, {
+        withCredentials: false,
+    });
+    return response;
 }
