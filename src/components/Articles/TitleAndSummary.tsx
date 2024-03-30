@@ -1,6 +1,7 @@
 import { Heading, Box, Text, Image } from "@chakra-ui/react";
+import { IArticle } from "../../types/articles";
 
-export default function TitleAndSummary() {
+export default function TitleAndSummary({ article }: { article: IArticle }) {
     return (
         <Box
             display="flex"
@@ -11,14 +12,13 @@ export default function TitleAndSummary() {
         >
             <Box w="full" mr="7">
                 <Heading fontSize="xl" w="full">
-                    My fisrt blog title
+                    {article.title}
                 </Heading>
                 <Text mt="2" w="full" whiteSpace={"wrap"}>
-                    This is an article's summary. This is an article's summary.
-                    This is an article's summary. This is an summary.
+                    {article.summary.substring(0, 200)}...
                 </Text>
             </Box>
-            <Image src="/hero.jpg" alt="thumbnail" w="150px" h="full" />
+            <Image src={article.thumbnail} alt="thumbnail" w="150px" h="full" />
         </Box>
     );
 }

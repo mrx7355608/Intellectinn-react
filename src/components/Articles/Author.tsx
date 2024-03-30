@@ -1,11 +1,12 @@
 import { Box, Image, Text } from "@chakra-ui/react";
+import { IArticle } from "../../types/articles";
 
-export default function Author() {
+export default function Author({ article }: { article: IArticle }) {
     return (
         <Box display="flex" alignItems="center">
             {/* Profile picture*/}
             <Image
-                src="/vite.svg"
+                src={article.author.profilePicture}
                 alt="author profile picture"
                 w="19px"
                 rounded="full"
@@ -13,12 +14,12 @@ export default function Author() {
             />
             {/* Name */}
             <Text ml="2" fontSize="sm">
-                Uncle bob
+                {article.author.fullname}
             </Text>
 
             {/* Publish date */}
             <Text ml="1" color="gray.500" fontSize="sm">
-                - Feb 26, 2024
+                {new Date(article.createdAt).toDateString()}
             </Text>
         </Box>
     );

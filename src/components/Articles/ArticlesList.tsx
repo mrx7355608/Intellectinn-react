@@ -1,14 +1,17 @@
 import Article from "./Article";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
+import { IArticle } from "../../types/articles";
 
-export default function ArticlesList() {
+export default function ArticlesList({ articles }: { articles: IArticle[] }) {
     return (
         <Box display="flex" flexDirection="column" gap={"8"}>
-            <Article />
-            <Article />
-            <Article />
-            <Article />
-            <Article />
+            {articles.length > 2 ? (
+                articles.map((article) => {
+                    return <Article article={article} />;
+                })
+            ) : (
+                <Text>Nothing to show</Text>
+            )}
         </Box>
     );
 }
