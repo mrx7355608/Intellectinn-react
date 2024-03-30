@@ -13,3 +13,17 @@ export async function searchUsers(
     const response = await axiosAgent.get(`/api/users/search?user=${query}`);
     return response.data;
 }
+
+export async function followUser(
+    userID: string,
+): Promise<IApiResponse<string[]>> {
+    const response = await axiosAgent.patch(`/api/users/follow/${userID}`);
+    return response.data;
+}
+
+export async function unfollowUser(
+    userID: string,
+): Promise<IApiResponse<string[]>> {
+    const response = await axiosAgent.patch(`/api/users/unfollow/${userID}`);
+    return response.data;
+}
