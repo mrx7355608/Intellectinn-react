@@ -39,3 +39,18 @@ export async function searchArticles(
     );
     return response.data;
 }
+
+export async function getArticles(query: string | null) {
+    let response;
+    if (!query) {
+        response = await axiosAgent.get<IApiResponse<IArticle[]>>(
+            "/api/articles/published",
+        );
+    } else {
+        response = await axiosAgent.get<IApiResponse<IArticle[]>>(
+            `/api/articles/published?tag=${query}`,
+        );
+    }
+
+    return response.data;
+}
