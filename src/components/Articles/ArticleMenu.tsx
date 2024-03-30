@@ -3,8 +3,9 @@ import { useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
+import { IArticle } from "../../types/articles";
 
-export default function ArticleMenu() {
+export default function ArticleMenu({ article }: { article: IArticle }) {
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -16,16 +17,19 @@ export default function ArticleMenu() {
                 px="3"
                 py="1"
                 bg="gray.100"
-                color="gray.600"
+                color="gray.500"
+                fontWeight="medium"
                 w="max-content"
                 fontSize="sm"
             >
-                Web development
+                {article.tags[0]}
             </Text>
+
             {/* Total read time in minutes */}
             <Text ml="4" color="gray.500" w="max-content" fontSize="sm">
-                6 min read
+                {article.timeToReadInMinutes} min read
             </Text>
+
             {/* Bookmark btn */}
             <Button
                 bg="transparent"

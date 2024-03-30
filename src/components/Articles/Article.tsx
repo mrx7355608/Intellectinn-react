@@ -9,7 +9,7 @@ export default function Article({ article }: { article: IArticle }) {
         <Box display="flex" flexDirection="column" w="full">
             <Author article={article} />
             <TitleAndSummary article={article} />
-            <ArticleMenu />
+            <ArticleMenu article={article} />
             <Divider />
         </Box>
     );

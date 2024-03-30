@@ -22,6 +22,15 @@ export async function uploadThumbnailToCloudinary(file: File) {
     return response;
 }
 
+export async function searchTags(
+    query: string,
+): Promise<IApiResponse<string[]>> {
+    const response = await axiosAgent.get(
+        `/api/articles/search/tags?tags=${query}`,
+    );
+    return response.data;
+}
+
 export async function searchArticles(
     query: string,
 ): Promise<IApiResponse<IArticle[]>> {
