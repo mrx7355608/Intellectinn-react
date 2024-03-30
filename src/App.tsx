@@ -7,23 +7,24 @@ import { Box, Spinner, Heading } from "@chakra-ui/react";
 // Layouts
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
-import ArticlesList from "./components/Articles/ArticlesList";
 
 // Pages
 const Home = lazy(() => import("./pages/Home/Home"));
 const Signup = lazy(() => import("./pages/Signup/Signup"));
 const Login = lazy(() => import("./pages/Login/Login"));
 const Writepage = lazy(() => import("./pages/Write/Writepage"));
-const ArticlesByTags = lazy(
-    () => import("./pages/ArticlesByTags/ArticlesByTags"),
-);
 const Settings = lazy(() => import("./pages/Settings/Settings"));
 const Userpage = lazy(() => import("./pages/Userpage/Userpage"));
+const UserPageArticles = lazy(
+    () => import("./pages/Userpage/UserPageArticles"),
+);
 
 const Searchpage = lazy(() => import("./pages/Searchpage/Searchpage"));
 const PeopleList = lazy(() => import("./pages/Searchpage/PeopleList"));
 const TopicsList = lazy(() => import("./pages/Searchpage/TopicsList"));
-const Articles = lazy(() => import("./pages/Searchpage/Articles"));
+const SearchedArticles = lazy(
+    () => import("./pages/Searchpage/SearchedArticles"),
+);
 
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 const About = lazy(() => import("./pages/Profile/About"));
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        element: <Articles />,
+                        element: <SearchedArticles />,
                     },
                     {
                         path: "people",
@@ -84,7 +85,7 @@ const router = createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        element: <ArticlesList />,
+                        element: <UserPageArticles />,
                     },
                 ],
             },
