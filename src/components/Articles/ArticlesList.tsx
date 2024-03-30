@@ -5,7 +5,7 @@ import { IArticle } from "../../types/articles";
 export default function ArticlesList({ articles }: { articles: IArticle[] }) {
     return (
         <Box display="flex" flexDirection="column" gap={"8"}>
-            {articles.length > 2 ? (
+            {articles.length > 0 ? (
                 articles.map((article) => {
                     return <Article article={article} />;
                 })

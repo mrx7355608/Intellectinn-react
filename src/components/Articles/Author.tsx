@@ -7,7 +7,6 @@ export default function Author({ article }: { article: IArticle }) {
             {/* Profile picture*/}
             <Image
                 src={article.author.profilePicture}
-                alt="author profile picture"
                 w="19px"
                 rounded="full"
                 objectFit="cover"

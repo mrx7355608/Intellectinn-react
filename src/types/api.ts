@@ -1,7 +1,5 @@
-import { IUser } from "./user";
-
-export type IApiResponse = {
-    data: IUser;
+export type IApiResponse<T> = {
+    data: T;
     error?: string;
     ok: boolean;
 };
