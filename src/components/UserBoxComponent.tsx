@@ -29,6 +29,7 @@ export default function UserBox({ user }: { user: IUser }) {
                 {/* user profile picture */}
                 <Image
                     w="60px"
+                    h="60px"
                     src={user.profilePicture}
                     rounded="full"
                     objectFit={"cover"}
