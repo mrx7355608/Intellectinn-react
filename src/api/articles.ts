@@ -1,4 +1,3 @@
-import { IApiResponse } from "../types/api";
 import { IArticle } from "../types/articles";
 import axiosAgent from "./utils";
 
@@ -20,44 +19,4 @@ export async function uploadThumbnailToCloudinary(file: File) {
         withCredentials: false,
     });
     return response;
-}
-
-export async function searchTags(
-    query: string,
-): Promise<IApiResponse<string[]>> {
-    const response = await axiosAgent.get(
-        `/api/articles/search/tags?tags=${query}`,
-    );
-    return response.data;
-}
-
-export async function searchArticles(
-    query: string,
-): Promise<IApiResponse<IArticle[]>> {
-    const response = await axiosAgent.get(
-        `/api/articles/search?articles=${query}`,
-    );
-    return response.data;
-}
-
-export async function getArticles(query: string | null) {
-    let response;
-    if (!query) {
-        response = await axiosAgent.get<IApiResponse<IArticle[]>>(
-            "/api/articles/published",
-        );
-    } else {
-        response = await axiosAgent.get<IApiResponse<IArticle[]>>(
-            `/api/articles/published?tag=${query}`,
-        );
-    }
-
-    return response.data;
-}
-
-export async function getUserArticles() {
-    const response = await axiosAgent.get<IApiResponse<IArticle[]>>(
-        "/api/articles/published/me",
-    );
-    return response.data;
 }
