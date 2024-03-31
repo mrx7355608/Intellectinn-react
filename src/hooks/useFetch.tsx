@@ -19,6 +19,7 @@ export default function useFetch<T>(url: string) {
                     setData(resp.data);
                 }
             })
+            .catch(() => setErr("Internal server error"))
             .finally(() => setLoading(false));
     }, [url]);
 
