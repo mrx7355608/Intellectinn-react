@@ -3,10 +3,12 @@ import { lazy, useEffect, useState } from "react";
 import { useAuthContext } from "./context/auth";
 import { getUser } from "./api/user";
 import { Box, Spinner, Heading } from "@chakra-ui/react";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // Layouts
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
+import GuestRoute from "./components/GuestRoute";
 
 // Pages
 const Home = lazy(() => import("./pages/Home/Home"));
@@ -47,7 +49,11 @@ const router = createBrowserRouter([
 
             {
                 path: "settings",
-                element: <Settings />,
+                element: (
+                    <ProtectedRoute>
+                        <Settings />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: "search",
@@ -69,7 +75,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "profile",
-                element: <Profile />,
+                element: (
+                    <ProtectedRoute>
+                        <Profile />
+                    </ProtectedRoute>
+                ),
                 children: [
                     {
                         index: true,
@@ -91,7 +101,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "user",
-                element: <Userpage />,
+                element: (
+                    <ProtectedRoute>
+                        <Userpage />
+                    </ProtectedRoute>
+                ),
                 children: [
                     {
                         index: true,
@@ -101,7 +115,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "write",
-                element: <Writepage />,
+                element: (
+                    <ProtectedRoute>
+                        <Writepage />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: "tags/:tag",
@@ -115,11 +133,19 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "signup",
-                element: <Signup />,
+                element: (
+                    <GuestRoute>
+                        <Signup />
+                    </GuestRoute>
+                ),
             },
             {
                 path: "login",
-                element: <Login />,
+                element: (
+                    <GuestRoute>
+                        <Login />
+                    </GuestRoute>
+                ),
             },
         ],
     },

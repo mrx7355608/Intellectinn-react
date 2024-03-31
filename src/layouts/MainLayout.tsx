@@ -5,15 +5,6 @@ import Navbar from "../components/Navbar";
 import { useAuthContext } from "../context/auth";
 
 export default function MainLayout() {
-    const { user } = useAuthContext();
-    const navTo = useNavigate();
-
-    useEffect(() => {
-        if (!user) {
-            navTo("/auth/login");
-        }
-    }, [navTo, user]);
-
     return (
         <Suspense fallback={<MainlayoutSpinner />}>
             <Navbar />

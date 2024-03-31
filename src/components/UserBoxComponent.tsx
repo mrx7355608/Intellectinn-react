@@ -92,7 +92,7 @@ export default function UserBox({ user }: { user: IUser }) {
             const { data, error } = await followUser(userID);
             if (error) {
                 // Show error toast
-                toast({
+                return toast({
                     description: error,
                     status: "error",
                 });
@@ -118,7 +118,7 @@ export default function UserBox({ user }: { user: IUser }) {
             const { data, error } = await unfollowUser(userID);
             if (error) {
                 // Show error toast
-                toast({
+                return toast({
                     description: error,
                     status: "error",
                 });

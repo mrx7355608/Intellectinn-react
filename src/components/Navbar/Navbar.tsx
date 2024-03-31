@@ -12,10 +12,10 @@ export default function Navbar() {
     const [navbarColor, setNavbarColor] = useState("transparent");
 
     const changeNavbarColor = () => {
-        if (window.scrollY >= 570) {
+        if (window.scrollY >= 400) {
             setNavbarColor("white");
         } else {
-            setNavbarColor("transparent");
+            setNavbarColor("#D2D5CC");
         }
     };
 
@@ -69,17 +69,28 @@ export default function Navbar() {
                     <Text _hover={{ color: "teal.500" }}>Home</Text>
                 </Link>
 
-                <Link to={"/profile"}>
-                    <Text mx="1" _hover={{ color: "teal.500" }}>
-                        Profile
-                    </Text>
-                </Link>
                 <Link to={"/write"}>
                     <Text mx="1" _hover={{ color: "teal.500" }}>
                         Write
                     </Text>
                 </Link>
-                {user ? <UserInfo /> : <LoginAndSignupButtons />}
+                {user ? (
+                    <>
+                        <Link to={"/profile"}>
+                            <Text mx="1" _hover={{ color: "teal.500" }}>
+                                Profile
+                            </Text>
+                        </Link>
+                        <Link to={"/settings"}>
+                            <Text mx="1" _hover={{ color: "teal.500" }}>
+                                Settings
+                            </Text>
+                        </Link>
+                        <UserInfo />
+                    </>
+                ) : (
+                    <LoginAndSignupButtons />
+                )}
             </Box>
         </Box>
     );
