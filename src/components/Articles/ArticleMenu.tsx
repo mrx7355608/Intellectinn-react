@@ -4,8 +4,10 @@ import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
 import { IArticle } from "../../types/articles";
+import { useAuthContext } from "../../context/auth";
 
 export default function ArticleMenu({ article }: { article: IArticle }) {
+    const { user } = useAuthContext();
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -45,25 +47,45 @@ export default function ArticleMenu({ article }: { article: IArticle }) {
                     <FaRegBookmark />
                 )}
             </Button>
-            {/* Follow/Unfollow btn */}
-            <Menu>
-                {({ isOpen }) => (
-                    <>
-                        <MenuButton
-                            isActive={isOpen}
-                            as={Button}
-                            bg="transparent"
-                            _hover={{ bg: "transprent" }}
-                        >
-                            <BsThreeDots size={22} />
-                        </MenuButton>
-                        <MenuList>
-                            <MenuItem>Follow</MenuItem>
-                            <MenuItem>Unfollow</MenuItem>
-                        </MenuList>
-                    </>
-                )}
-            </Menu>
+            {article.author._id === user?._id ? (
+                <Menu>
+                    {({ isOpen }) => (
+                        <>
+                            <MenuButton
+                                isActive={isOpen}
+                                as={Button}
+                                bg="transparent"
+                                _hover={{ bg: "transprent" }}
+                            >
+                                <BsThreeDots size={22} />
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem>Edit</MenuItem>
+                                <MenuItem>Delete</MenuItem>
+                            </MenuList>
+                        </>
+                    )}
+                </Menu>
+            ) : (
+                <Menu>
+                    {({ isOpen }) => (
+                        <>
+                            <MenuButton
+                                isActive={isOpen}
+                                as={Button}
+                                bg="transparent"
+                                _hover={{ bg: "transprent" }}
+                            >
+                                <BsThreeDots size={22} />
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem>Follow</MenuItem>
+                                <MenuItem>Unfollow</MenuItem>
+                            </MenuList>
+                        </>
+                    )}
+                </Menu>
+            )}
         </Box>
     );
 
