@@ -14,7 +14,7 @@ export default function UserInfo() {
 
     return (
         <Box display="flex" gap="5" alignItems="center">
-            <Link to="/profile">
+            <Link to="/user">
                 <Text
                     fontSize="sm"
                     fontWeight="medium"
