@@ -27,3 +27,10 @@ export async function unfollowUser(
     const response = await axiosAgent.patch(`/api/users/unfollow/${userID}`);
     return response.data;
 }
+
+export async function updateUser(
+    newData: Partial<IUser>,
+): Promise<IApiResponse<IUser>> {
+    const response = await axiosAgent.patch("/api/users/me", newData);
+    return response.data;
+}
