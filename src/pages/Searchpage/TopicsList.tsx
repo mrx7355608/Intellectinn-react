@@ -1,26 +1,15 @@
-import { useState, useEffect } from "react";
 import { Box, Spinner, Text } from "@chakra-ui/react";
-import { searchTags } from "../../api/articles";
 import { useSearchParams } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 
 export default function TopicsList() {
-    const [tags, setTags] = useState<string[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [err, setErr] = useState("");
     const [sp, setSp] = useSearchParams();
     const query = sp.get("query");
-
-    useEffect(() => {
-        if (!query) return;
-        searchTags(query)
-            .then((resp) => {
-                if (resp.error) {
-                    return setErr(resp.error);
-                }
-                setTags(resp.data);
-            })
-            .finally(() => setLoading(false));
-    }, [query]);
+    const {
+        loading,
+        err,
+        data: tags,
+    } = useFetch<string>(`/api/articles/search/tags?tags=${query}`);
 
     return (
         <Box display="flex" flexWrap="wrap" gap="2">

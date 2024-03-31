@@ -1,30 +1,17 @@
-import { useState, useEffect } from "react";
 import ArticlesList from "../../components/Articles/ArticlesList";
 import { useSearchParams } from "react-router-dom";
-import { searchArticles } from "../../api/articles";
 import { IArticle } from "../../types/articles";
 import { Text, Spinner } from "@chakra-ui/react";
+import useFetch from "../../hooks/useFetch";
 
 export default function SearchedArticles() {
-    const [articles, setArticles] = useState<IArticle[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [err, setErr] = useState("");
     const [sp, setSp] = useSearchParams();
     const query = sp.get("query");
-
-    useEffect(() => {
-        if (!query) return;
-        setLoading(true);
-        searchArticles(query)
-            .then((resp) => {
-                if (resp.error) {
-                    setErr(resp.error);
-                } else {
-                    setArticles(resp.data);
-                }
-            })
-            .finally(() => setLoading(false));
-    }, [query]);
+    const {
+        loading,
+        err,
+        data: articles,
+    } = useFetch<IArticle>(`/api/articles/search?articles=${query}`);
 
     return (
         <>
