@@ -40,8 +40,8 @@ export default function UserBox({ user }: { user: IUser }) {
                         {user.fullname}
                     </Text>
                     {user.about ? (
-                        <Text color="gray.500">
-                            {user.about.substring(0, 100)}
+                        <Text color="gray.500" mr="6">
+                            {user.about.substring(0, 60)}...
                         </Text>
                     ) : (
                         <Text fontStyle={"italic"} color="gray.500">
