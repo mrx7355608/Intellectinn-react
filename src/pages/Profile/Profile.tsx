@@ -27,6 +27,16 @@ export default function Profile() {
                                 Your publications
                             </Tab>
                         </Link>
+                        <Link to="/profile/followers">
+                            <Tab py="2" whiteSpace={"nowrap"} m="0">
+                                Followers
+                            </Tab>
+                        </Link>
+                        <Link to="/profile/following">
+                            <Tab py="2" whiteSpace={"nowrap"} m="0">
+                                Following
+                            </Tab>
+                        </Link>
                         <Link to="/profile/about">
                             <Tab py="2" whiteSpace={"nowrap"} m="0">
                                 About

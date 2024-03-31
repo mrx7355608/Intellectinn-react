@@ -1,17 +1,16 @@
-import { useSearchParams } from "react-router-dom";
 import { Box, Spinner, Text } from "@chakra-ui/react";
-import { IUser } from "../../types/user";
-import UserBox from "../../components/UserBoxComponent";
 import useFetch from "../../hooks/useFetch";
+import UserBox from "../../components/UserBoxComponent";
+import { useAuthContext } from "../../context/auth";
+import { IUser } from "../../types/user";
 
-export default function PeopleList() {
-    const [sp, setSp] = useSearchParams();
-    const query = sp.get("query");
+export default function Following() {
+    const { user } = useAuthContext();
     const {
         loading,
         err,
-        data: users,
-    } = useFetch<IUser>(`/api/users/search?user=${query}`);
+        data: following,
+    } = useFetch<IUser>(`/api/users/following/${user!._id}`);
 
     return (
         <Box display="flex" flexDirection={"column"}>
@@ -20,7 +19,7 @@ export default function PeopleList() {
             ) : err ? (
                 <Text color="red.600">{err}</Text>
             ) : (
-                users.map((user) => {
+                following.map((user) => {
                     return <UserBox user={user} />;
                 })
             )}

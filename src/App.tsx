@@ -29,6 +29,8 @@ const SearchedArticles = lazy(
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 const About = lazy(() => import("./pages/Profile/About"));
 const Publications = lazy(() => import("./pages/Profile/Publications"));
+const Followers = lazy(() => import("./pages/Profile/Followers"));
+const Following = lazy(() => import("./pages/Profile/Following"));
 
 const TagsPage = lazy(() => import("./pages/TagPage/TagPage"));
 
@@ -72,6 +74,14 @@ const router = createBrowserRouter([
                     {
                         index: true,
                         element: <Publications />,
+                    },
+                    {
+                        path: "followers",
+                        element: <Followers />,
+                    },
+                    {
+                        path: "following",
+                        element: <Following />,
                     },
                     {
                         path: "about",
