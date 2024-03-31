@@ -7,6 +7,7 @@ import {
     Heading,
     Text,
 } from "@chakra-ui/react";
+import ChangeProfilePictureComponent from "./ChangeProfilePictureComponent";
 
 export default function Settings() {
     return (
@@ -19,13 +20,8 @@ export default function Settings() {
                     </Tab>
                 </TabList>
 
-                <TabPanels py="10">
-                    <Box>
-                        <Text>Update Profile picture</Text>
-                        <Text fontSize="sm" color="gray.500">
-                            Select a new profile picture
-                        </Text>
-                    </Box>
+                <TabPanels py="8">
+                    <ChangeProfilePictureComponent />
                     <Box mt="5">
                         <Text>Update Bio</Text>
                         <Text fontSize="sm" color="gray.500">
