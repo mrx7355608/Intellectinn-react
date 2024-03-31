@@ -54,3 +54,10 @@ export async function getArticles(query: string | null) {
 
     return response.data;
 }
+
+export async function getUserArticles() {
+    const response = await axiosAgent.get<IApiResponse<IArticle[]>>(
+        "/api/articles/published/me",
+    );
+    return response.data;
+}

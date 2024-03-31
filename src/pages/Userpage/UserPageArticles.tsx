@@ -25,6 +25,7 @@ export default function UserPageArticles() {
             })
             .finally(() => setLoading(false));
     }, [tag]);
+
     // Render the articles list
     return (
         <>
@@ -32,8 +33,6 @@ export default function UserPageArticles() {
                 <Spinner />
             ) : err ? (
                 <Text color="red.600">{err}</Text>
-            ) : articles.length < 1 ? (
-                <Text>Nothing to show</Text>
             ) : (
                 <ArticlesList articles={articles} />
             )}
