@@ -1,9 +1,9 @@
-import { IUser } from "../../types/user";
+import { IUser } from "../types/user";
 import { Box, Image, Button, Text, Spinner } from "@chakra-ui/react";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
-import { useAuthContext } from "../../context/auth";
-import { followUser, unfollowUser } from "../../api/user";
+import { useAuthContext } from "../context/auth";
+import { followUser, unfollowUser } from "../api/user";
 
 export default function UserBox({ user }: { user: IUser }) {
     const { user: usr, setUser } = useAuthContext();
@@ -18,7 +18,7 @@ export default function UserBox({ user }: { user: IUser }) {
 
     return (
         <Box
-            mt="5"
+            mb="10"
             display="flex"
             alignItems="start"
             justifyContent="space-between"
@@ -39,9 +39,15 @@ export default function UserBox({ user }: { user: IUser }) {
                     <Text fontWeight={"bold"} fontSize="lg">
                         {user.fullname}
                     </Text>
-                    <Text fontSize={"sm"} color="gray.500">
-                        {user.about}
-                    </Text>
+                    {user.about ? (
+                        <Text color="gray.500">
+                            {user.about.substring(0, 100)}
+                        </Text>
+                    ) : (
+                        <Text fontStyle={"italic"} color="gray.500">
+                            No about content provided
+                        </Text>
+                    )}
                 </Box>
             </Box>
 
