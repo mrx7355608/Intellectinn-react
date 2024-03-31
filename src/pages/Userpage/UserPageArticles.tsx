@@ -1,30 +1,16 @@
-import { useState, useEffect } from "react";
 import { Spinner, Text } from "@chakra-ui/react";
 import ArticlesList from "../../components/Articles/ArticlesList";
 import { useSearchParams } from "react-router-dom";
-import { getArticles } from "../../api/articles";
-import { IArticle } from "../../types/articles";
+import useFetch from "../../hooks/useFetch";
 
 export default function UserPageArticles() {
-    const [articles, setArticles] = useState<IArticle[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [err, setErr] = useState("");
-    const [sp, setSp] = useSearchParams();
-
+    // eslint-disable-next-line
+    const [sp, _setSp] = useSearchParams();
     const tag = sp.get("tag");
 
-    // Fetch articles
-    useEffect(() => {
-        getArticles(tag)
-            .then((resp) => {
-                if (resp.error) {
-                    setErr(resp.error);
-                } else {
-                    setArticles(resp.data);
-                }
-            })
-            .finally(() => setLoading(false));
-    }, [tag]);
+    const noTagUrl = "/api/articles/published";
+    const withTagUrl = `/api/articles/published?tag=${tag}`;
+    const { loading, err, articles } = useFetch(tag ? withTagUrl : noTagUrl);
 
     // Render the articles list
     return (
