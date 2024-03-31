@@ -1,9 +1,14 @@
 import ArticlesList from "../../components/Articles/ArticlesList";
 import { Spinner, Text } from "@chakra-ui/react";
 import useFetch from "../../hooks/useFetch";
+import { IArticle } from "../../types/articles";
 
 export default function Publications() {
-    const { loading, err, articles } = useFetch("/api/articles/published/me");
+    const {
+        loading,
+        err,
+        data: articles,
+    } = useFetch<IArticle>("/api/articles/published/me");
 
     return (
         <>
