@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Box, Text, Heading } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuthContext } from "../../context/auth";
@@ -8,6 +9,23 @@ import LoginAndSignupButtons from "./LoginAndSignupButtons";
 export default function Navbar() {
     const { pathname } = useLocation();
     const { user } = useAuthContext();
+    const [navbarColor, setNavbarColor] = useState("transparent");
+
+    const changeNavbarColor = () => {
+        if (window.scrollY >= 570) {
+            setNavbarColor("white");
+        } else {
+            setNavbarColor("transparent");
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", changeNavbarColor);
+
+        return () => {
+            window.removeEventListener("scroll", changeNavbarColor);
+        };
+    }, [changeNavbarColor]);
 
     return (
         <Box
@@ -17,7 +35,7 @@ export default function Navbar() {
             px={"14"}
             py={"3"}
             shadow={"sm"}
-            bg={pathname === "/" ? "transparent" : "white"}
+            bg={pathname === "/" ? navbarColor : "white"}
             w={"full"}
             pos={"fixed"}
             top={"0"}
@@ -25,6 +43,8 @@ export default function Navbar() {
             color={"black"}
             borderColor={pathname === "/" ? "gray.600" : "gray.200"}
             zIndex={3}
+            transition={"ease-out"}
+            transitionDuration={"0.2s"}
         >
             <Box
                 display={"flex"}

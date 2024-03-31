@@ -12,7 +12,7 @@ export default function Hero() {
             justifyContent={"center"}
             alignItems={"start"}
             p={"14"}
-            h={"85vh"}
+            h={"100vh"}
             borderBottom={"1px"}
             color={"black"}
         >
