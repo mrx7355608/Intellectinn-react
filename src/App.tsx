@@ -35,6 +35,7 @@ const Followers = lazy(() => import("./pages/Profile/Followers"));
 const Following = lazy(() => import("./pages/Profile/Following"));
 
 const TagsPage = lazy(() => import("./pages/TagPage/TagPage"));
+const SingleArticle = lazy(() => import("./pages/SingleArticle/SingleArticle"));
 
 // Routes
 const router = createBrowserRouter([
@@ -124,6 +125,10 @@ const router = createBrowserRouter([
             {
                 path: "tags/:tag",
                 element: <TagsPage />,
+            },
+            {
+                path: "/:slug",
+                element: <SingleArticle />,
             },
         ],
     },
