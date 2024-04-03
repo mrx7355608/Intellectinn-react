@@ -91,7 +91,7 @@ function Article({ article }: { article: IArticle }) {
                         {new Date(article.createdAt).toDateString()}
                     </Text>
                 </Box>
-                <FollowAndUnfollowButtons article={article} />
+                <FollowAndUnfollowButtons authorID={article.author._id} />
             </Box>
 
             <Divider mt="8" mb="2" />

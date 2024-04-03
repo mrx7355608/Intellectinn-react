@@ -1,13 +1,12 @@
 import { Spinner, Button, useToast } from "@chakra-ui/react";
 import { useAuthContext } from "../../context/auth";
 import { useState } from "react";
-import { IArticle } from "../../types/articles";
 import { followUser, unfollowUser } from "../../api/user";
 
 export default function FollowAndUnfollowButtons({
-    article,
+    authorID,
 }: {
-    article: IArticle;
+    authorID: string;
 }) {
     const { user: usr, setUser } = useAuthContext();
     const toast = useToast({
@@ -21,7 +20,7 @@ export default function FollowAndUnfollowButtons({
 
     return (
         <>
-            {usr?.following.includes(article.author._id) ? (
+            {usr?.following.includes(authorID) ? (
                 <Button
                     bg="gray.900"
                     rounded="full"
@@ -33,7 +32,7 @@ export default function FollowAndUnfollowButtons({
                     ml="auto"
                     color="white"
                     _hover={{ bg: "gray.900", color: "white" }}
-                    onClick={() => unfollow(article.author._id)}
+                    onClick={unfollow}
                 >
                     {loading.isUnfollowing ? <Spinner size="sm" /> : "Unfollow"}
                 </Button>
@@ -48,7 +47,7 @@ export default function FollowAndUnfollowButtons({
                     size="sm"
                     my="auto"
                     ml="auto"
-                    onClick={() => follow(article.author._id)}
+                    onClick={follow}
                 >
                     {loading.isFollowing ? <Spinner size="sm" /> : "Follow"}
                 </Button>
@@ -56,10 +55,10 @@ export default function FollowAndUnfollowButtons({
         </>
     );
 
-    async function follow(userID: string) {
+    async function follow() {
         setLoading((prev) => ({ ...prev, isFollowing: true }));
         try {
-            const { data, error } = await followUser(userID);
+            const { data, error } = await followUser(authorID);
             if (error) {
                 // Show error toast
                 return toast({
@@ -82,10 +81,10 @@ export default function FollowAndUnfollowButtons({
         }
     }
 
-    async function unfollow(userID: string) {
+    async function unfollow() {
         setLoading((prev) => ({ ...prev, isUnfollowing: true }));
         try {
-            const { data, error } = await unfollowUser(userID);
+            const { data, error } = await unfollowUser(authorID);
             if (error) {
                 // Show error toast
                 return toast({
