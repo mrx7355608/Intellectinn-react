@@ -78,9 +78,39 @@ export default function ThumbnailSelector({
         fileInputRef.current?.click();
     }
 
+    function validateFile(file: File | undefined) {
+        if (!file) {
+            return "No image selected";
+        }
+        const splittedFileName = file.name.split(".");
+        const extension =
+            splittedFileName[splittedFileName.length - 1].toLowerCase();
+        if (
+            extension !== "jpg" &&
+            extension !== "png" &&
+            extension !== "jpeg"
+        ) {
+            return "Invalid thumbnail";
+        }
+        const sizeLimitMb = 5000000; // 5 MB
+        if (file.size > sizeLimitMb) {
+            return "Thumbnail size should be less than 5 MB";
+        }
+
+        return null;
+    }
+
     async function onChangeHandler() {
-        setIsUploading(true);
+        // setIsUploading(true);
         const file = fileInputRef.current?.files![0];
+        const error = validateFile(file);
+        if (error) {
+            toast({
+                status: "error",
+                description: error,
+            });
+            return;
+        }
         const url = URL.createObjectURL(file!);
         setPreviewURL(url);
 
