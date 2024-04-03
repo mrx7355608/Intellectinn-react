@@ -20,3 +20,14 @@ export async function uploadThumbnailToCloudinary(file: File) {
     });
     return response;
 }
+
+export async function deleteArticle(articleID: string) {
+    const response = await axiosAgent.delete(`/api/articles/${articleID}`);
+    if (response.status !== 204) {
+        return response.data;
+    }
+    return {
+        data: null,
+        error: null,
+    };
+}
