@@ -116,8 +116,38 @@ export default function ChangeProfilePictureComponent() {
         fileInputRef.current?.click();
     }
 
+    function validateFile(file: File | undefined) {
+        if (!file) {
+            return "No image selected";
+        }
+        console.log("size: ", file.size);
+        const splittedFileName = file.name.split(".");
+        const extension =
+            splittedFileName[splittedFileName.length - 1].toLowerCase();
+        if (
+            extension !== "jpg" &&
+            extension !== "png" &&
+            extension !== "jpeg"
+        ) {
+            return "Invalid thumbnail";
+        }
+        const sizeLimitMb = 2000000; // 2 MB
+        if (file.size > sizeLimitMb) {
+            return "Thumbnail size should be less than 5 MB";
+        }
+
+        return null;
+    }
+
     function onChangeHandler() {
         const file = fileInputRef.current?.files![0];
+        const error = validateFile(file);
+        if (error) {
+            return toast({
+                status: "error",
+                description: error,
+            });
+        }
         const url = URL.createObjectURL(file!);
         setPreviewURL(url);
     }
