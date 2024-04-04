@@ -1,3 +1,4 @@
+import "./custom.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -40,7 +41,7 @@ export default function SingleArticle() {
     });
     return (
         <Box
-            w="50vw"
+            w="60vw"
             mx="auto"
             display="flex"
             alignItems={"start"}
@@ -147,7 +148,7 @@ function Article({ article }: { article: IArticle }) {
                 h="auto"
                 mb="9"
             />
-            {Parser(article.content)}
+            <div className="container">{Parser(article.content)}</div>
         </>
     );
 }

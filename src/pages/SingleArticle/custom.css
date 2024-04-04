@@ -1,0 +1,16 @@
+.container * {
+    font-weight: revert;
+    font-size: 15pt;
+    margin: revert;
+    padding: revert;
+}
+
+.container li {
+    margin: 8px 0px;
+}
+
+.container a {
+    text-decoration: underline;
+    color: blue
+}
+
