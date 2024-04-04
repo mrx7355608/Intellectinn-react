@@ -19,6 +19,7 @@
     "@types/react-html-parser": "^2.0.6",
     "axios": "^1.6.8",
     "framer-motion": "^11.0.8",
+    "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-html-parser": "^2.0.2",
@@ -26,6 +27,7 @@
     "react-router-dom": "^6.22.2"
   },
   "devDependencies": {
+    "@types/prismjs": "^1.26.3",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^7.0.2",

@@ -18,6 +18,9 @@ import axiosAgent from "../../api/utils";
 import { IApiResponse } from "../../types/api";
 import { IArticle } from "../../types/articles";
 import FollowAndUnfollowButtons from "./FollowAndUnfollowButtons";
+import Prism from "prismjs";
+import "prismjs/themes/prism-solarizedlight.css";
+import "prismjs/components/prism-java";
 
 export default function SingleArticle() {
     const { slug } = useParams();
@@ -38,7 +41,8 @@ export default function SingleArticle() {
             })
             .catch(() => setErr("Internal server error"))
             .finally(() => setLoading(false));
-    });
+    }, [slug]);
+
     return (
         <Box
             w="60vw"
@@ -64,6 +68,9 @@ export default function SingleArticle() {
 }
 
 function Article({ article }: { article: IArticle }) {
+    useEffect(() => {
+        Prism.highlightAll();
+    }, []);
     return (
         <>
             <Heading fontSize="4xl" fontWeight={"black"}>
@@ -148,7 +155,33 @@ function Article({ article }: { article: IArticle }) {
                 h="auto"
                 mb="9"
             />
+            {/* TinyMCE content */}
             <div className="container">{Parser(article.content)}</div>
+
+            {/* Tags */}
+            <Box
+                display="flex"
+                alignItems={"center"}
+                justifyContent={"start"}
+                flexWrap={"wrap"}
+                gap="2"
+                mt="10"
+            >
+                {article.tags.map((t) => {
+                    return (
+                        <Text
+                            bg="gray.100"
+                            py="2"
+                            rounded="full"
+                            px="5"
+                            color="gray.600"
+                        >
+                            {t}
+                        </Text>
+                    );
+                })}
+            </Box>
+            <Divider my="10" />
         </>
     );
 }

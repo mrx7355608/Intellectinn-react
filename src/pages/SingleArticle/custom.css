@@ -5,6 +5,10 @@
     padding: revert;
 }
 
+.container * pre {
+    background-color: #f6f6f6 !important;
+}
+
 .container li {
     margin: 8px 0px;
 }
