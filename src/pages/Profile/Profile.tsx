@@ -5,15 +5,13 @@ import {
     Tab,
     Box,
     TabPanels,
-    TabPanel,
     Heading,
     Image,
     Text,
     Spinner,
 } from "@chakra-ui/react";
-import { Outlet, Link, useParams } from "react-router-dom";
+import { Outlet, Link, useParams, useLocation } from "react-router-dom";
 import NestedLayoutsSpinner from "../../components/Spinners/NestedLayoutsSpinner";
-import About from "./About";
 
 import { useAuthContext } from "../../context/auth";
 import axiosAgent from "../../api/utils";
@@ -28,8 +26,33 @@ export default function Profile() {
     const [loading, setLoading] = useState(true);
     const { user } = useAuthContext();
 
+    const [tabIndex, setTabIndex] = useState(0);
+    const { pathname } = useLocation();
+
     // Get user profile
     useEffect(() => {
+        const changeTabIndex = () => {
+            // Change tab index according to route
+            // so that correct tab will be selected when page reloads
+            switch (pathname) {
+                case `/profile/${id}`:
+                    setTabIndex(0);
+                    break;
+
+                case `/profile/${id}/followers`:
+                    setTabIndex(1);
+                    break;
+                case `/profile/${id}/following`:
+                    setTabIndex(2);
+                    break;
+                case `/profile/${id}/about`:
+                    setTabIndex(3);
+                    break;
+            }
+        };
+
+        changeTabIndex();
+
         axiosAgent
             .get<IApiResponse<IUser>>(`/api/users/profile/${id}`, {
                 withCredentials: false,
@@ -43,7 +66,7 @@ export default function Profile() {
             })
             .catch(() => setApiError("Internal server error"))
             .finally(() => setLoading(false));
-    }, [id]);
+    }, [id, pathname]);
 
     return (
         <Box minH="100vh" display="flex" alignItems="start" p="0">
@@ -62,7 +85,7 @@ export default function Profile() {
                 ) : (
                     <>
                         <Heading>{profile?.fullname}</Heading>
-                        <Tabs size={"sm"} mt="8">
+                        <Tabs size={"sm"} mt="8" defaultIndex={tabIndex}>
                             <TabList overflowY="hidden" height={"full"}>
                                 <Link to={`/profile/${id}`}>
                                     <Tab py="2" whiteSpace={"nowrap"} m="0">
@@ -79,20 +102,17 @@ export default function Profile() {
                                         Following
                                     </Tab>
                                 </Link>
-                                <Tab py="2" whiteSpace={"nowrap"} m="0">
-                                    About
-                                </Tab>
+                                <Link to={`/profile/${id}/about`}>
+                                    <Tab py="2" whiteSpace={"nowrap"} m="0">
+                                        About
+                                    </Tab>
+                                </Link>
                             </TabList>
 
                             <TabPanels py="10">
                                 <Suspense fallback={<NestedLayoutsSpinner />}>
                                     <Outlet />
                                 </Suspense>
-                                <TabPanel></TabPanel>
-                                <TabPanel></TabPanel>
-                                <TabPanel>
-                                    <About profile={profile!} />
-                                </TabPanel>
                             </TabPanels>
                         </Tabs>
                     </>

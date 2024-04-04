@@ -13,7 +13,11 @@ export default function TitleAndSummary({ article }: { article: IArticle }) {
         >
             <Box w="full" mr="7">
                 <Link to={`/${article.slug}`}>
-                    <Heading fontSize="xl" w="full">
+                    <Heading
+                        fontSize="xl"
+                        w="full"
+                        _hover={{ textDecor: "underline" }}
+                    >
                         {article.title}
                     </Heading>
                 </Link>
