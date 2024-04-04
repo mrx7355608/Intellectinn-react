@@ -5,6 +5,7 @@ import {
     Tab,
     Box,
     TabPanels,
+    TabPanel,
     Heading,
     Image,
     Text,
@@ -12,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { Outlet, Link, useParams } from "react-router-dom";
 import NestedLayoutsSpinner from "../../components/Spinners/NestedLayoutsSpinner";
+import About from "./About";
 
 import { useAuthContext } from "../../context/auth";
 import axiosAgent from "../../api/utils";
@@ -37,7 +39,6 @@ export default function Profile() {
                 if (apiResponse.error) {
                     return setApiError(apiResponse.error);
                 }
-                console.log(apiResponse.data);
                 setProfile(apiResponse.data);
             })
             .catch(() => setApiError("Internal server error"))
@@ -78,17 +79,20 @@ export default function Profile() {
                                         Following
                                     </Tab>
                                 </Link>
-                                <Link to={`/profile/${id}/about`}>
-                                    <Tab py="2" whiteSpace={"nowrap"} m="0">
-                                        About
-                                    </Tab>
-                                </Link>
+                                <Tab py="2" whiteSpace={"nowrap"} m="0">
+                                    About
+                                </Tab>
                             </TabList>
 
                             <TabPanels py="10">
                                 <Suspense fallback={<NestedLayoutsSpinner />}>
                                     <Outlet />
                                 </Suspense>
+                                <TabPanel></TabPanel>
+                                <TabPanel></TabPanel>
+                                <TabPanel>
+                                    <About profile={profile!} />
+                                </TabPanel>
                             </TabPanels>
                         </Tabs>
                     </>

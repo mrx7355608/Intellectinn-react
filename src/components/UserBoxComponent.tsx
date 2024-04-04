@@ -1,6 +1,7 @@
 import { IUser } from "../types/user";
 import { Box, Image, Text } from "@chakra-ui/react";
 import FollowAndUnfollowButtons from "../pages/SingleArticle/FollowAndUnfollowButtons";
+import { Link } from "react-router-dom";
 
 export default function UserBox({ user }: { user: IUser }) {
     return (
@@ -24,9 +25,15 @@ export default function UserBox({ user }: { user: IUser }) {
 
                 {/* user fullname and about */}
                 <Box ml="4">
-                    <Text fontWeight={"bold"} fontSize="lg">
-                        {user.fullname}
-                    </Text>
+                    <Link to={`/profile/${user._id}`}>
+                        <Text
+                            fontWeight={"bold"}
+                            fontSize="lg"
+                            _hover={{ textDecor: "underline" }}
+                        >
+                            {user.fullname}
+                        </Text>
+                    </Link>
                     {user.about ? (
                         <Text color="gray.500" mr="6">
                             {user.about.substring(0, 60)}...

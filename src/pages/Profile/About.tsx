@@ -1,20 +1,26 @@
 import { Box, Text } from "@chakra-ui/react";
 import AboutModal from "./AboutModal";
 import { useAuthContext } from "../../context/auth";
+import { IUser } from "../../types/user";
 
-export default function About() {
+export default function About({ profile }: { profile: IUser }) {
     const { user } = useAuthContext();
 
     return (
         <>
-            {user?.about ? (
+            {/* Show about section if it is present */}
+            {profile.about ? (
                 <>
                     <Text whiteSpace={"break-spaces"} fontSize="lg">
-                        {user?.about}
+                        {profile.about}
                     </Text>
                     <AboutModal />
                 </>
-            ) : (
+            ) : /*
+             * Otherwise, check if profile that is currently being viewed is of logged in user's profile
+             * if so, then display an edit about UI
+             */
+            profile._id === user?._id ? (
                 <Box
                     display="flex"
                     justifyItems={"center"}
@@ -34,6 +40,11 @@ export default function About() {
                     </Text>
                     <AboutModal />
                 </Box>
+            ) : (
+                /* Otherwise, display this text */
+                <Text fontStyle={"italic"} color="gray.500">
+                    No about content provided
+                </Text>
             )}
         </>
     );
