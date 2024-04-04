@@ -1,5 +1,6 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 import { IArticle } from "../../types/articles";
+import { Link } from "react-router-dom";
 
 export default function Author({ article }: { article: IArticle }) {
     return (
@@ -13,9 +14,11 @@ export default function Author({ article }: { article: IArticle }) {
                 objectFit="cover"
             />
             {/* Name */}
-            <Text ml="2" fontSize="sm">
-                {article.author.fullname}
-            </Text>
+            <Link to={`/profile/${article.author._id}`}>
+                <Text ml="2" fontSize="sm" _hover={{ textDecor: "underline" }}>
+                    {article.author.fullname}
+                </Text>
+            </Link>
 
             {/* Publish date */}
             <Text ml="1" color="gray.500" fontSize="sm">

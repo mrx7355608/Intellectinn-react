@@ -20,38 +20,44 @@ export default function FollowAndUnfollowButtons({
 
     return (
         <>
-            {usr?.following.includes(authorID) ? (
-                <Button
-                    bg="gray.900"
-                    rounded="full"
-                    px="6"
-                    py="2"
-                    pt="2.5"
-                    size="sm"
-                    my="auto"
-                    ml="auto"
-                    color="white"
-                    _hover={{ bg: "gray.900", color: "white" }}
-                    onClick={unfollow}
-                >
-                    {loading.isUnfollowing ? <Spinner size="sm" /> : "Unfollow"}
-                </Button>
-            ) : (
-                <Button
-                    variant="outline"
-                    rounded="full"
-                    borderColor="black"
-                    px="6"
-                    py="2"
-                    pt="2.5"
-                    size="sm"
-                    my="auto"
-                    ml="auto"
-                    onClick={follow}
-                >
-                    {loading.isFollowing ? <Spinner size="sm" /> : "Follow"}
-                </Button>
-            )}
+            {usr?._id !== authorID ? (
+                usr?.following.includes(authorID) ? (
+                    <Button
+                        bg="gray.900"
+                        rounded="full"
+                        px="6"
+                        py="2"
+                        pt="2.5"
+                        size="sm"
+                        my="auto"
+                        ml="auto"
+                        color="white"
+                        _hover={{ bg: "gray.900", color: "white" }}
+                        onClick={unfollow}
+                    >
+                        {loading.isUnfollowing ? (
+                            <Spinner size="sm" />
+                        ) : (
+                            "Unfollow"
+                        )}
+                    </Button>
+                ) : (
+                    <Button
+                        variant="outline"
+                        rounded="full"
+                        borderColor="black"
+                        px="6"
+                        py="2"
+                        pt="2.5"
+                        size="sm"
+                        my="auto"
+                        ml="auto"
+                        onClick={follow}
+                    >
+                        {loading.isFollowing ? <Spinner size="sm" /> : "Follow"}
+                    </Button>
+                )
+            ) : null}
         </>
     );
 

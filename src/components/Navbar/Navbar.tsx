@@ -76,7 +76,7 @@ export default function Navbar() {
                 </Link>
                 {user ? (
                     <>
-                        <Link to={"/profile"}>
+                        <Link to={`/profile/${user._id}`}>
                             <Text mx="1" _hover={{ color: "teal.500" }}>
                                 Profile
                             </Text>

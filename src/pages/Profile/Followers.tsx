@@ -1,15 +1,15 @@
 import useFetch from "../../hooks/useFetch";
 import { IUser } from "../../types/user";
-import { useAuthContext } from "../../context/auth";
 import { Spinner, Text, Box, Image } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
 
 export default function Followers() {
-    const { user } = useAuthContext();
+    const { id } = useParams();
     const {
         loading,
         err,
         data: following,
-    } = useFetch<IUser>(`/api/users/followers/${user?._id}`);
+    } = useFetch<IUser>(`/api/users/followers/${id}`);
 
     return (
         <Box display="flex" flexDirection={"column"}>

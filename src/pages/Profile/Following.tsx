@@ -1,16 +1,16 @@
 import { Box, Spinner, Text } from "@chakra-ui/react";
 import useFetch from "../../hooks/useFetch";
 import UserBox from "../../components/UserBoxComponent";
-import { useAuthContext } from "../../context/auth";
 import { IUser } from "../../types/user";
+import { useParams } from "react-router-dom";
 
 export default function Following() {
-    const { user } = useAuthContext();
+    const { id } = useParams();
     const {
         loading,
         err,
         data: following,
-    } = useFetch<IUser>(`/api/users/following/${user!._id}`);
+    } = useFetch<IUser>(`/api/users/following/${id}`);
 
     return (
         <Box display="flex" flexDirection={"column"}>
