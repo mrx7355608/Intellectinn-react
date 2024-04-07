@@ -1,10 +1,12 @@
-import { Box, Text, Button } from "@chakra-ui/react";
-import { FaRegBookmark } from "react-icons/fa";
+import { Spinner, Box, Text, Button, useToast } from "@chakra-ui/react";
+import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
 import { IArticle } from "../../types/articles";
 import { useAuthContext } from "../../context/auth";
 import DeleteArticleConfirmationModal from "./DeleteArticleConfirmationModal";
+import { useState } from "react";
+import { addBookmark, removeBookmark } from "../../api/articles";
 
 export default function ArticleMenu({
     filterArticle,
@@ -14,6 +16,12 @@ export default function ArticleMenu({
     article: IArticle;
 }) {
     const { user } = useAuthContext();
+    const [bookmarks, setBookmarks] = useState(article.bookmarkedBy);
+    const [loading, setLoading] = useState(false);
+    const toast = useToast({
+        isClosable: true,
+        duration: 4000,
+    });
 
     return (
         <Box mb="8" display={"flex"} alignItems={"center"} w={"80%"}>
@@ -38,7 +46,13 @@ export default function ArticleMenu({
 
             {/* Bookmark btn */}
             <Button bg="transparent" _hover={{ bg: "transparent" }} ml="auto">
-                <FaRegBookmark />
+                {loading ? (
+                    <Spinner />
+                ) : user && bookmarks.includes(user._id) ? (
+                    <FaBookmark onClick={deleteBookmark} />
+                ) : (
+                    <FaRegBookmark onClick={createBookmark} />
+                )}
             </Button>
             {article.author._id === user?._id ? (
                 <Menu>
@@ -86,4 +100,33 @@ export default function ArticleMenu({
             )}
         </Box>
     );
+
+    async function createBookmark() {
+        try {
+            setLoading(true);
+            const { data, error } = await addBookmark(article._id);
+            if (error) {
+                return toast({ status: "error", description: error });
+            }
+            setBookmarks(data);
+        } catch (err) {
+            toast({ status: "error", description: "Internal server error" });
+        } finally {
+            setLoading(false);
+        }
+    }
+    async function deleteBookmark() {
+        try {
+            setLoading(true);
+            const { data, error } = await removeBookmark(article._id);
+            if (error) {
+                return toast({ status: "error", description: error });
+            }
+            setBookmarks(data);
+        } catch (err) {
+            toast({ status: "error", description: "Internal server error" });
+        } finally {
+            setLoading(false);
+        }
+    }
 }
