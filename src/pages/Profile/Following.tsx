@@ -18,10 +18,12 @@ export default function Following() {
                 <Spinner />
             ) : err ? (
                 <Text color="red.600">{err}</Text>
-            ) : (
+            ) : following.length > 0 ? (
                 following.map((user) => {
                     return <UserBox user={user} />;
                 })
+            ) : (
+                <Text>Nothing to show</Text>
             )}
         </Box>
     );

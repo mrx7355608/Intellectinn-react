@@ -3,6 +3,8 @@ export interface IArticle {
     title: string;
     thumbnail: string;
     tags: string[];
+    likes: string[];
+    bookmarkedBy: string[];
     content: string;
     timeToReadInMinutes: string;
     summary: string;
