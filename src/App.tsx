@@ -18,14 +18,14 @@ const Writepage = lazy(() => import("./pages/Write/Writepage"));
 const Settings = lazy(() => import("./pages/Settings/Settings"));
 const Userpage = lazy(() => import("./pages/Userpage/Userpage"));
 const UserPageArticles = lazy(
-    () => import("./pages/Userpage/UserPageArticles"),
+    () => import("./pages/Userpage/UserPageArticles")
 );
 
 const Searchpage = lazy(() => import("./pages/Searchpage/Searchpage"));
 const PeopleList = lazy(() => import("./pages/Searchpage/PeopleList"));
 const TopicsList = lazy(() => import("./pages/Searchpage/TopicsList"));
 const SearchedArticles = lazy(
-    () => import("./pages/Searchpage/SearchedArticles"),
+    () => import("./pages/Searchpage/SearchedArticles")
 );
 
 const Profile = lazy(() => import("./pages/Profile/Profile"));
@@ -33,6 +33,7 @@ const About = lazy(() => import("./pages/Profile/About"));
 const Publications = lazy(() => import("./pages/Profile/Publications"));
 const Followers = lazy(() => import("./pages/Profile/Followers"));
 const Following = lazy(() => import("./pages/Profile/Following"));
+const Bookmarks = lazy(() => import("./pages/Profile/Bookmarks"));
 
 const TagsPage = lazy(() => import("./pages/TagPage/TagPage"));
 const SingleArticle = lazy(() => import("./pages/SingleArticle/SingleArticle"));
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
                     {
                         index: true,
                         element: <Publications />,
+                    },
+                    {
+                        path: "bookmarks",
+                        element: <Bookmarks />,
                     },
                     {
                         path: "followers",

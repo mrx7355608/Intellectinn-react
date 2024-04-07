@@ -38,15 +38,17 @@ export default function Profile() {
                 case `/profile/${id}`:
                     setTabIndex(0);
                     break;
-
-                case `/profile/${id}/followers`:
+                case `/profile/${id}/bookmarks`:
                     setTabIndex(1);
                     break;
-                case `/profile/${id}/following`:
+                case `/profile/${id}/followers`:
                     setTabIndex(2);
                     break;
-                case `/profile/${id}/about`:
+                case `/profile/${id}/following`:
                     setTabIndex(3);
+                    break;
+                case `/profile/${id}/about`:
+                    setTabIndex(4);
                     break;
             }
         };
@@ -54,7 +56,7 @@ export default function Profile() {
         changeTabIndex();
 
         axiosAgent
-            .get<IApiResponse<IUser>>(`/api/users/profile/${id}`, {
+            .get<IApiResponse<IUser>>(`/api/users/${id}`, {
                 withCredentials: false,
             })
             .then((axiosResp) => axiosResp.data)
@@ -90,6 +92,11 @@ export default function Profile() {
                                 <Link to={`/profile/${id}`}>
                                     <Tab py="2" whiteSpace={"nowrap"} m="0">
                                         Publications
+                                    </Tab>
+                                </Link>
+                                <Link to={`/profile/${id}/bookmarks`}>
+                                    <Tab py="2" whiteSpace={"nowrap"} m="0">
+                                        Bookmarks
                                     </Tab>
                                 </Link>
                                 <Link to={`/profile/${id}/followers`}>
