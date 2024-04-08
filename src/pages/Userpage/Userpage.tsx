@@ -10,23 +10,15 @@ import {
     Button,
 } from "@chakra-ui/react";
 import Author from "../../components/Articles/Author";
+import { FaPlus } from "react-icons/fa6";
 import { Outlet, Link } from "react-router-dom";
 import NestedLayoutsSpinner from "../../components/Spinners/NestedLayoutsSpinner";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
+import InterestsModal from "./InterestsModal";
+import { useAuthContext } from "../../context/auth";
 
 export default function Userpage() {
-    const tags = [
-        "Programming",
-        "Web development",
-        "Block chain",
-        "Game development",
-        "Software engineering",
-        "Cybersecurity",
-        "Web 3.0",
-        "Self Improvement",
-        "Philosophy",
-        "Economics",
-    ];
+    const { user } = useAuthContext();
 
     return (
         <Box minH="100vh" display="flex" alignItems="start" p="0">
@@ -38,13 +30,16 @@ export default function Userpage() {
                                 For you
                             </Tab>
                         </Link>
-                        {tags.map((t) => (
+                        {user!.topicsInterestedIn.map((t) => (
                             <Link to={`/user?tag=${t}`}>
                                 <Tab py="2" whiteSpace={"nowrap"} m="0">
                                     {t}
                                 </Tab>
                             </Link>
                         ))}
+                        <Tab>
+                            <InterestsModal />
+                        </Tab>
                     </TabList>
 
                     <TabPanels py="10">

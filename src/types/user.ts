@@ -6,4 +6,5 @@ export interface IUser {
     _id: string;
     followers: string[];
     following: string[];
+    topicsInterestedIn: string[];
 }
