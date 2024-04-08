@@ -1,19 +1,7 @@
-import {
-    Tabs,
-    TabList,
-    Tab,
-    Box,
-    TabPanels,
-    Text,
-    Heading,
-    Image,
-    Button,
-} from "@chakra-ui/react";
-import Author from "../../components/Articles/Author";
-import { FaPlus } from "react-icons/fa6";
+import { Tabs, TabList, Tab, Box, TabPanels } from "@chakra-ui/react";
 import { Outlet, Link } from "react-router-dom";
 import NestedLayoutsSpinner from "../../components/Spinners/NestedLayoutsSpinner";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import InterestsModal from "./InterestsModal";
 import { useAuthContext } from "../../context/auth";
 

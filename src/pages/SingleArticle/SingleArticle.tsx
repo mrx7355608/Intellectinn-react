@@ -43,6 +43,7 @@ export default function SingleArticle() {
             flexDir={"column"}
             mt="16"
             pt="14"
+            minH="100vh"
         >
             {loading ? (
                 <Spinner mx="auto" />
