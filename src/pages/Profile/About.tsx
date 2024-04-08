@@ -16,7 +16,7 @@ export default function About() {
 
     useEffect(() => {
         axiosAgent
-            .get<IApiResponse<IUser>>(`/api/users/profile/${id}`, {
+            .get<IApiResponse<IUser>>(`/api/users/${id}`, {
                 withCredentials: false,
             })
             .then((axiosResp) => axiosResp.data)
