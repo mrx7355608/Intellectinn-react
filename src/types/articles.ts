@@ -16,3 +16,15 @@ export interface IArticle {
     };
     createdAt: Date;
 }
+
+export interface IComment {
+    _id: string;
+    text: string;
+    user: {
+        profilePicture: string;
+        _id: string;
+        fullname: string;
+    };
+    createdAt: Date;
+    updatedAt: Date;
+}

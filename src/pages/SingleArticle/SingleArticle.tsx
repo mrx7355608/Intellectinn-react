@@ -11,6 +11,8 @@ import "prismjs/themes/prism-solarizedlight.css";
 import "prismjs/components/prism-java";
 import ArticleAuthorInfo from "./ArticleAuthorInfo";
 import ArticleActionButtons from "./ArticleActionButtons";
+import CommentsSection from "./Comments/CommentsSection";
+import CommentsProvider from "../../context/comments";
 
 export default function SingleArticle() {
     const { slug } = useParams();
@@ -110,6 +112,9 @@ function Article({ article }: { article: IArticle }) {
                 })}
             </Box>
             <Divider my="10" />
+            <CommentsProvider>
+                <CommentsSection article={article} />
+            </CommentsProvider>
         </>
     );
 }
