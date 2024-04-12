@@ -85,7 +85,7 @@ export default function InputComment({ article }: { article: IArticle }) {
             setLoading(true);
             const { data: newlyCreatedComment, error } = await postComment(
                 commentText,
-                article._id
+                article._id,
             );
             if (error) {
                 return toast({
@@ -93,7 +93,7 @@ export default function InputComment({ article }: { article: IArticle }) {
                     status: "warning",
                 });
             }
-            setComments((prevState) => [...prevState, newlyCreatedComment]);
+            setComments((prevState) => [newlyCreatedComment, ...prevState]);
         } catch (err) {
             toast({
                 status: "error",

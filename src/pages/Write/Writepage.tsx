@@ -19,9 +19,11 @@ const TinymceEditor = lazy(() => import("./TinymceEditor"));
 
 // Api functions
 import { createArticle } from "../../api/articles";
+import { useNavigate } from "react-router-dom";
 
 export default function Writepage() {
     const editorRef = useRef<TinyEditor | null>(null);
+    const navTo = useNavigate();
     const toast = useToast({
         duration: 4000,
         isClosable: true,
@@ -128,7 +130,7 @@ export default function Writepage() {
     );
 
     function onChangeHandler(
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) {
         const { name, value } = e.target;
         setArticleData({ ...articleData, [name]: value });
@@ -149,10 +151,10 @@ export default function Writepage() {
 
         try {
             const article = createArticleObject();
-            console.log(article);
             const { error: err } = await createArticle(article);
             if (err) return setError(err);
             showSuccessToast("Article published successfully");
+            navTo("/user");
         } catch (err) {
             showErrorToast("Internal server error");
         } finally {

@@ -120,7 +120,6 @@ export default function ChangeProfilePictureComponent() {
         if (!file) {
             return "No image selected";
         }
-        console.log("size: ", file.size);
         const splittedFileName = file.name.split(".");
         const extension =
             splittedFileName[splittedFileName.length - 1].toLowerCase();
@@ -129,11 +128,11 @@ export default function ChangeProfilePictureComponent() {
             extension !== "png" &&
             extension !== "jpeg"
         ) {
-            return "Invalid thumbnail";
+            return "Only jpg, png and jpeg image formats are allowed";
         }
         const sizeLimitMb = 2000000; // 2 MB
         if (file.size > sizeLimitMb) {
-            return "Thumbnail size should be less than 5 MB";
+            return "Thumbnail size should be less than 2 MB";
         }
 
         return null;

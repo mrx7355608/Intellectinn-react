@@ -94,11 +94,13 @@ export default function Profile() {
                                         Publications
                                     </Tab>
                                 </Link>
-                                <Link to={`/profile/${id}/bookmarks`}>
-                                    <Tab py="2" whiteSpace={"nowrap"} m="0">
-                                        Bookmarks
-                                    </Tab>
-                                </Link>
+                                {profile?._id === user?._id ? (
+                                    <Link to={`/profile/${id}/bookmarks`}>
+                                        <Tab py="2" whiteSpace={"nowrap"} m="0">
+                                            Bookmarks
+                                        </Tab>
+                                    </Link>
+                                ) : null}
                                 <Link to={`/profile/${id}/followers`}>
                                     <Tab py="2" whiteSpace={"nowrap"} m="0">
                                         Followers
