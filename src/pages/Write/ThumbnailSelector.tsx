@@ -90,7 +90,7 @@ export default function ThumbnailSelector({
             extension !== "png" &&
             extension !== "jpeg"
         ) {
-            return "Invalid thumbnail";
+            return "Only jpg, png and jpeg image formats are allowed";
         }
         const sizeLimitMb = 5000000; // 5 MB
         if (file.size > sizeLimitMb) {

@@ -29,50 +29,32 @@ export default function Userpage() {
     }, [tag, user?.topicsInterestedIn]);
 
     return (
-        <Box minH="100vh" display="flex" alignItems="start" p="0">
-            <Box w="68vw" p="12">
-                <Tabs size={"sm"} mt="12" index={tabIndex}>
-                    <TabList overflowY="hidden" height={"full"}>
-                        <Link to={`/user`}>
+        <Box w="70vw" p="12" mx="auto">
+            <Tabs size={"sm"} mt="12" index={tabIndex}>
+                <TabList overflowY="hidden" height={"full"}>
+                    <Link to={`/user`}>
+                        <Tab py="2" whiteSpace={"nowrap"} m="0">
+                            For you
+                        </Tab>
+                    </Link>
+                    {user!.topicsInterestedIn.map((t) => (
+                        <Link to={`/user?tag=${t}`}>
                             <Tab py="2" whiteSpace={"nowrap"} m="0">
-                                For you
+                                {t}
                             </Tab>
                         </Link>
-                        {user!.topicsInterestedIn.map((t) => (
-                            <Link to={`/user?tag=${t}`}>
-                                <Tab py="2" whiteSpace={"nowrap"} m="0">
-                                    {t}
-                                </Tab>
-                            </Link>
-                        ))}
-                        <Tab>
-                            <InterestsModal />
-                        </Tab>
-                    </TabList>
+                    ))}
+                    <Tab>
+                        <InterestsModal />
+                    </Tab>
+                </TabList>
 
-                    <TabPanels py="10">
-                        <Suspense fallback={<NestedLayoutsSpinner />}>
-                            <Outlet />
-                        </Suspense>
-                    </TabPanels>
-                </Tabs>
-            </Box>
-
-            {/* side content */}
-            <Box
-                display="flex"
-                flexDirection="column"
-                p="10"
-                borderLeft="1px"
-                borderColor="gray.200"
-                minH="100vh"
-            >
-                {/* editor's pick */}
-
-                {/* recommended topics */}
-
-                {/* users to follow */}
-            </Box>
+                <TabPanels py="10">
+                    <Suspense fallback={<NestedLayoutsSpinner />}>
+                        <Outlet />
+                    </Suspense>
+                </TabPanels>
+            </Tabs>
         </Box>
     );
 }
