@@ -1,17 +1,37 @@
 import { Tabs, TabList, Tab, Box, TabPanels } from "@chakra-ui/react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useSearchParams } from "react-router-dom";
 import NestedLayoutsSpinner from "../../components/Spinners/NestedLayoutsSpinner";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import InterestsModal from "./InterestsModal";
 import { useAuthContext } from "../../context/auth";
 
 export default function Userpage() {
     const { user } = useAuthContext();
+    const [sp, _setSp] = useSearchParams();
+    const [tabIndex, setTabIndex] = useState(0);
+
+    const tag = sp.get("tag");
+
+    useEffect(() => {
+        if (!tag) {
+            return setTabIndex(0);
+        }
+        // Get the index of the tab, user is currently on
+        // from his interested topics array.
+        // Here, findIndex() method may return undefined so,
+        // it will set the default tabIndex to 0. Otherwise,
+        // add 1 to the received index (because there's a hardcoded "For you"
+        // section in tabs) and set it as the current tabindex
+        const tabIdx =
+            user?.topicsInterestedIn.findIndex((t) => t === tag) || 0;
+
+        setTabIndex(tabIdx + 1);
+    }, [tag, user?.topicsInterestedIn]);
 
     return (
         <Box minH="100vh" display="flex" alignItems="start" p="0">
             <Box w="68vw" p="12">
-                <Tabs size={"sm"} mt="12">
+                <Tabs size={"sm"} mt="12" index={tabIndex}>
                     <TabList overflowY="hidden" height={"full"}>
                         <Link to={`/user`}>
                             <Tab py="2" whiteSpace={"nowrap"} m="0">
