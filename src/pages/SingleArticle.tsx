@@ -3,16 +3,16 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Spinner, Text, Box, Image, Heading, Divider } from "@chakra-ui/react";
 import Parser from "react-html-parser";
-import axiosAgent from "../../api/utils";
-import { IApiResponse } from "../../types/api";
-import { IArticle } from "../../types/articles";
+import axiosAgent from "../api/utils";
+import { IApiResponse } from "../types/api";
+import { IArticle } from "../types/articles";
 import Prism from "prismjs";
 import "prismjs/themes/prism-solarizedlight.css";
 import "prismjs/components/prism-java";
 import ArticleAuthorInfo from "./ArticleAuthorInfo";
 import ArticleActionButtons from "./ArticleActionButtons";
 import CommentsSection from "./Comments/CommentsSection";
-import CommentsProvider from "../../context/comments";
+import CommentsProvider from "../context/comments";
 
 export default function SingleArticle() {
     const { slug } = useParams();

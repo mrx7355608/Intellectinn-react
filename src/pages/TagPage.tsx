@@ -1,6 +1,6 @@
 import { Box, Heading, Text, Divider, Image, Button } from "@chakra-ui/react";
 import { useParams, Link } from "react-router-dom";
-import Author from "../../components/Articles/Author";
+import Author from "../components/Articles/Author";
 import {
     FaHeart,
     FaCommentAlt,

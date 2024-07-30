@@ -1,8 +1,8 @@
 import Hero from "./Hero";
 import { Box, Spinner, Text } from "@chakra-ui/react";
-import ArticlesList from "../../components/Articles/ArticlesList";
-import useFetch from "../../hooks/useFetch";
-import { IArticle } from "../../types/articles";
+import ArticlesList from "../components/Articles/ArticlesList";
+import useFetch from "../hooks/useFetch";
+import { IArticle } from "../types/articles";
 
 export default function Home() {
     const {

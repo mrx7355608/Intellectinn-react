@@ -18,7 +18,7 @@ import SaveAsDraftButton from "./SaveAsDraftButton";
 const TinymceEditor = lazy(() => import("./TinymceEditor"));
 
 // Api functions
-import { createArticle } from "../../api/articles";
+import { createArticle } from "../api/articles";
 import { useNavigate } from "react-router-dom";
 
 export default function Writepage() {
@@ -130,7 +130,7 @@ export default function Writepage() {
     );
 
     function onChangeHandler(
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) {
         const { name, value } = e.target;
         setArticleData({ ...articleData, [name]: value });

@@ -1,22 +1,23 @@
-import { Heading, VStack, Divider, Text } from "@chakra-ui/react";
-import LoginForm from "./LoginForm";
-import ContinueWithGoogle from "../../components/form/ContinueWithGoogle";
+import { Heading, VStack, Divider } from "@chakra-ui/react";
+import SignupForm from "./SignupForm";
+import ContinueWithGoogle from "../components/form/ContinueWithGoogle";
+import { Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function Signup() {
     return (
         <VStack w={"full"}>
             <Heading as="h1" size={"lg"} mb={"14"}>
-                Login to your account
+                Create your account
             </Heading>
-            <LoginForm />
+            <SignupForm />
             <Divider my="7" />
             <ContinueWithGoogle />
             <Text mt={"4"}>
-                Not a member?{" "}
-                <Link to="/auth/signup">
+                Already a member?{" "}
+                <Link to="/auth/login">
                     <Text as="span" fontWeight={"medium"} color="teal">
-                        Signup
+                        Login
                     </Text>
                 </Link>
             </Text>

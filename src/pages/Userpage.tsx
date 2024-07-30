@@ -1,9 +1,9 @@
 import { Tabs, TabList, Tab, Box, TabPanels } from "@chakra-ui/react";
 import { Outlet, Link, useSearchParams } from "react-router-dom";
-import NestedLayoutsSpinner from "../../components/Spinners/NestedLayoutsSpinner";
+import NestedLayoutsSpinner from "../components/Spinners/NestedLayoutsSpinner";
 import { Suspense, useEffect, useState } from "react";
 import InterestsModal from "./InterestsModal";
-import { useAuthContext } from "../../context/auth";
+import { useAuthContext } from "../context/auth";
 
 export default function Userpage() {
     const { user } = useAuthContext();
