@@ -1,8 +1,8 @@
 import { Box, Text, Image, Button, Spinner, useToast } from "@chakra-ui/react";
-import { useAuthContext } from "../../context/auth";
+import { useAuthContext } from "../../../context/auth";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { logout } from "../../api/auth";
+import { logout } from "../../../api/auth";
 
 export default function UserInfo() {
     const { user, setUser } = useAuthContext();

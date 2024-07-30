@@ -1,34 +1,9 @@
-import useFetch from "../../hooks/useFetch";
 import { IUser } from "../../types/user";
-import { Spinner, Text, Box, Image } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
+import { Box, Image, Text } from "@chakra-ui/react";
+import FollowAndUnfollowButtons from "../pages/SingleArticle/FollowAndUnfollowButtons";
+import { Link } from "react-router-dom";
 
-export default function Followers() {
-    const { id } = useParams();
-    const {
-        loading,
-        err,
-        data: following,
-    } = useFetch<IUser>(`/api/users/followers/${id}`);
-
-    return (
-        <Box display="flex" flexDirection={"column"}>
-            {loading ? (
-                <Spinner />
-            ) : err ? (
-                <Text color="red.600">{err}</Text>
-            ) : following.length > 0 ? (
-                following.map((user) => {
-                    return <User user={user} />;
-                })
-            ) : (
-                <Text>Nothing to show</Text>
-            )}
-        </Box>
-    );
-}
-
-function User({ user }: { user: IUser }) {
+export default function UserBox({ user }: { user: IUser }) {
     return (
         <Box
             mb="10"
@@ -50,9 +25,15 @@ function User({ user }: { user: IUser }) {
 
                 {/* user fullname and about */}
                 <Box ml="4">
-                    <Text fontWeight={"bold"} fontSize="lg">
-                        {user.fullname}
-                    </Text>
+                    <Link to={`/profile/${user._id}`}>
+                        <Text
+                            fontWeight={"bold"}
+                            fontSize="lg"
+                            _hover={{ textDecor: "underline" }}
+                        >
+                            {user.fullname}
+                        </Text>
+                    </Link>
                     {user.about ? (
                         <Text color="gray.500" mr="6">
                             {user.about.substring(0, 60)}...
@@ -64,6 +45,9 @@ function User({ user }: { user: IUser }) {
                     )}
                 </Box>
             </Box>
+
+            {/* follow and unfollow buttons */}
+            <FollowAndUnfollowButtons authorID={user._id} />
         </Box>
     );
 }

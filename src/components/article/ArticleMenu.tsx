@@ -4,7 +4,7 @@ import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
 import { IArticle } from "../../types/articles";
 import { useAuthContext } from "../../context/auth";
-import DeleteArticleConfirmationModal from "./DeleteArticleConfirmationModal";
+import DeleteArticleConfirmationModal from "../modals/DeleteArticleConfirmationModal";
 import { useState } from "react";
 import { addBookmark, removeBookmark } from "../../api/articles";
 

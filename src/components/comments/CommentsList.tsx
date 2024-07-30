@@ -1,5 +1,5 @@
 import { useCommentsContext } from "../../../context/comments";
-import CommentCard from "./CommentCard";
+import CommentCard from "./CommentItem";
 import { Box } from "@chakra-ui/react";
 
 export default function CommentsList() {

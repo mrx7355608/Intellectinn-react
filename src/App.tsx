@@ -3,12 +3,12 @@ import { lazy, useEffect, useState } from "react";
 import { useAuthContext } from "./context/auth";
 import { getUser } from "./api/user";
 import { Box, Spinner, Heading } from "@chakra-ui/react";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/route-protection/ProtectedRoute";
 
 // Layouts
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
-import GuestRoute from "./components/GuestRoute";
+import GuestRoute from "./components/route-protection/GuestRoute";
 
 // Pages
 const Home = lazy(() => import("./pages/Home"));

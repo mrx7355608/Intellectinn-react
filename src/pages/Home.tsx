@@ -1,6 +1,6 @@
 import Hero from "./Hero";
 import { Box, Spinner, Text } from "@chakra-ui/react";
-import ArticlesList from "../components/Articles/ArticlesList";
+import ArticlesList from "../components/article/ArticlesList";
 import useFetch from "../hooks/useFetch";
 import { IArticle } from "../types/articles";
 

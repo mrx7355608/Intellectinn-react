@@ -1,5 +1,5 @@
 import { Box, Image, Text } from "@chakra-ui/react";
-import FollowAndUnfollowButtons from "./FollowAndUnfollowButtons";
+import FollowAndUnfollowButtons from "../single-article/FollowAndUnfollowButtons";
 import { IArticle } from "../../types/articles";
 
 export default function ArticleAuthorInfo({ article }: { article: IArticle }) {

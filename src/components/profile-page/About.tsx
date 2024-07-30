@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box, Text, Spinner } from "@chakra-ui/react";
-import AboutModal from "./AboutModal";
+import AboutModal from "../modals/AboutModal";
 import { useAuthContext } from "../../context/auth";
 import { IUser } from "../../types/user";
 import { IApiResponse } from "../../types/api";

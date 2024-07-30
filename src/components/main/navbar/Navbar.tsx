@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Box, Text, Heading } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
-import { useAuthContext } from "../../context/auth";
-import Searchbar from "../Searchbar";
+import { useAuthContext } from "../../../context/auth";
+import Searchbar from "../../Searchbar";
 import UserInfo from "./UserInfo";
 import LoginAndSignupButtons from "./LoginAndSignupButtons";
 

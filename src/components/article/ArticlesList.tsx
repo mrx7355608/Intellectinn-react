@@ -1,4 +1,4 @@
-import Article from "./Article";
+import Article from "./ArticleItem";
 import { Box, Text } from "@chakra-ui/react";
 import { IArticle } from "../../types/articles";
 import { useEffect, useState } from "react";
