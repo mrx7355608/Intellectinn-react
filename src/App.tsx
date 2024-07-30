@@ -11,32 +11,32 @@ import AuthLayout from "./layouts/AuthLayout";
 import GuestRoute from "./components/GuestRoute";
 
 // Pages
-const Home = lazy(() => import("./pages/Home/Home"));
-const Signup = lazy(() => import("./pages/Signup/Signup"));
-const Login = lazy(() => import("./pages/Login/Login"));
-const Writepage = lazy(() => import("./pages/Write/Writepage"));
-const Settings = lazy(() => import("./pages/Settings/Settings"));
-const Userpage = lazy(() => import("./pages/Userpage/Userpage"));
+const Home = lazy(() => import("./pages/Home"));
+const Signup = lazy(() => import("./pages/Signup"));
+const Login = lazy(() => import("./pages/Login"));
+const Writepage = lazy(() => import("./pages/Writepage"));
+const Settings = lazy(() => import("./pages/Settings"));
+const Userpage = lazy(() => import("./pages/Userpage"));
 const UserPageArticles = lazy(
-    () => import("./pages/Userpage/UserPageArticles")
+    () => import("./pages/Userpage/UserPageArticles"),
 );
 
-const Searchpage = lazy(() => import("./pages/Searchpage/Searchpage"));
+const Searchpage = lazy(() => import("./pages/Searchpage"));
 const PeopleList = lazy(() => import("./pages/Searchpage/PeopleList"));
 const TopicsList = lazy(() => import("./pages/Searchpage/TopicsList"));
 const SearchedArticles = lazy(
-    () => import("./pages/Searchpage/SearchedArticles")
+    () => import("./pages/Searchpage/SearchedArticles"),
 );
 
-const Profile = lazy(() => import("./pages/Profile/Profile"));
+const Profile = lazy(() => import("./pages/Profile"));
 const About = lazy(() => import("./pages/Profile/About"));
 const Publications = lazy(() => import("./pages/Profile/Publications"));
 const Followers = lazy(() => import("./pages/Profile/Followers"));
 const Following = lazy(() => import("./pages/Profile/Following"));
 const Bookmarks = lazy(() => import("./pages/Profile/Bookmarks"));
 
-const TagsPage = lazy(() => import("./pages/TagPage/TagPage"));
-const SingleArticle = lazy(() => import("./pages/SingleArticle/SingleArticle"));
+const TagsPage = lazy(() => import("./pages/TagPage"));
+const SingleArticle = lazy(() => import("./pages/SingleArticle"));
 
 // Routes
 const router = createBrowserRouter([
