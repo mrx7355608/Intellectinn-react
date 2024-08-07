@@ -1,4 +1,4 @@
-import { IComment } from "../../../types/articles";
+import { IComment } from "../../types/articles";
 import { Divider, Box, Image, Text } from "@chakra-ui/react";
 import DeleteCommentButton from "./DeleteCommentButton";
 

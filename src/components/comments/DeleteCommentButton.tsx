@@ -1,7 +1,7 @@
 import { Text, useToast } from "@chakra-ui/react";
 import { useState } from "react";
-import { deleteComment } from "../../../api/comments";
-import { useCommentsContext } from "../../../context/comments";
+import { deleteComment } from "../../api/comments";
+import { useCommentsContext } from "../../context/comments";
 
 export default function DeleteCommentButton({
     commentID,
@@ -58,7 +58,7 @@ export default function DeleteCommentButton({
                 status: "success",
             });
             setComments((prevState) =>
-                prevState.filter((comment) => comment._id !== commentID)
+                prevState.filter((comment) => comment._id !== commentID),
             );
             return;
         } catch (err) {

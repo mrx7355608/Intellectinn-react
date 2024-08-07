@@ -1,4 +1,4 @@
-import { useCommentsContext } from "../../../context/comments";
+import { useCommentsContext } from "../../context/comments";
 import CommentCard from "./CommentItem";
 import { Box } from "@chakra-ui/react";
 

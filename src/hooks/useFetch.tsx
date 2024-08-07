@@ -10,7 +10,7 @@ export default function useFetch<T>(url: string) {
     useEffect(() => {
         setLoading(true);
         axiosAgent
-            .get<IApiResponse<T[]>>(url)
+            .get<IApiResponse<T[]>>(`${import.meta.env.VITE_SERVER_URL}${url}`)
             .then((axiosResp) => axiosResp.data)
             .then((resp) => {
                 if (resp.error) {

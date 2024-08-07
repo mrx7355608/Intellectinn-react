@@ -1,4 +1,4 @@
-import "./custom.css";
+import "../components/single-article/custom.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Spinner, Text, Box, Image, Heading, Divider } from "@chakra-ui/react";
