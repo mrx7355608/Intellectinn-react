@@ -89,7 +89,7 @@ export default function Profile() {
                         <Heading>{profile?.fullname}</Heading>
                         <Tabs size={"sm"} mt="8" defaultIndex={tabIndex}>
                             <TabList overflowY="hidden" height={"full"}>
-                                <Link to={`/profile/${id}`}>
+                                <Link to={`/profile/${id}/publications`}>
                                     <Tab py="2" whiteSpace={"nowrap"} m="0">
                                         Publications
                                     </Tab>

@@ -10,6 +10,7 @@ import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import GuestRoute from "./components/route-protection/GuestRoute";
 import UserPageArticles from "./components/user-page/UserPageArticles";
+import SubProfilePage from "./components/profile-page/SubProfilePage";
 
 // Pages
 const Home = lazy(() => import("./pages/Home"));
@@ -48,8 +49,14 @@ const router = createBrowserRouter([
                 element: <Searchpage />,
             },
             {
-                path: "profile/:id",
+                path: "profile",
                 element: <Profile />,
+                children: [
+                    {
+                        path: ":id/:type",
+                        element: <SubProfilePage />,
+                    },
+                ],
             },
             {
                 path: "user",
