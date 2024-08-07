@@ -17,24 +17,9 @@ const Login = lazy(() => import("./pages/Login"));
 const Writepage = lazy(() => import("./pages/Writepage"));
 const Settings = lazy(() => import("./pages/Settings"));
 const Userpage = lazy(() => import("./pages/Userpage"));
-const UserPageArticles = lazy(
-    () => import("./pages/Userpage/UserPageArticles"),
-);
-
 const Searchpage = lazy(() => import("./pages/Searchpage"));
-const PeopleList = lazy(() => import("./pages/Searchpage/PeopleList"));
-const TopicsList = lazy(() => import("./pages/Searchpage/TopicsList"));
-const SearchedArticles = lazy(
-    () => import("./pages/Searchpage/SearchedArticles"),
-);
 
 const Profile = lazy(() => import("./pages/Profile"));
-const About = lazy(() => import("./pages/Profile/About"));
-const Publications = lazy(() => import("./pages/Profile/Publications"));
-const Followers = lazy(() => import("./pages/Profile/Followers"));
-const Following = lazy(() => import("./pages/Profile/Following"));
-const Bookmarks = lazy(() => import("./pages/Profile/Bookmarks"));
-
 const TagsPage = lazy(() => import("./pages/TagPage"));
 const SingleArticle = lazy(() => import("./pages/SingleArticle"));
 
@@ -60,46 +45,10 @@ const router = createBrowserRouter([
             {
                 path: "search",
                 element: <Searchpage />,
-                children: [
-                    {
-                        index: true,
-                        element: <SearchedArticles />,
-                    },
-                    {
-                        path: "people",
-                        element: <PeopleList />,
-                    },
-                    {
-                        path: "topics",
-                        element: <TopicsList />,
-                    },
-                ],
             },
             {
                 path: "profile/:id",
                 element: <Profile />,
-                children: [
-                    {
-                        index: true,
-                        element: <Publications />,
-                    },
-                    {
-                        path: "bookmarks",
-                        element: <Bookmarks />,
-                    },
-                    {
-                        path: "followers",
-                        element: <Followers />,
-                    },
-                    {
-                        path: "following",
-                        element: <Following />,
-                    },
-                    {
-                        path: "about",
-                        element: <About />,
-                    },
-                ],
             },
             {
                 path: "user",
@@ -108,12 +57,6 @@ const router = createBrowserRouter([
                         <Userpage />
                     </ProtectedRoute>
                 ),
-                children: [
-                    {
-                        index: true,
-                        element: <UserPageArticles />,
-                    },
-                ],
             },
             {
                 path: "write",
@@ -159,7 +102,7 @@ const router = createBrowserRouter([
 
 function App() {
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
+    const [error, _setError] = useState("");
     const { setUser } = useAuthContext();
 
     // Fetch user on every page refresh / reload

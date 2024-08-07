@@ -7,7 +7,7 @@ import {
     Heading,
     Text,
 } from "@chakra-ui/react";
-import ChangeProfilePictureComponent from "./ChangeProfilePictureComponent";
+import ChangeProfilePictureComponent from "../components/settings-page/ChangeProfilePictureComponent";
 
 export default function Settings() {
     return (

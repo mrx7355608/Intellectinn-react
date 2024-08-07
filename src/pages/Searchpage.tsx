@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { Outlet, Link } from "react-router-dom";
 import { Tabs, TabList, Tab, Box, TabPanels, Heading } from "@chakra-ui/react";
-import NestedLayoutsSpinner from "../components/Spinners/NestedLayoutsSpinner";
+import NestedLayoutsSpinner from "../components/main/NestedLayoutsSpinner";
 
 export default function Searchpage() {
     const [searchParams, setSearchParams] = useSearchParams();

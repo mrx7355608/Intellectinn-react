@@ -11,13 +11,13 @@ import {
     Spinner,
 } from "@chakra-ui/react";
 import { Outlet, Link, useParams, useLocation } from "react-router-dom";
-import NestedLayoutsSpinner from "../components/Spinners/NestedLayoutsSpinner";
+import NestedLayoutsSpinner from "../components/main/NestedLayoutsSpinner";
 
 import { useAuthContext } from "../context/auth";
 import axiosAgent from "../api/utils";
 import { IApiResponse } from "../types/api";
 import { IUser } from "../types/user";
-import FollowAndUnfollowButtons from "../SingleArticle/FollowAndUnfollowButtons";
+import FollowAndUnfollowButtons from "../components/single-article/FollowAndUnfollowButtons";
 
 export default function Profile() {
     const { id } = useParams();

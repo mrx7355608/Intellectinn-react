@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import MainlayoutSpinner from "../components/Spinners/MainlayoutSpinner";
-import Navbar from "../components/navbar";
+import MainlayoutSpinner from "../components/main/MainlayoutSpinner";
+import Navbar from "../components/main/navbar";
 import Footer from "../components/main/Footer";
 import { Box } from "@chakra-ui/react";
 

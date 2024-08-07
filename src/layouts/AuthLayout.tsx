@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { Container } from "@chakra-ui/react";
 import { Suspense, useEffect } from "react";
-import AuthlayoutSpinner from "../components/Spinners/AuthlayoutSpinner";
+import AuthlayoutSpinner from "../components/main/AuthlayoutSpinner";
 import { useAuthContext } from "../context/auth";
 
 export default function AuthLayout() {

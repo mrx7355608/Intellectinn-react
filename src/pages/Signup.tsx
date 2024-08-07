@@ -1,5 +1,5 @@
 import { Heading, VStack, Divider } from "@chakra-ui/react";
-import SignupForm from "./SignupForm";
+import SignupForm from "../components/form/SignupForm";
 import ContinueWithGoogle from "../components/form/ContinueWithGoogle";
 import { Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";

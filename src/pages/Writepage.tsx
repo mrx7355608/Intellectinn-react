@@ -11,11 +11,13 @@ import {
 } from "@chakra-ui/react";
 
 // Components
-import ThumbnailSelector from "./ThumbnailSelector";
-import TagInput from "./TagInput";
-import PublishButton from "./PublishButton";
-import SaveAsDraftButton from "./SaveAsDraftButton";
-const TinymceEditor = lazy(() => import("./TinymceEditor"));
+import ThumbnailSelector from "../components/write-page/ThumbnailSelector";
+import TagInput from "../components/write-page/TagInput";
+import PublishButton from "../components/write-page/PublishButton";
+import SaveAsDraftButton from "../components/write-page/SaveAsDraftButton";
+const TinymceEditor = lazy(
+    () => import("../components/write-page/TinymceEditor"),
+);
 
 // Api functions
 import { createArticle } from "../api/articles";

@@ -9,9 +9,9 @@ import { IArticle } from "../types/articles";
 import Prism from "prismjs";
 import "prismjs/themes/prism-solarizedlight.css";
 import "prismjs/components/prism-java";
-import ArticleAuthorInfo from "./ArticleAuthorInfo";
-import ArticleActionButtons from "./ArticleActionButtons";
-import CommentsSection from "./Comments/CommentsSection";
+import ArticleAuthorInfo from "../components/article/ArticleAuthorInfo";
+import ArticleActionButtons from "../components/article/ArticleActionButtons";
+import CommentsSection from "../components/comments/CommentsSection";
 import CommentsProvider from "../context/comments";
 
 export default function SingleArticle() {
