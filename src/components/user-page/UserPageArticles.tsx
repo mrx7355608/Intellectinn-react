@@ -1,5 +1,5 @@
 import { Spinner, Text } from "@chakra-ui/react";
-import ArticlesList from "../../components/Articles/ArticlesList";
+import ArticlesList from "../article/ArticlesList";
 import { useSearchParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { IArticle } from "../../types/articles";

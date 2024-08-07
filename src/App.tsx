@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/route-protection/ProtectedRoute";
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import GuestRoute from "./components/route-protection/GuestRoute";
+import UserPageArticles from "./components/user-page/UserPageArticles";
 
 // Pages
 const Home = lazy(() => import("./pages/Home"));
@@ -57,6 +58,12 @@ const router = createBrowserRouter([
                         <Userpage />
                     </ProtectedRoute>
                 ),
+                children: [
+                    {
+                        index: true,
+                        element: <UserPageArticles />,
+                    },
+                ],
             },
             {
                 path: "write",
