@@ -1,9 +1,9 @@
 import { IUser } from "../../types/user";
 import { Box, Image, Text } from "@chakra-ui/react";
-import FollowAndUnfollowButtons from "../pages/SingleArticle/FollowAndUnfollowButtons";
+import FollowAndUnfollowButtons from "../single-article/FollowAndUnfollowButtons";
 import { Link } from "react-router-dom";
 
-export default function UserBox({ user }: { user: IUser }) {
+export default function UserItem({ user }: { user: IUser }) {
     return (
         <Box
             mb="10"

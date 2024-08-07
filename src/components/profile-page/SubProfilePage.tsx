@@ -1,10 +1,13 @@
-import { Box, Spinner, Text } from "@chakra-ui/react";
 import useFetch from "../../hooks/useFetch";
-import UserBox from "../write-page/UserBoxComponent";
-import { IUser } from "../../types/user";
 import { useParams } from "react-router-dom";
+import { Box, Spinner, Text } from "@chakra-ui/react";
+// Components
 import ArticlesList from "../article/ArticlesList";
+import About from "./About";
+import UserList from "../users/UserList";
+// Types
 import { IArticle } from "../../types/articles";
+import { IUser } from "../../types/user";
 
 export default function SubProfilePage() {
     const { type, id } = useParams();
@@ -19,8 +22,6 @@ export default function SubProfilePage() {
                 <Spinner />
             ) : err ? (
                 <Text color="red.600">{err}</Text>
-            ) : data.length < 1 ? (
-                <Text>Nothing to show</Text>
             ) : (
                 <DataList type={type!} data={data} />
             )}
@@ -33,7 +34,11 @@ function DataList({ type, data }: { type: string; data: unknown[] }) {
         <>
             {type === "bookmarks" || type === "publications" ? (
                 <ArticlesList articles={data as IArticle[]} />
-            ) : null}
+            ) : type === "about" ? (
+                <About />
+            ) : (
+                <UserList users={data as IUser[]} />
+            )}
         </>
     );
 }
