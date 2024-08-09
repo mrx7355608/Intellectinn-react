@@ -9,14 +9,14 @@ import {
     removeBookmark,
     unlikeArticle,
 } from "../../api/articles";
-import { useAuthContext } from "../../context/auth";
+import { useAuth } from "../../context/auth";
 
 export default function ArticleActionButtons({
     article,
 }: {
     article: IArticle;
 }) {
-    const { user } = useAuthContext();
+    const { user } = useAuth();
     const [likes, setLikes] = useState(article.likes);
     const [bookmarks, setBookmarks] = useState(article.bookmarkedBy);
     const [loading, setLoading] = useState({

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Box, Text, Spinner } from "@chakra-ui/react";
 import AboutModal from "../modals/AboutModal";
-import { useAuthContext } from "../../context/auth";
+import { useAuth } from "../../context/auth";
 import { IUser } from "../../types/user";
 import { IApiResponse } from "../../types/api";
 import axiosAgent from "../../api/utils";
 import { useParams } from "react-router-dom";
 
 export default function About() {
-    const { user } = useAuthContext();
+    const { user } = useAuth();
     const { id } = useParams();
     const [profile, setProfile] = useState<IUser | null>(null);
     const [apiError, setApiError] = useState("");

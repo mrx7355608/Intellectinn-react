@@ -4,11 +4,11 @@ import EmailInput from "../../components/form/EmailInput";
 import PasswordInput from "../../components/form/PasswordInput";
 import FormSubmitButton from "../../components/form/FormSubmitButton";
 import ShowApiError from "../../components/form/ShowApiError";
-import { useAuthContext } from "../../context/auth";
+import { useAuth } from "../../context/auth";
 import { login } from "../../api/auth";
 
 export default function LoginForm() {
-    const { setUser } = useAuthContext();
+    const { setUser } = useAuth();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [apiError, setApiError] = useState<string>("");
     const [creds, setCreds] = useState({

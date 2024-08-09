@@ -6,7 +6,7 @@ import { Tabs, TabList, Tab, Box, TabPanels, Heading } from "@chakra-ui/react";
 import NestedLayoutsSpinner from "../components/main/NestedLayoutsSpinner";
 
 export default function Searchpage() {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, _setSearchParams] = useSearchParams();
     const [tabIndex, setTabIndex] = useState(0);
     const { pathname } = useLocation();
 

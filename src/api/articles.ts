@@ -1,8 +1,8 @@
 import { IApiResponse } from "../types/api";
-import { IArticle } from "../types/articles";
+import { IInputArticle } from "../types/articles";
 import axiosAgent from "./utils";
 
-export async function createArticle(article: IArticle) {
+export async function createArticle(article: IInputArticle) {
     const response = await axiosAgent.post("/api/articles", article);
     return response.data;
 }
@@ -35,28 +35,28 @@ export async function deleteArticle(articleID: string) {
 
 export async function likeArticle(articleID: string) {
     const response = await axiosAgent.patch<IApiResponse<string[]>>(
-        `/api/articles/like/${articleID}`
+        `/api/articles/like/${articleID}`,
     );
     return response.data;
 }
 
 export async function unlikeArticle(articleID: string) {
     const response = await axiosAgent.patch<IApiResponse<string[]>>(
-        `/api/articles/un-like/${articleID}`
+        `/api/articles/un-like/${articleID}`,
     );
     return response.data;
 }
 
 export async function addBookmark(articleID: string) {
     const response = await axiosAgent.post<IApiResponse<string[]>>(
-        `/api/bookmarks/${articleID}`
+        `/api/bookmarks/${articleID}`,
     );
     return response.data;
 }
 
 export async function removeBookmark(articleID: string) {
     const response = await axiosAgent.delete<IApiResponse<string[]>>(
-        `/api/bookmarks/${articleID}`
+        `/api/bookmarks/${articleID}`,
     );
     return response.data;
 }

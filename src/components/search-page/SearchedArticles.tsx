@@ -1,11 +1,11 @@
-import ArticlesList from "../../components/Articles/ArticlesList";
+import ArticlesList from "../article/ArticlesList";
 import { useSearchParams } from "react-router-dom";
 import { IArticle } from "../../types/articles";
 import { Text, Spinner } from "@chakra-ui/react";
 import useFetch from "../../hooks/useFetch";
 
 export default function SearchedArticles() {
-    const [sp, setSp] = useSearchParams();
+    const [sp, _setSp] = useSearchParams();
     const query = sp.get("query");
     const {
         loading,

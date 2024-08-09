@@ -1,11 +1,11 @@
 import { useSearchParams } from "react-router-dom";
 import { Box, Spinner, Text } from "@chakra-ui/react";
 import { IUser } from "../../types/user";
-import UserBox from "../write-page/UserBoxComponent";
+import UserBox from "../users/UserItem";
 import useFetch from "../../hooks/useFetch";
 
 export default function PeopleList() {
-    const [sp, setSp] = useSearchParams();
+    const [sp, _setSp] = useSearchParams();
     const query = sp.get("query");
     const {
         loading,

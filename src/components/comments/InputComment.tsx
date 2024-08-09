@@ -6,14 +6,14 @@ import {
     Image,
     useToast,
 } from "@chakra-ui/react";
-import { useAuthContext } from "../../context/auth";
+import { useAuth } from "../../context/auth";
 import React, { useState } from "react";
 import { postComment } from "../../api/comments";
 import { IArticle } from "../../types/articles";
 import { useCommentsContext } from "../../context/comments";
 
 export default function InputComment({ article }: { article: IArticle }) {
-    const { user } = useAuthContext();
+    const { user } = useAuth();
     const [loading, setLoading] = useState(false);
     const [commentText, setCommentText] = useState("");
     const toast = useToast({

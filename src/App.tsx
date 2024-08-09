@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { lazy, useEffect, useState } from "react";
-import { useAuthContext } from "./context/auth";
+import { useAuth } from "./context/auth";
 import { getUser } from "./api/user";
 import { Box, Spinner, Heading } from "@chakra-ui/react";
 import ProtectedRoute from "./components/route-protection/ProtectedRoute";
@@ -117,7 +117,7 @@ const router = createBrowserRouter([
 function App() {
     const [loading, setLoading] = useState(true);
     const [error, _setError] = useState("");
-    const { setUser } = useAuthContext();
+    const { setUser } = useAuth();
 
     // Fetch user on every page refresh / reload
     useEffect(() => {

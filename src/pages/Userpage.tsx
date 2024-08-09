@@ -3,10 +3,10 @@ import { Outlet, Link, useSearchParams } from "react-router-dom";
 import NestedLayoutsSpinner from "../components/main/NestedLayoutsSpinner";
 import { Suspense, useEffect, useState } from "react";
 import InterestsModal from "../components/modals/InterestsModal";
-import { useAuthContext } from "../context/auth";
+import { useAuth } from "../context/auth";
 
 export default function Userpage() {
-    const { user } = useAuthContext();
+    const { user } = useAuth();
     const [sp, _setSp] = useSearchParams();
     const [tabIndex, setTabIndex] = useState(0);
 

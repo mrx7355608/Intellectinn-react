@@ -15,10 +15,10 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { updateUser } from "../../api/user";
-import { useAuthContext } from "../../context/auth";
+import { useAuth } from "../../context/auth";
 
 export default function InterestsModal() {
-    const { user, setUser } = useAuthContext();
+    const { user, setUser } = useAuth();
     const { isOpen, onOpen, onClose } = useDisclosure();
     // eslint-disable-next-line
     const [interests, _setInterests] = useState([
@@ -36,7 +36,7 @@ export default function InterestsModal() {
         "Poetry",
     ]);
     const [selectedInterests, setSelectedInterests] = useState<string[]>(
-        user!.topicsInterestedIn
+        user!.topicsInterestedIn,
     );
     const [loading, setLoading] = useState(false);
     const toast = useToast({
@@ -141,10 +141,10 @@ export default function InterestsModal() {
                 });
             }
             setSelectedInterests(data.topicsInterestedIn);
-            setUser((prevState) => ({
-                ...prevState,
+            setUser({
+                ...user!,
                 topicsInterestedIn: data.topicsInterestedIn,
-            }));
+            });
             toast({
                 description: "Interests updated successfully",
                 status: "success",

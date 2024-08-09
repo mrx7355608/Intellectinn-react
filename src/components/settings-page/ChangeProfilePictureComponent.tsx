@@ -16,12 +16,12 @@ import {
     useToast,
     Image,
 } from "@chakra-ui/react";
-import { useAuthContext } from "../../context/auth";
+import { useAuth } from "../../context/auth";
 import { uploadThumbnailToCloudinary } from "../../api/articles";
 import { updateUser } from "../../api/user";
 
 export default function ChangeProfilePictureComponent() {
-    const { user, setUser } = useAuthContext();
+    const { user, setUser } = useAuth();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [previewURL, setPreviewURL] = useState("");
@@ -173,10 +173,10 @@ export default function ChangeProfilePictureComponent() {
                 });
             }
 
-            setUser((prevState) => ({
-                ...prevState,
+            setUser({
+                ...user!,
                 profilePicture: data.profilePicture,
-            }));
+            });
             toast({
                 status: "success",
                 description: "Profile picture updated successfully",

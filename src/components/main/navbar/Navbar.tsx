@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Box, Text, Heading } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
-import { useAuthContext } from "../../../context/auth";
+import { useAuth } from "../../../context/auth";
 import Searchbar from "../Searchbar";
 import UserInfo from "./UserInfo";
 import LoginAndSignupButtons from "./LoginAndSignupButtons";
 
 export default function Navbar() {
     const { pathname } = useLocation();
-    const { user } = useAuthContext();
+    const { user } = useAuth();
     const [navbarColor, setNavbarColor] = useState("transparent");
 
     const changeNavbarColor = () => {

@@ -13,7 +13,7 @@ import {
 import { Outlet, Link, useParams, useLocation } from "react-router-dom";
 import NestedLayoutsSpinner from "../components/main/NestedLayoutsSpinner";
 
-import { useAuthContext } from "../context/auth";
+import { useAuth } from "../context/auth";
 import axiosAgent from "../api/utils";
 import { IApiResponse } from "../types/api";
 import { IUser } from "../types/user";
@@ -24,7 +24,7 @@ export default function Profile() {
     const [profile, setProfile] = useState<IUser | null>(null);
     const [apiError, setApiError] = useState("");
     const [loading, setLoading] = useState(true);
-    const { user } = useAuthContext();
+    const { user } = useAuth();
 
     const [tabIndex, setTabIndex] = useState(0);
     const { pathname } = useLocation();

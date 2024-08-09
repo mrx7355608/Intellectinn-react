@@ -1,5 +1,5 @@
 import { Spinner, Button, useToast } from "@chakra-ui/react";
-import { useAuthContext } from "../../context/auth";
+import { useAuth } from "../../context/auth";
 import { useState } from "react";
 import { followUser, unfollowUser } from "../../api/user";
 
@@ -8,7 +8,7 @@ export default function FollowAndUnfollowButtons({
 }: {
     authorID: string;
 }) {
-    const { user: usr, setUser } = useAuthContext();
+    const { user: usr, setUser } = useAuth();
     const toast = useToast({
         duration: 4000,
         isClosable: true,
@@ -72,7 +72,7 @@ export default function FollowAndUnfollowButtons({
                     status: "error",
                 });
             }
-            setUser((prev) => ({ ...prev, following: data }));
+            setUser({ ...usr!, following: data });
             toast({
                 description: "You are now following this user",
                 status: "success",
@@ -98,7 +98,7 @@ export default function FollowAndUnfollowButtons({
                     status: "error",
                 });
             }
-            setUser((prev) => ({ ...prev, following: data }));
+            setUser({ ...usr!, following: data });
             toast({
                 description: "User un-followed",
                 status: "success",

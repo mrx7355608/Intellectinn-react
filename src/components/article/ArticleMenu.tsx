@@ -3,7 +3,7 @@ import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
 import { IArticle } from "../../types/articles";
-import { useAuthContext } from "../../context/auth";
+import { useAuth } from "../../context/auth";
 import DeleteArticleConfirmationModal from "../modals/DeleteArticleConfirmationModal";
 import { useState } from "react";
 import { addBookmark, removeBookmark } from "../../api/articles";
@@ -15,7 +15,7 @@ export default function ArticleMenu({
     filterArticle: (id: string) => void;
     article: IArticle;
 }) {
-    const { user } = useAuthContext();
+    const { user } = useAuth();
     const [bookmarks, setBookmarks] = useState(article.bookmarkedBy);
     const [loading, setLoading] = useState(false);
     const toast = useToast({

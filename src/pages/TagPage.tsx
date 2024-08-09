@@ -1,12 +1,7 @@
 import { Box, Heading, Text, Divider, Image, Button } from "@chakra-ui/react";
 import { useParams, Link } from "react-router-dom";
-import Author from "../components/article/Author";
-import {
-    FaHeart,
-    FaCommentAlt,
-    FaRegBookmark,
-    FaComment,
-} from "react-icons/fa";
+// import Author from "../components/article/Author";
+import { FaHeart, FaCommentAlt, FaRegBookmark } from "react-icons/fa";
 
 export default function TagPage() {
     const { tag } = useParams();
@@ -79,7 +74,7 @@ function Article() {
             mb="12"
         >
             <Image src="/hero.jpg" objectFit="cover" w="full" mb="8" />
-            <Author />
+            {/* <Author article={null} /> */}
             <Heading mt="5" fontSize="2xl">
                 The future of poetry
             </Heading>

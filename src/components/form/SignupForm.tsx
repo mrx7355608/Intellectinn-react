@@ -6,8 +6,6 @@ import FormSubmitButton from "../../components/form/FormSubmitButton";
 import FullnameInput from "../../components/form/FullnameInput";
 import ConfirmPasswordInput from "../../components/form/ConfirmPasswordInput";
 import ShowApiError from "../../components/form/ShowApiError";
-import fetchFromServer from "../../utils/fetchFromServer";
-import { IUser } from "../../types/user";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../../api/auth";
 

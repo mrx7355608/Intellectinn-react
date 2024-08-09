@@ -2,6 +2,7 @@ import { Box, Text, Input, Image, Spinner, useToast } from "@chakra-ui/react";
 import { useState, useRef, SetStateAction } from "react";
 import { FaCamera } from "react-icons/fa";
 import { uploadThumbnailToCloudinary } from "../../api/articles";
+import { IArticle } from "../../types/articles";
 
 export default function ThumbnailSelector({
     setArticleData,
@@ -116,7 +117,7 @@ export default function ThumbnailSelector({
 
         try {
             const response = await uploadThumbnailToCloudinary(file!);
-            setArticleData((prev) => ({
+            setArticleData((prev: IArticle) => ({
                 ...prev,
                 thumbnail: response.data.secure_url,
             }));

@@ -1,30 +1,18 @@
 // UI imports
-import { lazy, Suspense, useState, useRef } from "react";
-import { Editor as TinyEditor } from "tinymce";
-import {
-    Box,
-    Input,
-    Spinner,
-    Textarea,
-    Text,
-    useToast,
-} from "@chakra-ui/react";
+import { useState } from "react";
+import { Box, Input, Textarea, Text, useToast } from "@chakra-ui/react";
 
 // Components
 import ThumbnailSelector from "../components/write-page/ThumbnailSelector";
 import TagInput from "../components/write-page/TagInput";
 import PublishButton from "../components/write-page/PublishButton";
 import SaveAsDraftButton from "../components/write-page/SaveAsDraftButton";
-const TinymceEditor = lazy(
-    () => import("../components/write-page/TinymceEditor"),
-);
 
 // Api functions
 import { createArticle } from "../api/articles";
 import { useNavigate } from "react-router-dom";
 
 export default function Writepage() {
-    const editorRef = useRef<TinyEditor | null>(null);
     const navTo = useNavigate();
     const toast = useToast({
         duration: 4000,
@@ -70,10 +58,7 @@ export default function Writepage() {
                 name="title"
             />
 
-            {/* Tinymce editor */}
-            <Suspense fallback={<Spinner />}>
-                <TinymceEditor ref={editorRef} />
-            </Suspense>
+            {/* WYSIWYG editor */}
 
             {/* Tags */}
             <Text color="gray.800" mt="12">
@@ -141,7 +126,7 @@ export default function Writepage() {
     function createArticleObject() {
         const article = Object.assign({}, articleData, {
             tags,
-            content: editorRef.current?.getContent() || "",
+            content: "",
             is_published: true,
         });
         return article;

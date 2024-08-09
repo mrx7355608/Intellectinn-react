@@ -1,31 +1,14 @@
-import {
-    createContext,
-    useContext,
-    ReactNode,
-    useState,
-    Dispatch,
-    SetStateAction,
-} from "react";
+import { create } from "zustand";
 import { IUser } from "../types/user";
 
-interface IAuthContext {
+type Store = {
     user: IUser | null;
-    setUser: Dispatch<SetStateAction<IUser | null>>;
-}
-
-const initialState: IAuthContext = {
-    user: null,
-    setUser: () => null,
+    setUser: (user: IUser) => void;
+    logoutUser: () => void;
 };
 
-const AuthContext = createContext<IAuthContext>(initialState);
-export const useAuthContext = () => useContext(AuthContext);
-
-export default function AuthProvider({ children }: { children: ReactNode }) {
-    const [user, setUser] = useState<IUser | null>(null);
-    return (
-        <AuthContext.Provider value={{ user, setUser }}>
-            {children}
-        </AuthContext.Provider>
-    );
-}
+export const useAuth = create<Store>()((set) => ({
+    user: null,
+    setUser: (user) => set(() => ({ user: user })),
+    logoutUser: () => set(() => ({ user: null })),
+}));

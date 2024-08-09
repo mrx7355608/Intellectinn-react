@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 
 export default function TopicsList() {
-    const [sp, setSp] = useSearchParams();
+    const [sp, _setSp] = useSearchParams();
     const query = sp.get("query");
     const {
         loading,

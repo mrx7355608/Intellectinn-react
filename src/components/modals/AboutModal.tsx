@@ -15,10 +15,10 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { updateUser } from "../../api/user";
-import { useAuthContext } from "../../context/auth";
+import { useAuth } from "../../context/auth";
 
 export default function AboutModal() {
-    const { user, setUser } = useAuthContext();
+    const { user, setUser } = useAuth();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [about, setAbout] = React.useState(user?.about || "");
     const [err, setErr] = React.useState("");
@@ -90,7 +90,7 @@ export default function AboutModal() {
             if (error) {
                 return setErr(error);
             }
-            setUser((prevState) => ({ ...prevState, about: data.about }));
+            setUser({ ...user!, about: data.about });
             toast({
                 status: "success",
                 description: "About section updated successfully",
