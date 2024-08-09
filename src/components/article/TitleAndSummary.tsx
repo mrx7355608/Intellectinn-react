@@ -21,9 +21,15 @@ export default function TitleAndSummary({ article }: { article: IArticle }) {
                         {article.title}
                     </Heading>
                 </Link>
-                <Text mt="2" w="full" whiteSpace={"wrap"}>
-                    {article.summary.substring(0, 200)}...
-                </Text>
+                {article.summary.length <= 200 ? (
+                    <Text mt="2" w="full" whiteSpace={"wrap"}>
+                        {article.summary}
+                    </Text>
+                ) : (
+                    <Text mt="2" w="full" whiteSpace={"wrap"}>
+                        {article.summary.substring(0, 200)}...
+                    </Text>
+                )}
             </Box>
             <Image src={article.thumbnail} alt="thumbnail" w="150px" h="full" />
         </Box>
