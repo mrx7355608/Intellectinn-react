@@ -132,7 +132,7 @@ export default function ChangeProfilePictureComponent() {
         }
         const sizeLimitMb = 2000000; // 2 MB
         if (file.size > sizeLimitMb) {
-            return "Thumbnail size should be less than 2 MB";
+            return "Image size should be less than 2 MB";
         }
 
         return null;
