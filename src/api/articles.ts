@@ -19,6 +19,7 @@ export async function uploadThumbnailToCloudinary(file: File) {
     const response = await axiosAgent.post(cloudinaryURL, formData, {
         withCredentials: false,
     });
+
     return response;
 }
 
