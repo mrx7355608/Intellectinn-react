@@ -7,6 +7,8 @@
 
 .container * pre {
     background-color: #f6f6f6 !important;
+    padding: 10px;
+    border-radius: 8px;
 }
 
 .container li {
@@ -15,6 +17,5 @@
 
 .container a {
     text-decoration: underline;
-    color: blue
+    color: blue;
 }
-
