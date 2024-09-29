@@ -51,16 +51,13 @@ export default function SingleArticle() {
                     {err}
                 </Text>
             ) : (
-                article && <Article article={article} />
+                article && <ArticlePageUI article={article} />
             )}
         </Box>
     );
 }
 
-function Article({ article }: { article: IArticle }) {
-    useEffect(() => {
-        Prism.highlightAll();
-    }, []);
+function ArticlePageUI({ article }: { article: IArticle }) {
     return (
         <>
             <Heading fontSize="4xl" fontWeight={"black"}>
