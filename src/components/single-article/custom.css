@@ -5,9 +5,9 @@
     padding: revert;
 }
 
-.container * pre {
+pre {
     background-color: #f6f6f6 !important;
-    padding: 10px;
+    padding: 20px !important;
     border-radius: 8px;
 }
 

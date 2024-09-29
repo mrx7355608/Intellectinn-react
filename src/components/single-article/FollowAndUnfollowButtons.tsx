@@ -8,7 +8,7 @@ export default function FollowAndUnfollowButtons({
 }: {
     authorID: string;
 }) {
-    const { user: usr, setUser } = useAuth();
+    const { user: usr, loginUser } = useAuth();
     const toast = useToast({
         duration: 4000,
         isClosable: true,
@@ -72,7 +72,7 @@ export default function FollowAndUnfollowButtons({
                     status: "error",
                 });
             }
-            setUser({ ...usr!, following: data });
+            loginUser({ ...usr!, following: data });
             toast({
                 description: "You are now following this user",
                 status: "success",
@@ -98,7 +98,7 @@ export default function FollowAndUnfollowButtons({
                     status: "error",
                 });
             }
-            setUser({ ...usr!, following: data });
+            loginUser({ ...usr!, following: data });
             toast({
                 description: "User un-followed",
                 status: "success",
