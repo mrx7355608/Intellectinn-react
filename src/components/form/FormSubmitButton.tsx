@@ -1,4 +1,4 @@
-import { Button, Spinner } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
 type IFormSubmitButtonProps = {
     buttonText: string;
@@ -10,8 +10,15 @@ export default function FormSubmitButton({
     isLoading,
 }: IFormSubmitButtonProps) {
     return (
-        <Button colorScheme="teal" type="submit" w="full" mt={"5"}>
-            {isLoading ? <Spinner /> : buttonText}
+        <Button
+            colorScheme="teal"
+            type="submit"
+            w="full"
+            mt={"5"}
+            isLoading={isLoading}
+            disabled={isLoading}
+        >
+            {buttonText}
         </Button>
     );
 }

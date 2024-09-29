@@ -8,7 +8,7 @@ import { useAuth } from "../../context/auth";
 import { login } from "../../api/auth";
 
 export default function LoginForm() {
-    const { setUser } = useAuth();
+    const { loginUser } = useAuth();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [apiError, setApiError] = useState<string>("");
     const [creds, setCreds] = useState({
@@ -40,7 +40,7 @@ export default function LoginForm() {
 
     async function onSubmitHandler(e: FormEvent<HTMLDivElement>) {
         e.preventDefault();
-        setApiError(""); // Disappear the previous error message
+        setApiError(""); // Hide the previous error message
         setIsLoading(true);
         try {
             const { data, error } = await login(creds);
@@ -48,7 +48,7 @@ export default function LoginForm() {
                 return setApiError(error);
             }
             // set user in auth context
-            setUser(data);
+            loginUser(data);
         } catch (err) {
             // It's an internal server error because axios will
             // only throw errors with 500 and aboves status code
