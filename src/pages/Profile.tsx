@@ -83,7 +83,7 @@ export default function Profile() {
                 {err && <Text color="red.600">{err}</Text>}
                 {profile && (
                     <>
-                        <Heading>{profile?.fullname}</Heading>
+                        <Heading>{profile.fullname}</Heading>
                         <Tabs size={"sm"} mt="8" defaultIndex={tabIndex}>
                             <MyTabsList tabs={tabsList} />
                             <TabPanels py="10">
@@ -98,29 +98,37 @@ export default function Profile() {
 
             {/* Second half of user's profile */}
             <Box mt="16" px="12" pt="16">
-                <Image
-                    src={profile?.profilePicture}
-                    w="90px"
-                    h="90px"
-                    objectFit="cover"
-                    rounded="full"
-                />
-                <Text fontWeight="bold" mt="5" mb="8">
-                    {profile?.fullname}
-                </Text>
-                {profile && user?._id !== profile?._id ? (
-                    <FollowAndUnfollowButtons authorID={profile._id} />
-                ) : (
-                    <Link to="/settings">
-                        <Text
-                            color="teal.500"
-                            fontSize="sm"
-                            textDecoration="underline"
-                        >
-                            Edit profile
-                        </Text>
-                    </Link>
-                )}
+                {loading && <Spinner />}
+                {err && <Text color="red.600">{err}</Text>}
+                {
+                    profile && (
+                        <>
+                            <Image
+                                src={profile?.profilePicture}
+                                w="90px"
+                                h="90px"
+                                objectFit="cover"
+                                rounded="full"
+                            />
+                            <Text fontWeight="bold" mt="5" mb="8">
+                                {profile?.fullname}
+                            </Text>
+                            {profile && user?._id !== profile?._id ? (
+                                <FollowAndUnfollowButtons authorID={profile._id} />
+                            ) : (
+                                <Link to="/settings">
+                                    <Text
+                                        color="teal.500"
+                                        fontSize="sm"
+                                        textDecoration="underline"
+                                    >
+                                        Edit profile
+                                    </Text>
+                                </Link>
+                            )}
+                        </>
+                    )
+                }
             </Box>
         </Box>
     );
