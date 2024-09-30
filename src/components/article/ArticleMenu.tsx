@@ -7,15 +7,11 @@ import { useAuth } from "../../context/auth";
 import DeleteArticleConfirmationModal from "../modals/DeleteArticleConfirmationModal";
 import { useState } from "react";
 import { addBookmark, removeBookmark } from "../../api/articles";
+import { useArticles } from "../../context/articles";
 
-export default function ArticleMenu({
-    filterArticle,
-    article,
-}: {
-    filterArticle: (id: string) => void;
-    article: IArticle;
-}) {
+export default function ArticleMenu({ article }: { article: IArticle }) {
     const { user } = useAuth();
+    const { filterArticle } = useArticles();
     const [bookmarks, setBookmarks] = useState(article.bookmarkedBy);
     const [loading, setLoading] = useState(false);
     const toast = useToast({

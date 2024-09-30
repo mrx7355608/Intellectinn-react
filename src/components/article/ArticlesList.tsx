@@ -20,20 +20,11 @@ export default function ArticlesList({
         <Box display="flex" flexDirection="column" gap={"8"}>
             {articles.length > 0 ? (
                 articles.map((article) => {
-                    return (
-                        <Article
-                            filterArticle={filterArticle}
-                            article={article}
-                        />
-                    );
+                    return <Article article={article} />;
                 })
             ) : (
                 <Text>Nothing to show</Text>
             )}
         </Box>
     );
-
-    function filterArticle(articleID: string) {
-        setArticles(articles.filter(({ _id }) => _id !== articleID));
-    }
 }

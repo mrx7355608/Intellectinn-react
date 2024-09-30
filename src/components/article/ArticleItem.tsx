@@ -4,18 +4,12 @@ import Author from "./Author";
 import TitleAndSummary from "./TitleAndSummary";
 import { IArticle } from "../../types/articles";
 
-export default function Article({
-    filterArticle,
-    article,
-}: {
-    filterArticle: (id: string) => void;
-    article: IArticle;
-}) {
+export default function Article({ article }: { article: IArticle }) {
     return (
         <Box display="flex" flexDirection="column" w="full">
             <Author article={article} />
             <TitleAndSummary article={article} />
-            <ArticleMenu filterArticle={filterArticle} article={article} />
+            <ArticleMenu article={article} />
             <Divider />
         </Box>
     );
