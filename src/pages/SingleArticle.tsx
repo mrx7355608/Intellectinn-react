@@ -7,7 +7,7 @@ import axiosAgent from "../api/utils";
 import { IApiResponse } from "../types/api";
 import { IArticle } from "../types/articles";
 import ArticleAuthorInfo from "../components/article/ArticleAuthorInfo";
-import ArticleActionButtons from "../components/article/ArticleActionButtons";
+import ArticleActionButtons from "../components/article/ArticleItemMenu";
 import CommentsSection from "../components/comments/CommentsSection";
 import CommentsProvider from "../context/comments";
 
