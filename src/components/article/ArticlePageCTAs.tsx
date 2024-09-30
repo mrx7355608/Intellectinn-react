@@ -1,16 +1,12 @@
 
 import { Spinner, Box, Button, Text, useToast } from "@chakra-ui/react";
-import { FaRegBookmark, FaBookmark, FaRegComment } from "react-icons/fa";
+import { FaRegComment } from "react-icons/fa";
 import { BiSolidLike, BiLike } from "react-icons/bi";
 import { useState } from "react";
 import { IArticle } from "../../types/articles";
-import {
-    addBookmark,
-    likeArticle,
-    removeBookmark,
-    unlikeArticle,
-} from "../../api/articles";
+import { likeArticle, unlikeArticle } from "../../api/articles";
 import { useAuth } from "../../context/auth";
+import BookmarkButton from "./BookmarkButton"
 
 export default function ArticlePageCTA({
     article,
@@ -19,7 +15,6 @@ export default function ArticlePageCTA({
 }) {
     const { user } = useAuth();
     const [likes, setLikes] = useState(article.likes);
-    const [bookmarks, setBookmarks] = useState(article.bookmarkedBy);
     const [loading, setLoading] = useState({
         isLiking: false,
         isBookmarking: false,
@@ -66,16 +61,8 @@ export default function ArticlePageCTA({
                 </Button>
             </Box>
             {/* Bookmark button */}
-            <Button bg="transparent" _hover={{ bg: "transparent" }} ml="auto">
-                {loading.isBookmarking ? (
-                    <Spinner size="md" />
-                ) : user && bookmarks.includes(user._id) ? (
-                    <FaBookmark size={18} onClick={deleteBookmark} />
-                ) : (
-                    <FaRegBookmark size={18} onClick={createBookmark} />
-                )}
-                <Text ml="2">{bookmarks.length}</Text>
-            </Button>
+            <BookmarkButton article={article} />
+            <Text as="span" ml="2">{article.bookmarkedBy.length}</Text>
         </Box>
     );
 
@@ -106,35 +93,6 @@ export default function ArticlePageCTA({
             toast({ status: "error", description: "Internal server error" });
         } finally {
             setLoading({ ...loading, isLiking: false });
-        }
-    }
-
-    async function createBookmark() {
-        try {
-            setLoading({ ...loading, isBookmarking: true });
-            const { data, error } = await addBookmark(article._id);
-            if (error) {
-                return toast({ status: "error", description: error });
-            }
-            setBookmarks(data);
-        } catch (err) {
-            toast({ status: "error", description: "Internal server error" });
-        } finally {
-            setLoading({ ...loading, isBookmarking: false });
-        }
-    }
-    async function deleteBookmark() {
-        try {
-            setLoading({ ...loading, isBookmarking: true });
-            const { data, error } = await removeBookmark(article._id);
-            if (error) {
-                return toast({ status: "error", description: error });
-            }
-            setBookmarks(data);
-        } catch (err) {
-            toast({ status: "error", description: "Internal server error" });
-        } finally {
-            setLoading({ ...loading, isBookmarking: false });
         }
     }
 }
