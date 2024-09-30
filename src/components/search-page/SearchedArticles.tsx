@@ -11,17 +11,13 @@ export default function SearchedArticles() {
         loading,
         err,
         data: articles,
-    } = useFetch<IArticle>(`/api/articles/search?articles=${query}`);
+    } = useFetch<IArticle[]>(`/api/articles/search?articles=${query}`);
 
     return (
         <>
-            {loading ? (
-                <Spinner />
-            ) : err ? (
-                <Text color="red.600">{err}</Text>
-            ) : (
-                <ArticlesList articles={articles} />
-            )}
+            {loading && <Spinner />}
+            {err && <Text color="red.600">{err}</Text>}
+            {articles && <ArticlesList articles={articles} />}
         </>
     );
 }

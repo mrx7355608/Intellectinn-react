@@ -11,7 +11,7 @@ import { useCommentsContext } from "../../context/comments";
 
 export default function CommentsSection({ article }: { article: IArticle }) {
     const { setComments } = useCommentsContext();
-    const { loading, err, data } = useFetch<IComment>(
+    const { loading, err, data } = useFetch<IComment[]>(
         `/api/comments/${article._id}`,
     );
 

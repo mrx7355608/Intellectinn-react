@@ -5,12 +5,12 @@ import { IApiResponse } from "../types/api";
 export default function useFetch<T>(url: string) {
     const [loading, setLoading] = useState(true);
     const [err, setErr] = useState("");
-    const [data, setData] = useState<T[]>([]);
+    const [data, setData] = useState<T | null>(null);
 
     useEffect(() => {
         setLoading(true);
         axiosAgent
-            .get<IApiResponse<T[]>>(url)
+            .get<IApiResponse<T>>(url)
             .then((axiosResp) => axiosResp.data)
             .then((resp) => {
                 if (resp.error) {

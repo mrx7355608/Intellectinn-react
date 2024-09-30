@@ -15,18 +15,14 @@ export default function UserPageArticles() {
         loading,
         err,
         data: articles,
-    } = useFetch<IArticle>(tag ? withTagUrl : noTagUrl);
+    } = useFetch<IArticle[]>(tag ? withTagUrl : noTagUrl);
 
     // Render the articles list
     return (
         <>
-            {loading ? (
-                <Spinner />
-            ) : err ? (
-                <Text color="red.600">{err}</Text>
-            ) : (
-                <ArticlesList articles={articles} />
-            )}
+            {loading && <Spinner />}
+            {err && <Text color="red.600">{err}</Text>}
+            {articles && <ArticlesList articles={articles} />}
         </>
     );
 }

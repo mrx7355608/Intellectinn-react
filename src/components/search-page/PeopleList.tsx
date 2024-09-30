@@ -11,19 +11,19 @@ export default function PeopleList() {
         loading,
         err,
         data: users,
-    } = useFetch<IUser>(`/api/users/search?user=${query}`);
+    } = useFetch<IUser[]>(`/api/users/search?user=${query}`);
+
+    // TODO: make a UserList component out of the below users.map()
+    // to show a response when users are empty
 
     return (
         <Box display="flex" flexDirection={"column"}>
-            {loading ? (
-                <Spinner />
-            ) : err ? (
-                <Text color="red.600">{err}</Text>
-            ) : (
+            {loading && <Spinner />}
+            {err && <Text color="red.600">{err}</Text>}
+            {users &&
                 users.map((user) => {
-                    return <UserBox user={user} />;
-                })
-            )}
+                    return <UserBox user={user} />; // TODO: rename this to UserItem
+                })}
         </Box>
     );
 }

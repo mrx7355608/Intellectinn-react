@@ -9,15 +9,13 @@ export default function TopicsList() {
         loading,
         err,
         data: tags,
-    } = useFetch<string>(`/api/articles/search/tags?tags=${query}`);
+    } = useFetch<string[]>(`/api/articles/search/tags?tags=${query}`);
 
     return (
         <Box display="flex" flexWrap="wrap" gap="2">
-            {loading ? (
-                <Spinner />
-            ) : err ? (
-                <Text color="red.600">{err}</Text>
-            ) : (
+            {loading && <Spinner />}
+            {err && <Text color="red.600">{err}</Text>}
+            {tags &&
                 tags.map((t) => {
                     return (
                         <Text
@@ -32,8 +30,7 @@ export default function TopicsList() {
                             {t}
                         </Text>
                     );
-                })
-            )}
+                })}
         </Box>
     );
 }

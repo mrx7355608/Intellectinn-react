@@ -9,19 +9,15 @@ export default function Home() {
         loading,
         err,
         data: articles,
-    } = useFetch<IArticle>("/api/articles/published");
+    } = useFetch<IArticle[]>("/api/articles/published");
 
     return (
         <>
             <Hero />
             <Box p="12">
-                {loading ? (
-                    <Spinner />
-                ) : err ? (
-                    <Text color="red.600">{err}</Text>
-                ) : (
-                    <ArticlesList articles={articles} />
-                )}
+                {loading && <Spinner />}
+                {err && <Text color="red.600">{err}</Text>}
+                {articles && <ArticlesList articles={articles} />}
             </Box>
         </>
     );
