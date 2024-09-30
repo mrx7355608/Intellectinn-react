@@ -1,8 +1,6 @@
 import { useState, Suspense, useEffect } from "react";
 import {
     Tabs,
-    TabList,
-    Tab,
     Box,
     TabPanels,
     Heading,
@@ -12,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { Outlet, Link, useParams, useLocation } from "react-router-dom";
 import NestedLayoutsSpinner from "../components/main/NestedLayoutsSpinner";
+import MyTabsList from "../components/main/MyTabsList";
 
 import { useAuth } from "../context/auth";
 import axiosAgent from "../api/utils";
@@ -28,6 +27,29 @@ export default function Profile() {
 
     const [tabIndex, setTabIndex] = useState(0);
     const { pathname } = useLocation();
+
+    const tabsList = [
+        {
+            title: "Publications",
+            link: `/profile/${id}/publications`,
+        },
+        {
+            title: "Bookmarks",
+            link: `/profile/${id}/bookmarks`,
+        },
+        {
+            title: "Followers",
+            link: `/profile/${id}/followers`,
+        },
+        {
+            title: "Following",
+            link: `/profile/${id}/following`,
+        },
+        {
+            title: "About",
+            link: `/profile/${id}/about`,
+        },
+    ];
 
     // Get user profile
     useEffect(() => {
@@ -72,52 +94,16 @@ export default function Profile() {
 
     return (
         <Box minH="100vh" display="flex" alignItems="start" p="0">
+            {/* First half of user's profile where PUBLICATIONS, BOOKMARKS, etc are shown */}
             <Box w="68vw" p="12" mt="16">
-                {loading ? (
-                    <Spinner />
-                ) : apiError ? (
-                    <Text
-                        color="red.600"
-                        textAlign="center"
-                        fontSize="lg"
-                        fontWeight={"medium"}
-                    >
-                        {apiError}
-                    </Text>
-                ) : (
+                {loading && <Spinner />}
+                {apiError && <Text color="red.600">{apiError}</Text>}
+
+                {profile && (
                     <>
                         <Heading>{profile?.fullname}</Heading>
                         <Tabs size={"sm"} mt="8" defaultIndex={tabIndex}>
-                            <TabList overflowY="hidden" height={"full"}>
-                                <Link to={`/profile/${id}/publications`}>
-                                    <Tab py="2" whiteSpace={"nowrap"} m="0">
-                                        Publications
-                                    </Tab>
-                                </Link>
-                                {profile?._id === user?._id ? (
-                                    <Link to={`/profile/${id}/bookmarks`}>
-                                        <Tab py="2" whiteSpace={"nowrap"} m="0">
-                                            Bookmarks
-                                        </Tab>
-                                    </Link>
-                                ) : null}
-                                <Link to={`/profile/${id}/followers`}>
-                                    <Tab py="2" whiteSpace={"nowrap"} m="0">
-                                        Followers
-                                    </Tab>
-                                </Link>
-                                <Link to={`/profile/${id}/following`}>
-                                    <Tab py="2" whiteSpace={"nowrap"} m="0">
-                                        Following
-                                    </Tab>
-                                </Link>
-                                <Link to={`/profile/${id}/about`}>
-                                    <Tab py="2" whiteSpace={"nowrap"} m="0">
-                                        About
-                                    </Tab>
-                                </Link>
-                            </TabList>
-
+                            <MyTabsList tabs={tabsList} />
                             <TabPanels py="10">
                                 <Suspense fallback={<NestedLayoutsSpinner />}>
                                     <Outlet />
@@ -127,6 +113,8 @@ export default function Profile() {
                     </>
                 )}
             </Box>
+
+            {/* Second half of user's profile */}
             <Box mt="16" px="12" pt="16">
                 <Image
                     src={profile?.profilePicture}

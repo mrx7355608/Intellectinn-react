@@ -1,9 +1,8 @@
-import { Suspense } from "react";
-import { useState, useEffect } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
-import { Outlet, Link } from "react-router-dom";
-import { Tabs, TabList, Tab, Box, TabPanels, Heading } from "@chakra-ui/react";
+import { useState, useEffect, Suspense } from "react";
+import { useLocation, useSearchParams, Outlet } from "react-router-dom";
+import { Tabs, Box, TabPanels, Heading } from "@chakra-ui/react";
 import NestedLayoutsSpinner from "../components/main/NestedLayoutsSpinner";
+import MyTabsList from "../components/main/MyTabsList";
 
 export default function Searchpage() {
     const [searchParams, _setSearchParams] = useSearchParams();
@@ -32,6 +31,21 @@ export default function Searchpage() {
         changeTabIndex();
     }, [pathname, searchParams]);
 
+    const tabsList = [
+        {
+            title: "Articles",
+            link: `/search?query=${searchParams.get("query")}`,
+        },
+        {
+            title: "People",
+            link: `/search/people?query=${searchParams.get("query")}`,
+        },
+        {
+            title: "Topics",
+            link: `/search/topics?query=${searchParams.get("query")}`,
+        },
+    ];
+
     return (
         <Box mt="12" p="12" w="70vw" mx="auto">
             <Heading display={"inline"} color={"#2d2d2d"}>
@@ -40,28 +54,7 @@ export default function Searchpage() {
             <Heading display={"inline"}> {searchParams.get("query")}</Heading>
 
             <Tabs size={"sm"} mt="8" index={tabIndex}>
-                <TabList overflowY="hidden" height={"full"}>
-                    <Link to={`/search?query=${searchParams.get("query")}`}>
-                        <Tab py="2" whiteSpace={"nowrap"} m="0">
-                            Articles
-                        </Tab>
-                    </Link>
-                    <Link
-                        to={`/search/people?query=${searchParams.get("query")}`}
-                    >
-                        <Tab py="2" whiteSpace={"nowrap"} m="0">
-                            People
-                        </Tab>
-                    </Link>
-                    <Link
-                        to={`/search/topics?query=${searchParams.get("query")}`}
-                    >
-                        <Tab py="2" whiteSpace={"nowrap"} m="0">
-                            Topics
-                        </Tab>
-                    </Link>
-                </TabList>
-
+                <MyTabsList tabs={tabsList} />
                 <TabPanels py="10">
                     <Suspense fallback={<NestedLayoutsSpinner />}>
                         <Outlet />
