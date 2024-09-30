@@ -5,7 +5,7 @@ import { Suspense, useEffect, useState } from "react";
 import InterestsModal from "../components/modals/InterestsModal";
 import { useAuth } from "../context/auth";
 
-export default function Userpage() {
+export default function UserDashboard() {
     const { user } = useAuth();
     const [sp, _setSp] = useSearchParams();
     const [tabIndex, setTabIndex] = useState(0);

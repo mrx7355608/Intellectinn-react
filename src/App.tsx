@@ -18,7 +18,7 @@ const Signup = lazy(() => import("./pages/Signup"));
 const Login = lazy(() => import("./pages/Login"));
 const Writepage = lazy(() => import("./pages/Writepage"));
 const Settings = lazy(() => import("./pages/Settings"));
-const Userpage = lazy(() => import("./pages/Userpage"));
+const UserDasboard = lazy(() => import("./pages/UserDasboard"));
 const Searchpage = lazy(() => import("./pages/Searchpage"));
 
 const Profile = lazy(() => import("./pages/Profile"));
@@ -62,7 +62,7 @@ const router = createBrowserRouter([
                 path: "user",
                 element: (
                     <ProtectedRoute>
-                        <Userpage />
+                        <UserDasboard />
                     </ProtectedRoute>
                 ),
                 children: [
@@ -117,7 +117,7 @@ const router = createBrowserRouter([
 function App() {
     const [loading, setLoading] = useState(true);
     const [error, _setError] = useState("");
-    const { setUser } = useAuth();
+    const { loginUser } = useAuth();
 
     // Fetch user on every page refresh / reload
     useEffect(() => {
@@ -125,11 +125,11 @@ function App() {
         getUser()
             .then((resp) => {
                 if (resp.ok && resp.data) {
-                    setUser(resp.data);
+                    loginUser(resp.data);
                 }
             })
             .finally(() => setLoading(false));
-    }, [setUser]);
+    }, [loginUser]);
 
     if (loading) {
         return (
