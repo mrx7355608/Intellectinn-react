@@ -9,24 +9,19 @@ import {
     Spinner,
 } from "@chakra-ui/react";
 import { Outlet, Link, useParams, useLocation } from "react-router-dom";
-import NestedLayoutsSpinner from "../components/main/NestedLayoutsSpinner";
 import MyTabsList from "../components/main/MyTabsList";
-
-import { useAuth } from "../context/auth";
-import axiosAgent from "../api/utils";
-import { IApiResponse } from "../types/api";
-import { IUser } from "../types/user";
+import NestedLayoutsSpinner from "../components/main/NestedLayoutsSpinner";
 import FollowAndUnfollowButtons from "../components/single-article/FollowAndUnfollowButtons";
+import useFetch from "../hooks/useFetch";
+import { useAuth } from "../context/auth";
+import { IUser } from "../types/user";
 
 export default function Profile() {
     const { id } = useParams();
-    const [profile, setProfile] = useState<IUser | null>(null);
-    const [apiError, setApiError] = useState("");
-    const [loading, setLoading] = useState(true);
     const { user } = useAuth();
-
-    const [tabIndex, setTabIndex] = useState(0);
     const { pathname } = useLocation();
+    const [tabIndex, setTabIndex] = useState(0);
+    const { loading, err, data: profile } = useFetch<IUser>(`/api/users/${id}`);
 
     const tabsList = [
         {
@@ -51,7 +46,7 @@ export default function Profile() {
         },
     ];
 
-    // Get user profile
+    // Set correct tab index on page load
     useEffect(() => {
         const changeTabIndex = () => {
             // Change tab index according to route
@@ -76,29 +71,16 @@ export default function Profile() {
         };
 
         changeTabIndex();
-
-        axiosAgent
-            .get<IApiResponse<IUser>>(`/api/users/${id}`, {
-                withCredentials: false,
-            })
-            .then((axiosResp) => axiosResp.data)
-            .then((apiResponse) => {
-                if (apiResponse.error) {
-                    return setApiError(apiResponse.error);
-                }
-                setProfile(apiResponse.data);
-            })
-            .catch(() => setApiError("Internal server error"))
-            .finally(() => setLoading(false));
     }, [id, pathname]);
+
+    // TODO: fix profile page rendering logic
 
     return (
         <Box minH="100vh" display="flex" alignItems="start" p="0">
             {/* First half of user's profile where PUBLICATIONS, BOOKMARKS, etc are shown */}
             <Box w="68vw" p="12" mt="16">
                 {loading && <Spinner />}
-                {apiError && <Text color="red.600">{apiError}</Text>}
-
+                {err && <Text color="red.600">{err}</Text>}
                 {profile && (
                     <>
                         <Heading>{profile?.fullname}</Heading>
