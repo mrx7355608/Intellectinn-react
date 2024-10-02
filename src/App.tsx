@@ -20,10 +20,10 @@ const Writepage = lazy(() => import("./pages/Writepage"));
 const Settings = lazy(() => import("./pages/Settings"));
 const UserDasboard = lazy(() => import("./pages/UserDasboard"));
 const Searchpage = lazy(() => import("./pages/Searchpage"));
-
 const Profile = lazy(() => import("./pages/Profile"));
 const TagsPage = lazy(() => import("./pages/TagPage"));
 const SingleArticle = lazy(() => import("./pages/SingleArticle"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Routes
 const router = createBrowserRouter([
@@ -112,6 +112,10 @@ const router = createBrowserRouter([
             },
         ],
     },
+    {
+        path: "*",
+        element: <NotFound />
+    }
 ]);
 
 function App() {
