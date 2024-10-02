@@ -1,6 +1,6 @@
 // UI imports
 import { useState } from "react";
-import { Box, Input, Textarea, Text, useToast } from "@chakra-ui/react";
+import { Box, Input, Textarea, Text } from "@chakra-ui/react";
 import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
@@ -15,14 +15,12 @@ import PublishButton from "../components/write-page/PublishButton";
 // Api functions
 import { createArticle } from "../api/articles";
 import { useNavigate } from "react-router-dom";
+import useCustomToast from "../hooks/useCustomToast";
 
 export default function Writepage() {
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
     const navTo = useNavigate();
-    const toast = useToast({
-        duration: 4000,
-        isClosable: true,
-    });
+    const { showErrorToast, showSuccessToast } = useCustomToast();
 
     // Api loading and error states
     const [error, setError] = useState("");
@@ -153,20 +151,5 @@ export default function Writepage() {
         } finally {
             setIsLoading({ ...isLoading, isPublishing: false });
         }
-    }
-
-    // TODO: move the below 2 functions in a separate file to use the globally
-    function showSuccessToast(message: string) {
-        toast({
-            status: "success",
-            description: message,
-        });
-    }
-
-    function showErrorToast(message: string) {
-        toast({
-            status: "error",
-            description: message,
-        });
     }
 }

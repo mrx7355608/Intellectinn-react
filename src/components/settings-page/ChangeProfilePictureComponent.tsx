@@ -13,23 +13,21 @@ import {
     useDisclosure,
     Spinner,
     Input,
-    useToast,
     Image,
 } from "@chakra-ui/react";
 import { useAuth } from "../../context/auth";
 import { uploadThumbnailToCloudinary } from "../../api/articles";
 import { updateUser } from "../../api/user";
+import useCustomToast from "../../hooks/useCustomToast";
 
 export default function ChangeProfilePictureComponent() {
-    const { user, setUser } = useAuth();
+    const { user } = useAuth();
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const { showSuccessToast, showErrorToast } = useCustomToast();
+
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [previewURL, setPreviewURL] = useState("");
     const [isUploading, setIsUploading] = useState(false);
-    const toast = useToast({
-        duration: 4000,
-        isClosable: true,
-    });
 
     return (
         <>
@@ -142,10 +140,7 @@ export default function ChangeProfilePictureComponent() {
         const file = fileInputRef.current?.files![0];
         const error = validateFile(file);
         if (error) {
-            return toast({
-                status: "error",
-                description: error,
-            });
+            return showErrorToast(error);
         }
         const url = URL.createObjectURL(file!);
         setPreviewURL(url);
@@ -167,26 +162,18 @@ export default function ChangeProfilePictureComponent() {
             });
 
             if (error) {
-                return toast({
-                    status: "error",
-                    description: error,
-                });
+                return showErrorToast(error);
             }
 
             setUser({
                 ...user!,
                 profilePicture: data.profilePicture,
             });
-            toast({
-                status: "success",
-                description: "Profile picture updated successfully",
-            });
+            showSuccessToast("Profile picture updated successfully");
         } catch (err) {
-            toast({
-                status: "error",
-                description:
-                    "There was an error while updating your profile picture",
-            });
+            showErrorToast(
+                "There was an error while updating your profile picture",
+            );
         } finally {
             setIsUploading(false);
         }

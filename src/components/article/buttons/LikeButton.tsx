@@ -1,18 +1,16 @@
-import { useToast, Button, Text } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 import { BiSolidLike, BiLike } from "react-icons/bi";
 import { IArticle } from "../../../types/articles";
 import { useAuth } from "../../../context/auth";
 import { useState } from "react";
 import { likeArticle, unlikeArticle } from "../../../api/articles";
+import useCustomToast from "../../../hooks/useCustomToast";
 
 export default function LikeButton({ article }: { article: IArticle }) {
     const [likes, setLikes] = useState(article.likes);
     const [loading, setLoading] = useState(false);
     const { user } = useAuth();
-    const toast = useToast({
-        isClosable: true,
-        duration: 4000,
-    });
+    const { showErrorToast } = useCustomToast();
 
     return (
         <Button
@@ -36,11 +34,11 @@ export default function LikeButton({ article }: { article: IArticle }) {
             setLoading(true);
             const { data, error } = await likeArticle(article._id);
             if (error) {
-                return toast({ status: "error", description: error });
+                return showErrorToast(error);
             }
             setLikes(data);
         } catch (err) {
-            toast({ status: "error", description: "Internal server error" });
+            showErrorToast("Internal server error");
         } finally {
             setLoading(false);
         }
@@ -51,11 +49,11 @@ export default function LikeButton({ article }: { article: IArticle }) {
             setLoading(true);
             const { data, error } = await unlikeArticle(article._id);
             if (error) {
-                return toast({ status: "error", description: error });
+                return showErrorToast(error);
             }
             setLikes(data);
         } catch (err) {
-            toast({ status: "error", description: "Internal server error" });
+            showErrorToast("Internal server error");
         } finally {
             setLoading(false);
         }

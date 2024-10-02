@@ -12,21 +12,19 @@ import {
     Textarea,
     Spinner,
     Text,
-    useToast,
 } from "@chakra-ui/react";
 import { updateUser } from "../../api/user";
 import { useAuth } from "../../context/auth";
+import useCustomToast from "../../hooks/useCustomToast";
 
 export default function AboutModal() {
-    const { user, setUser } = useAuth();
+    const { user } = useAuth();
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const { showSuccessToast } = useCustomToast();
+
     const [about, setAbout] = React.useState(user?.about || "");
     const [err, setErr] = React.useState("");
     const [loading, setLoading] = React.useState(false);
-    const toast = useToast({
-        duration: 4000,
-        isClosable: true,
-    });
 
     return (
         <>
@@ -38,6 +36,8 @@ export default function AboutModal() {
                 variant="outline"
                 size="sm"
                 onClick={onOpen}
+                isLoading={loading}
+                disabled={loading}
             >
                 Edit
             </Button>
@@ -91,10 +91,7 @@ export default function AboutModal() {
                 return setErr(error);
             }
             setUser({ ...user!, about: data.about });
-            toast({
-                status: "success",
-                description: "About section updated successfully",
-            });
+            showSuccessToast("About section updated successfully");
         } catch (err) {
             setErr("Internal server error");
         } finally {

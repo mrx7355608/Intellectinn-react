@@ -1,7 +1,8 @@
-import { Spinner, Button, useToast } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { useAuth } from "../../context/auth";
 import { useState } from "react";
 import { followUser, unfollowUser } from "../../api/user";
+import useCustomToast from "../../hooks/useCustomToast";
 
 export default function FollowAndUnfollowButtons({
     authorID,
@@ -9,19 +10,23 @@ export default function FollowAndUnfollowButtons({
     authorID: string;
 }) {
     const { user: usr, loginUser } = useAuth();
-    const toast = useToast({
-        duration: 4000,
-        isClosable: true,
-    });
+    const { showSuccessToast, showErrorToast } = useCustomToast();
     const [loading, setLoading] = useState({
         isFollowing: false,
         isUnfollowing: false,
     });
 
+    const isUserHimself = () => {
+        return usr?._id !== authorID;
+    };
+    const isFollower = () => {
+        return usr?.following.includes(authorID);
+    };
+
     return (
         <>
-            {usr?._id !== authorID ? (
-                usr?.following.includes(authorID) ? (
+            {isUserHimself() ? (
+                isFollower() ? (
                     <Button
                         bg="gray.900"
                         rounded="full"
@@ -34,12 +39,10 @@ export default function FollowAndUnfollowButtons({
                         color="white"
                         _hover={{ bg: "gray.900", color: "white" }}
                         onClick={unfollow}
+                        isLoading={loading.isUnfollowing}
+                        disabled={loading.isUnfollowing}
                     >
-                        {loading.isUnfollowing ? (
-                            <Spinner size="sm" />
-                        ) : (
-                            "Unfollow"
-                        )}
+                        Unfollow
                     </Button>
                 ) : (
                     <Button
@@ -53,8 +56,10 @@ export default function FollowAndUnfollowButtons({
                         my="auto"
                         ml="auto"
                         onClick={follow}
+                        isLoading={loading.isFollowing}
+                        disabled={loading.isFollowing}
                     >
-                        {loading.isFollowing ? <Spinner size="sm" /> : "Follow"}
+                        Follow
                     </Button>
                 )
             ) : null}
@@ -66,22 +71,12 @@ export default function FollowAndUnfollowButtons({
         try {
             const { data, error } = await followUser(authorID);
             if (error) {
-                // Show error toast
-                return toast({
-                    description: error,
-                    status: "error",
-                });
+                return showErrorToast(error);
             }
             loginUser({ ...usr!, following: data });
-            toast({
-                description: "You are now following this user",
-                status: "success",
-            });
+            showSuccessToast("You are now following this user");
         } catch (err) {
-            toast({
-                description: "Internal server error",
-                status: "error",
-            });
+            showErrorToast("Internal server error");
         } finally {
             setLoading((prev) => ({ ...prev, isFollowing: false }));
         }
@@ -92,22 +87,12 @@ export default function FollowAndUnfollowButtons({
         try {
             const { data, error } = await unfollowUser(authorID);
             if (error) {
-                // Show error toast
-                return toast({
-                    description: error,
-                    status: "error",
-                });
+                return showErrorToast(error);
             }
             loginUser({ ...usr!, following: data });
-            toast({
-                description: "User un-followed",
-                status: "success",
-            });
+            showSuccessToast("User un-followed");
         } catch (err) {
-            toast({
-                description: "Internal server error",
-                status: "error",
-            });
+            showErrorToast("Internal server error");
         } finally {
             setLoading((prev) => ({ ...prev, isUnfollowing: false }));
         }

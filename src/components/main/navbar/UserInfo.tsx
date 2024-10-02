@@ -1,16 +1,14 @@
-import { Box, Text, Image, Button, Spinner, useToast } from "@chakra-ui/react";
+import { Box, Text, Image, Button } from "@chakra-ui/react";
 import { useAuth } from "../../../context/auth";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../../../api/auth";
+import useCustomToast from "../../../hooks/useCustomToast";
 
 export default function UserInfo() {
     const { user, logoutUser } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
-    const toast = useToast({
-        isClosable: true,
-        duration: 4000,
-    });
+    const { showSuccessToast, showErrorToast } = useCustomToast();
 
     return (
         <Box display="flex" gap="5" alignItems="center">
@@ -42,8 +40,10 @@ export default function UserInfo() {
                 rounded="full"
                 onClick={onClickHandler}
                 minW="70px"
+                isLoading={isLoading}
+                disabled={isLoading}
             >
-                {isLoading ? <Spinner size="sm" /> : "Logout"}
+                Logout
             </Button>
         </Box>
     );
@@ -53,23 +53,13 @@ export default function UserInfo() {
         try {
             const { error } = await logout();
             if (error) {
-                return toast({
-                    status: "error",
-                    description: error,
-                });
+                return showErrorToast(error);
             }
 
-            // Show success toast
-            toast({
-                status: "success",
-                description: "Logout successful",
-            });
-            logoutUser();
+            logoutUser(); // set user "null" in auth store
+            showSuccessToast("Logout successful");
         } catch (err) {
-            toast({
-                status: "error",
-                description: "Internal server error",
-            });
+            showErrorToast("Internal server error");
         } finally {
             setIsLoading(false);
         }

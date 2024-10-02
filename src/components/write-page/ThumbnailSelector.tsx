@@ -1,21 +1,19 @@
-import { Box, Text, Input, Image, Spinner, useToast } from "@chakra-ui/react";
+import { Box, Text, Input, Image, Spinner } from "@chakra-ui/react";
 import { useState, useRef, SetStateAction } from "react";
 import { FaCamera } from "react-icons/fa";
 import { uploadThumbnailToCloudinary } from "../../api/articles";
 import { IArticle } from "../../types/articles";
+import useCustomToast from "../../hooks/useCustomToast";
 
 export default function ThumbnailSelector({
     setArticleData,
 }: {
-    setArticleData: React.Dispatch<SetStateAction<any>>;
+    setArticleData: React.Dispatch<SetStateAction<IArticle>>;
 }) {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [previewURL, setPreviewURL] = useState("");
     const [isUploading, setIsUploading] = useState(false);
-    const toast = useToast({
-        duration: 4000,
-        isClosable: true,
-    });
+    const { showSuccessToast, showErrorToast } = useCustomToast();
 
     return (
         <Box w="full" mt="12">
@@ -106,11 +104,7 @@ export default function ThumbnailSelector({
         const file = fileInputRef.current?.files![0];
         const error = validateFile(file);
         if (error) {
-            toast({
-                status: "error",
-                description: error,
-            });
-            return;
+            return showErrorToast(error);
         }
         const url = URL.createObjectURL(file!);
         setPreviewURL(url);
@@ -121,16 +115,9 @@ export default function ThumbnailSelector({
                 ...prev,
                 thumbnail: response.data.secure_url,
             }));
-            toast({
-                status: "success",
-                description: "Thumbnail uploaded successfully",
-            });
+            showSuccessToast("Thumbnail uploaded successfully");
         } catch (err) {
-            toast({
-                status: "error",
-                description:
-                    "There was an error while uploading your thumbnail",
-            });
+            showErrorToast("There was an error while uploading your thumbnail");
         } finally {
             setIsUploading(false);
         }

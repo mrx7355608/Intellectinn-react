@@ -1,26 +1,18 @@
-import {
-    Spinner,
-    Button,
-    Box,
-    Textarea,
-    Image,
-    useToast,
-} from "@chakra-ui/react";
+import { Spinner, Button, Box, Textarea, Image } from "@chakra-ui/react";
 import { useAuth } from "../../context/auth";
 import React, { useState } from "react";
 import { postComment } from "../../api/comments";
 import { IArticle } from "../../types/articles";
 import { useCommentsContext } from "../../context/comments";
+import useCustomToast from "../../hooks/useCustomToast";
 
 export default function InputComment({ article }: { article: IArticle }) {
-    const { user } = useAuth();
     const [loading, setLoading] = useState(false);
     const [commentText, setCommentText] = useState("");
-    const toast = useToast({
-        isClosable: true,
-        duration: 4000,
-    });
+
+    const { user } = useAuth();
     const { setComments } = useCommentsContext();
+    const { showErrorToast, showWarningToast } = useCustomToast();
 
     return (
         <Box
@@ -88,17 +80,11 @@ export default function InputComment({ article }: { article: IArticle }) {
                 article._id,
             );
             if (error) {
-                return toast({
-                    description: error,
-                    status: "warning",
-                });
+                return showWarningToast(error);
             }
             setComments((prevState) => [newlyCreatedComment, ...prevState]);
         } catch (err) {
-            toast({
-                status: "error",
-                description: "Internal server error",
-            });
+            showErrorToast("Internal server error");
         } finally {
             setLoading(false);
         }

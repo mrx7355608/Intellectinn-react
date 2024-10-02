@@ -1,25 +1,21 @@
-import { useState } from "react"
-import { addBookmark, removeBookmark } from "../../api/articles";
+import { useState } from "react";
+import { Button } from "@chakra-ui/react";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
-import { useToast, Button } from "@chakra-ui/react"
 import { IArticle } from "../../types/articles";
+import { addBookmark, removeBookmark } from "../../api/articles";
 import { useAuth } from "../../context/auth";
+import useCustomToast from "../../hooks/useCustomToast";
 
-export default function BookmarkButton({ article }: {
-    article: IArticle
-}) {
+export default function BookmarkButton({ article }: { article: IArticle }) {
     const { user } = useAuth();
     const [bookmarks, setBookmarks] = useState(article.bookmarkedBy);
     const [loading, setLoading] = useState(false);
-    const toast = useToast({
-        isClosable: true,
-        duration: 4000,
-    });
+    const { showErrorToast } = useCustomToast();
 
     return (
-        <Button 
+        <Button
             bg="transparent"
-            _hover={{ bg: "transparent" }} 
+            _hover={{ bg: "transparent" }}
             ml="auto"
             isLoading={loading}
             disabled={loading}
@@ -30,18 +26,18 @@ export default function BookmarkButton({ article }: {
                 <FaRegBookmark onClick={createBookmark} />
             )}
         </Button>
-    )
+    );
 
     async function createBookmark() {
         try {
             setLoading(true);
             const { data, error } = await addBookmark(article._id);
             if (error) {
-                return toast({ status: "error", description: error });
+                return showErrorToast(error);
             }
             setBookmarks(data);
         } catch (err) {
-            toast({ status: "error", description: "Internal server error" });
+            showErrorToast("Internal server error");
         } finally {
             setLoading(false);
         }
@@ -51,11 +47,11 @@ export default function BookmarkButton({ article }: {
             setLoading(true);
             const { data, error } = await removeBookmark(article._id);
             if (error) {
-                return toast({ status: "error", description: error });
+                return showErrorToast(error);
             }
             setBookmarks(data);
         } catch (err) {
-            toast({ status: "error", description: "Internal server error" });
+            showErrorToast("Internal server error");
         } finally {
             setLoading(false);
         }

@@ -1,7 +1,8 @@
-import { Text, useToast } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { deleteComment } from "../../api/comments";
 import { useCommentsContext } from "../../context/comments";
+import useCustomToast from "../../hooks/useCustomToast";
 
 export default function DeleteCommentButton({
     commentID,
@@ -10,10 +11,8 @@ export default function DeleteCommentButton({
 }) {
     const [loading, setLoading] = useState(false);
     const { setComments } = useCommentsContext();
-    const toast = useToast({
-        isClosable: true,
-        duration: 4000,
-    });
+    const { showErrorToast, showSuccessToast } = useCustomToast();
+
     return (
         <>
             {loading ? (
@@ -48,24 +47,15 @@ export default function DeleteCommentButton({
             setLoading(true);
             const { error } = await deleteComment(commentID);
             if (error) {
-                return toast({
-                    description: error,
-                    status: "error",
-                });
+                return showErrorToast(error);
             }
-            toast({
-                description: "Comment deleted successfully",
-                status: "success",
-            });
+            showSuccessToast("Comment deleted successfully");
             setComments((prevState) =>
                 prevState.filter((comment) => comment._id !== commentID),
             );
             return;
         } catch (err) {
-            toast({
-                description: "Internal server error",
-                status: "error",
-            });
+            showErrorToast("Internal server error");
         } finally {
             setLoading(false);
         }

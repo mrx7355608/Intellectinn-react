@@ -11,14 +11,14 @@ import {
     Box,
     Heading,
     Spinner,
-    useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { updateUser } from "../../api/user";
 import { useAuth } from "../../context/auth";
+import useCustomToast from "../../hooks/useCustomToast";
 
 export default function InterestsModal() {
-    const { user, setUser } = useAuth();
+    const { user } = useAuth();
     const { isOpen, onOpen, onClose } = useDisclosure();
     // eslint-disable-next-line
     const [interests, _setInterests] = useState([
@@ -39,10 +39,7 @@ export default function InterestsModal() {
         user!.topicsInterestedIn,
     );
     const [loading, setLoading] = useState(false);
-    const toast = useToast({
-        isClosable: true,
-        duration: 4000,
-    });
+    const { showErrorToast, showSuccessToast } = useCustomToast();
 
     return (
         <>
@@ -135,26 +132,17 @@ export default function InterestsModal() {
                 topicsInterestedIn: selectedInterests,
             });
             if (error) {
-                return toast({
-                    description: error,
-                    status: "error",
-                });
+                return showErrorToast(error);
             }
             setSelectedInterests(data.topicsInterestedIn);
             setUser({
                 ...user!,
                 topicsInterestedIn: data.topicsInterestedIn,
             });
-            toast({
-                description: "Interests updated successfully",
-                status: "success",
-            });
+            showSuccessToast("Interests updated successfully");
             onClose();
         } catch (err) {
-            toast({
-                description: "Internal server error",
-                status: "error",
-            });
+            showErrorToast("Internal server error");
         } finally {
             setLoading(false);
         }

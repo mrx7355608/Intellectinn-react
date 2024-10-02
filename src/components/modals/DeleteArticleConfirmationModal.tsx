@@ -10,24 +10,22 @@ import {
     useDisclosure,
     Text,
     Spinner,
-    useToast,
 } from "@chakra-ui/react";
 import { deleteArticle } from "../../api/articles";
 import { useState } from "react";
+import { useArticles } from "../../context/articles";
+import useCustomToast from "../../hooks/useCustomToast";
 
 export default function DeleteArticleConfirmationModal({
     articleID,
-    filterArticle,
 }: {
     articleID: string;
-    filterArticle: (id: string) => void;
 }) {
-    const { isOpen, onOpen, onClose } = useDisclosure();
     const [loading, setLoading] = useState(false);
-    const toast = useToast({
-        isClosable: true,
-        duration: 4000,
-    });
+
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { filterArticle } = useArticles();
+    const { showSuccessToast, showErrorToast } = useCustomToast();
 
     return (
         <>
@@ -76,18 +74,5 @@ export default function DeleteArticleConfirmationModal({
         } finally {
             setLoading(false);
         }
-    }
-
-    function showSuccessToast(message: string) {
-        toast({
-            description: message,
-            status: "success",
-        });
-    }
-    function showErrorToast(message: string) {
-        toast({
-            description: message,
-            status: "error",
-        });
     }
 }
