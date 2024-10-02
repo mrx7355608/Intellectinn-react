@@ -4,6 +4,8 @@ import NestedLayoutsSpinner from "../components/main/NestedLayoutsSpinner";
 import { Suspense, useEffect, useState } from "react";
 import InterestsModal from "../components/modals/InterestsModal";
 import { useAuth } from "../context/auth";
+import ErrorBoundary from "../components/main/ErrorBoundary"
+import FallbackUI from "../components/main/FallbackUI"
 
 export default function UserDashboard() {
     const { user } = useAuth();
@@ -23,7 +25,7 @@ export default function UserDashboard() {
         // add 1 to the received index (because there's a hardcoded "For you"
         // section in tabs) and set it as the current tabindex
         const tabIdx =
-            user?.topicsInterestedIn.findIndex((t) => t === tag) || 0;
+            user?.topicsInterestedIn.findIndex((t: string) => t === tag) || 0;
 
         setTabIndex(tabIdx + 1);
     }, [tag, user?.topicsInterestedIn]);
@@ -37,7 +39,7 @@ export default function UserDashboard() {
                             For you
                         </Tab>
                     </Link>
-                    {user!.topicsInterestedIn.map((t) => (
+                    {user!.topicsInterestedIn.map((t:string) => (
                         <Link to={`/user?tag=${t}`}>
                             <Tab py="2" whiteSpace={"nowrap"} m="0">
                                 {t}
@@ -49,11 +51,13 @@ export default function UserDashboard() {
                     </Tab>
                 </TabList>
 
-                <TabPanels py="10">
-                    <Suspense fallback={<NestedLayoutsSpinner />}>
-                        <Outlet />
-                    </Suspense>
-                </TabPanels>
+                <ErrorBoundary fallback={<FallbackUI />}>
+                    <TabPanels py="10">
+                        <Suspense fallback={<NestedLayoutsSpinner />}>
+                            <Outlet />
+                        </Suspense>
+                    </TabPanels>
+                </ErrorBoundary>
             </Tabs>
         </Box>
     );

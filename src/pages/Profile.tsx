@@ -15,6 +15,8 @@ import FollowAndUnfollowButtons from "../components/single-article/FollowAndUnfo
 import useFetch from "../hooks/useFetch";
 import { useAuth } from "../context/auth";
 import { IUser } from "../types/user";
+import ErrorBoundary from "../components/main/ErrorBoundary"
+import FallbackUI from "../components/main/FallbackUI"
 
 export default function Profile() {
     const { id } = useParams();
@@ -86,11 +88,13 @@ export default function Profile() {
                         <Heading>{profile.fullname}</Heading>
                         <Tabs size={"sm"} mt="8" defaultIndex={tabIndex}>
                             <MyTabsList tabs={tabsList} />
-                            <TabPanels py="10">
-                                <Suspense fallback={<NestedLayoutsSpinner />}>
-                                    <Outlet />
-                                </Suspense>
-                            </TabPanels>
+                            <ErrorBoundary fallback={<FallbackUI/>}>
+                                <TabPanels py="10">
+                                    <Suspense fallback={<NestedLayoutsSpinner />}>
+                                        <Outlet />
+                                    </Suspense>
+                                </TabPanels>
+                            </ErrorBoundary>
                         </Tabs>
                     </>
                 )}

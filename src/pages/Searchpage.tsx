@@ -3,6 +3,8 @@ import { useLocation, useSearchParams, Outlet } from "react-router-dom";
 import { Tabs, Box, TabPanels, Heading } from "@chakra-ui/react";
 import NestedLayoutsSpinner from "../components/main/NestedLayoutsSpinner";
 import MyTabsList from "../components/main/MyTabsList";
+import ErrorBoundary from "../components/main/ErrorBoundary"
+import FallbackUI from "../components/main/FallbackUI"
 
 export default function Searchpage() {
     const [searchParams, _setSearchParams] = useSearchParams();
@@ -55,11 +57,13 @@ export default function Searchpage() {
 
             <Tabs size={"sm"} mt="8" index={tabIndex}>
                 <MyTabsList tabs={tabsList} />
-                <TabPanels py="10">
-                    <Suspense fallback={<NestedLayoutsSpinner />}>
-                        <Outlet />
-                    </Suspense>
-                </TabPanels>
+                <ErrorBoundary fallback={<FallbackUI/>}>
+                    <TabPanels py="10">
+                        <Suspense fallback={<NestedLayoutsSpinner />}>
+                            <Outlet />
+                        </Suspense>
+                    </TabPanels>
+                </ErrorBoundary>
             </Tabs>
         </Box>
     );
