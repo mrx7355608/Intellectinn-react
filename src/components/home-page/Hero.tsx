@@ -43,7 +43,7 @@ export default function Hero() {
                 pb={"0.5"}
                 mt={"12"}
                 onClick={() => {
-                    user ? navTo("/") : navTo("/login");
+                    user ? navTo("/write") : navTo("/auth/login");
                 }}
             >
                 Start reading
