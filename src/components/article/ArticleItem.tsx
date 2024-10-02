@@ -1,15 +1,15 @@
 import { Box, Divider } from "@chakra-ui/react";
-import ArticleMenu from "./ArticleMenu";
 import Author from "./Author";
 import TitleAndSummary from "./TitleAndSummary";
 import { IArticle } from "../../types/articles";
+import ArticleItemDetails from "./ArticleItemDetails";
 
-export default function Article({ article }: { article: IArticle }) {
+export default function ArticleItem({ article }: { article: IArticle }) {
     return (
         <Box display="flex" flexDirection="column" w="full">
             <Author article={article} />
             <TitleAndSummary article={article} />
-            <ArticleMenu article={article} />
+            <ArticleItemDetails article={article} />
             <Divider />
         </Box>
     );
