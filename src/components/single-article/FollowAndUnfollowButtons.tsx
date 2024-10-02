@@ -11,6 +11,7 @@ export default function FollowAndUnfollowButtons({
 }) {
     const { user: usr, loginUser } = useAuth();
     const { showSuccessToast, showErrorToast } = useCustomToast();
+
     const [loading, setLoading] = useState({
         isFollowing: false,
         isUnfollowing: false,

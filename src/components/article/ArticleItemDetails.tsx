@@ -1,16 +1,16 @@
 import { Box, Text } from "@chakra-ui/react";
 import { useAuth } from "../../context/auth";
 import { IArticle } from "../../types/articles";
-import BookmarkButton from "./BookmarkButton"
-import MenuForAuthor from "./menu/MenuForAuthor"
-import MenuForViewer from "./menu/MenuForViewer"
+import BookmarkButton from "./BookmarkButton";
+import MenuForAuthor from "./menu/MenuForAuthor";
+import MenuForViewer from "./menu/MenuForViewer";
 
 export default function ArticleItemDetails({ article }: { article: IArticle }) {
     const { user } = useAuth();
 
     const isOwner = () => {
         return user?._id === article.author._id;
-    }
+    };
 
     return (
         <Box mb="8" display={"flex"} alignItems={"center"} w={"80%"}>
@@ -40,9 +40,8 @@ export default function ArticleItemDetails({ article }: { article: IArticle }) {
             {isOwner() ? (
                 <MenuForAuthor article={article} />
             ) : (
-                <MenuForViewer/>
+                <MenuForViewer authorID={article.author._id} />
             )}
         </Box>
     );
-
 }
