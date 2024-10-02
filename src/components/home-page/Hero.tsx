@@ -1,6 +1,11 @@
 import { Text, Heading, Box, Button } from "@chakra-ui/react";
+import { useAuth } from "../../context/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
+    const { user } = useAuth();
+    const navTo = useNavigate();
+
     return (
         <Box
             backgroundImage={"/hero.jpg"}
@@ -37,6 +42,9 @@ export default function Hero() {
                 py={"0"}
                 pb={"0.5"}
                 mt={"12"}
+                onClick={() => {
+                    user ? navTo("/") : navTo("/login");
+                }}
             >
                 Start reading
             </Button>

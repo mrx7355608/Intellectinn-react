@@ -26,21 +26,21 @@ export default function MenuForViewer({ authorID }: { authorID: string }) {
                     </MenuButton>
                     <MenuList>
                         <Button
-                            size={"sm"}
                             width={"full"}
                             variant={"ghost"}
                             rounded={"none"}
                             onClick={follow}
+                            fontWeight={"regular"}
                             isLoading={isFollowing}
                             disabled={isFollowing}
                         >
                             Follow
                         </Button>
                         <Button
-                            size={"sm"}
                             width={"full"}
                             rounded={"none"}
                             variant={"ghost"}
+                            fontWeight={"regular"}
                             onClick={unfollow}
                             isLoading={isUnfollowing}
                             disabled={isUnfollowing}
