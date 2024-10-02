@@ -21,7 +21,7 @@ import { updateUser } from "../../api/user";
 import useCustomToast from "../../hooks/useCustomToast";
 
 export default function ChangeProfilePictureComponent() {
-    const { user } = useAuth();
+    const { user, updateProfilePicture } = useAuth();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { showSuccessToast, showErrorToast } = useCustomToast();
 
@@ -165,10 +165,7 @@ export default function ChangeProfilePictureComponent() {
                 return showErrorToast(error);
             }
 
-            setUser({
-                ...user!,
-                profilePicture: data.profilePicture,
-            });
+            updateProfilePicture(data.profilePicture); // update user state
             showSuccessToast("Profile picture updated successfully");
         } catch (err) {
             showErrorToast(

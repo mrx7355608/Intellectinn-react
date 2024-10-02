@@ -18,7 +18,7 @@ import { useAuth } from "../../context/auth";
 import useCustomToast from "../../hooks/useCustomToast";
 
 export default function AboutModal() {
-    const { user } = useAuth();
+    const { user, updateAbout } = useAuth();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { showSuccessToast } = useCustomToast();
 
@@ -90,7 +90,8 @@ export default function AboutModal() {
             if (error) {
                 return setErr(error);
             }
-            setUser({ ...user!, about: data.about });
+
+            updateAbout(data.about); // Update user state in zustand store
             showSuccessToast("About section updated successfully");
         } catch (err) {
             setErr("Internal server error");

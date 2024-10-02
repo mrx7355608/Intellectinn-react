@@ -9,7 +9,7 @@ export default function MenuForViewer({ authorID }: { authorID: string }) {
     const [isFollowing, setIsFollowing] = useState(false);
     const [isUnfollowing, setIsUnfollowing] = useState(false);
 
-    const { user } = useAuth();
+    const { updateFollowings } = useAuth();
     const { showSuccessToast, showErrorToast } = useCustomToast();
 
     return (
@@ -71,7 +71,7 @@ export default function MenuForViewer({ authorID }: { authorID: string }) {
             if (error) {
                 return showErrorToast(error);
             }
-            loginUser({ ...user!, following: data });
+            updateFollowings(data);
             showSuccessToast("You are now following this user");
         } catch (err) {
             showErrorToast("Internal server error");
@@ -87,7 +87,7 @@ export default function MenuForViewer({ authorID }: { authorID: string }) {
             if (error) {
                 return showErrorToast(error);
             }
-            loginUser({ ...user!, following: data });
+            updateFollowings(data);
             showSuccessToast("User un-followed");
         } catch (err) {
             showErrorToast("Internal server error");

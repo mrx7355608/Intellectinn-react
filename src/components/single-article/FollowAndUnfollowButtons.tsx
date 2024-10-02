@@ -9,7 +9,7 @@ export default function FollowAndUnfollowButtons({
 }: {
     authorID: string;
 }) {
-    const { user: usr, loginUser } = useAuth();
+    const { user: usr, updateFollowings } = useAuth();
     const { showSuccessToast, showErrorToast } = useCustomToast();
 
     const [loading, setLoading] = useState({
@@ -74,7 +74,7 @@ export default function FollowAndUnfollowButtons({
             if (error) {
                 return showErrorToast(error);
             }
-            loginUser({ ...usr!, following: data });
+            updateFollowings(data);
             showSuccessToast("You are now following this user");
         } catch (err) {
             showErrorToast("Internal server error");
@@ -90,7 +90,7 @@ export default function FollowAndUnfollowButtons({
             if (error) {
                 return showErrorToast(error);
             }
-            loginUser({ ...usr!, following: data });
+            updateFollowings(data);
             showSuccessToast("User un-followed");
         } catch (err) {
             showErrorToast("Internal server error");

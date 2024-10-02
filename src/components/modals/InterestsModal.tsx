@@ -18,7 +18,7 @@ import { useAuth } from "../../context/auth";
 import useCustomToast from "../../hooks/useCustomToast";
 
 export default function InterestsModal() {
-    const { user } = useAuth();
+    const { user, updateInterests } = useAuth();
     const { isOpen, onOpen, onClose } = useDisclosure();
     // eslint-disable-next-line
     const [interests, _setInterests] = useState([
@@ -106,7 +106,7 @@ export default function InterestsModal() {
                             <Button
                                 colorScheme="teal"
                                 mr={3}
-                                onClick={updateInterests}
+                                onClick={updateInterestsAPI}
                             >
                                 Update
                             </Button>
@@ -125,7 +125,7 @@ export default function InterestsModal() {
         setSelectedInterests(selectedInterests.filter((i) => i !== interest));
     }
 
-    async function updateInterests() {
+    async function updateInterestsAPI() {
         try {
             setLoading(true);
             const { data, error } = await updateUser({
@@ -135,10 +135,7 @@ export default function InterestsModal() {
                 return showErrorToast(error);
             }
             setSelectedInterests(data.topicsInterestedIn);
-            setUser({
-                ...user!,
-                topicsInterestedIn: data.topicsInterestedIn,
-            });
+            updateInterests(data.topicsInterestedIn); // Update interests in user store
             showSuccessToast("Interests updated successfully");
             onClose();
         } catch (err) {
