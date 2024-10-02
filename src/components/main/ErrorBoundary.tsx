@@ -1,3 +1,5 @@
+import React from "react"
+
 interface ErrorBoundaryProps {
     children: React.ReactNode;
     fallback: React.ReactNode;
@@ -26,3 +28,5 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps,ErrorBoundaryStat
         return this.props.children;
     }
 }
+
+export default ErrorBoundary;
