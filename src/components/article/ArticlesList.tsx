@@ -20,7 +20,7 @@ export default function ArticlesList({
         <Box display="flex" flexDirection="column" gap={"8"}>
             {articles.length > 0 ? (
                 articles.map((article) => {
-                    return <Article article={article} />;
+                    return <Article key={article._id} article={article} />;
                 })
             ) : (
                 <Text>Nothing to show</Text>

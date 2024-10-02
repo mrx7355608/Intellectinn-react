@@ -7,7 +7,7 @@ import axiosAgent from "../api/utils";
 import { IApiResponse } from "../types/api";
 import { IArticle } from "../types/articles";
 import ArticleAuthorInfo from "../components/article/ArticleAuthorInfo";
-import ArticleActionButtons from "../components/article/ArticleItemMenu";
+import ArticleActionButtons from "../components/article/ArticlePageCTAs";
 import CommentsSection from "../components/comments/CommentsSection";
 import CommentsProvider from "../context/comments";
 
@@ -94,6 +94,7 @@ function ArticlePageUI({ article }: { article: IArticle }) {
                 {article.tags.map((t) => {
                     return (
                         <Text
+                            key={t}
                             bg="gray.100"
                             py="2"
                             rounded="full"

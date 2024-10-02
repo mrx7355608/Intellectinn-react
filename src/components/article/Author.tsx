@@ -14,7 +14,7 @@ export default function Author({ article }: { article: IArticle }) {
                 objectFit="cover"
             />
             {/* Name */}
-            <Link to={`/profile/${article.author._id}`}>
+            <Link to={`/profile/${article.author._id}/publications`}>
                 <Text ml="2" fontSize="sm" _hover={{ textDecor: "underline" }}>
                     {article.author.fullname}
                 </Text>
@@ -22,7 +22,7 @@ export default function Author({ article }: { article: IArticle }) {
 
             {/* Publish date */}
             <Text ml="1" color="gray.500" fontSize="sm">
-                {new Date(article.createdAt).toDateString()}
+                {new Date(article.createdAt).toDateString().slice(4)}
             </Text>
         </Box>
     );

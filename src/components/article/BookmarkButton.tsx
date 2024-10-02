@@ -19,6 +19,7 @@ export default function BookmarkButton({ article }: { article: IArticle }) {
             ml="auto"
             isLoading={loading}
             disabled={loading}
+            padding={0}
         >
             {user && bookmarks.includes(user._id) ? (
                 <FaBookmark onClick={deleteBookmark} />

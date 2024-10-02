@@ -31,7 +31,7 @@ export default function ArticlePageCTA({ article }: { article: IArticle }) {
             </Box>
             {/* Bookmark button */}
             <BookmarkButton article={article} />
-            <Text as="span" ml="2">
+            <Text as="span" ml="0">
                 {article.bookmarkedBy.length}
             </Text>
         </Box>

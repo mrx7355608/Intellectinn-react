@@ -18,7 +18,7 @@ export default function ArticleAuthorInfo({ article }: { article: IArticle }) {
                 </Text>
                 <Text fontSize="sm" color="gray.500">
                     {article.timeToReadInMinutes} min read &middot;{" "}
-                    {new Date(article.createdAt).toDateString()}
+                    {new Date(article.createdAt).toDateString().slice(4)}
                 </Text>
             </Box>
             <FollowAndUnfollowButtons authorID={article.author._id} />

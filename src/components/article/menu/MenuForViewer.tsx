@@ -26,15 +26,10 @@ export default function MenuForViewer({ authorID }: { authorID: string }) {
                     </MenuButton>
                     <MenuList>
                         <Button
-                            variant="outline"
-                            rounded="full"
-                            borderColor="black"
-                            px="6"
-                            py="2"
-                            pt="2.5"
-                            size="sm"
-                            my="auto"
-                            ml="auto"
+                            size={"sm"}
+                            width={"full"}
+                            variant={"ghost"}
+                            rounded={"none"}
                             onClick={follow}
                             isLoading={isFollowing}
                             disabled={isFollowing}
@@ -42,16 +37,10 @@ export default function MenuForViewer({ authorID }: { authorID: string }) {
                             Follow
                         </Button>
                         <Button
-                            bg="gray.900"
-                            rounded="full"
-                            px="6"
-                            py="2"
-                            pt="2.5"
-                            size="sm"
-                            my="auto"
-                            ml="auto"
-                            color="white"
-                            _hover={{ bg: "gray.900", color: "white" }}
+                            size={"sm"}
+                            width={"full"}
+                            rounded={"none"}
+                            variant={"ghost"}
                             onClick={unfollow}
                             isLoading={isUnfollowing}
                             disabled={isUnfollowing}

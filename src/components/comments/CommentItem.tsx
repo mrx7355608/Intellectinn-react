@@ -34,7 +34,9 @@ export default function CommentCard({ comment }: { comment: IComment }) {
                             color="gray.500"
                             whiteSpace={"nowrap"}
                         >
-                            {new Date(comment.createdAt).toLocaleDateString()}
+                            {new Date(comment.createdAt)
+                                .toDateString()
+                                .slice(4)}
                         </Text>
                         <Text
                             fontSize="sm"

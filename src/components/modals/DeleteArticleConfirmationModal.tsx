@@ -68,6 +68,7 @@ export default function DeleteArticleConfirmationModal({
             }
 
             filterArticle(articleID);
+            onClose();
             return showSuccessToast("Article deleted successfully");
         } catch (err) {
             showErrorToast("Internal server error");

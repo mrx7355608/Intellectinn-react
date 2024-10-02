@@ -15,7 +15,7 @@ export default function MyTabsList({ tabs }: IMyTabListProps) {
         <TabList overflowY="hidden" height={"full"}>
             {tabs.map((tab) => {
                 return (
-                    <Link to={tab.link}>
+                    <Link key={tab.title} to={tab.link}>
                         <Tab py="2" whiteSpace={"nowrap"} m="0">
                             {tab.title}
                         </Tab>

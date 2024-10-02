@@ -3,13 +3,20 @@ import { Box, Spinner, Text } from "@chakra-ui/react";
 import ArticlesList from "../components/article/ArticlesList";
 import useFetch from "../hooks/useFetch";
 import { IArticle } from "../types/articles";
+import { useEffect } from "react";
+import { useArticles } from "../context/articles";
 
 export default function Home() {
-    const {
-        loading,
-        err,
-        data: articles,
-    } = useFetch<IArticle[]>("/api/articles/published");
+    const { articles, setArticles } = useArticles();
+    const { loading, err, data } = useFetch<IArticle[]>(
+        "/api/articles/published",
+    );
+
+    useEffect(() => {
+        if (data) {
+            setArticles(data);
+        }
+    }, [data]);
 
     return (
         <>
