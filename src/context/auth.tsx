@@ -7,10 +7,8 @@ type Store = {
     logoutUser: () => void;
     updateAbout: (about: string) => void;
     updateProfilePicture: (profilePicture: string) => void;
-    addFollower: (followerID: string) => void;
-    removeFollower: (followerID: string) => void;
-    addFollowing: (followingID: string) => void;
-    removeFollowing: (followingID: string) => void;
+    updateFollowings: (newFollowings: string[]) => void;
+    updateInterests: (interests: string[]) => void;
 };
 
 const updateUserHelper = (state: Store, updates: Partial<IUser>) => {
@@ -35,35 +33,17 @@ export const useAuth = create<Store>()((set) => ({
             user: updateUserHelper(state, { profilePicture }),
         })),
 
-    addFollower: (followerID) =>
+    updateFollowings: (newFollowings) =>
         set((state) => ({
             user: updateUserHelper(state, {
-                followers: [...(state.user?.followers || []), followerID],
+                following: newFollowings,
             }),
         })),
 
-    removeFollower: (followerID) =>
+    updateInterests: (updatedInterests) =>
         set((state) => ({
             user: updateUserHelper(state, {
-                followers: state.user?.followers.filter(
-                    (id) => id !== followerID,
-                ),
-            }),
-        })),
-
-    addFollowing: (followingID) =>
-        set((state) => ({
-            user: updateUserHelper(state, {
-                following: [...(state.user?.following || []), followingID],
-            }),
-        })),
-
-    removeFollowing: (followingID) =>
-        set((state) => ({
-            user: updateUserHelper(state, {
-                followers: state.user?.following.filter(
-                    (id) => id !== followingID,
-                ),
+                topicsInterestedIn: updatedInterests,
             }),
         })),
 }));
