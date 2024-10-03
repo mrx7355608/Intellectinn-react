@@ -4,6 +4,8 @@ import { useAuth } from "./context/auth";
 import { getUser } from "./api/user";
 import { Box, Spinner, Heading } from "@chakra-ui/react";
 import ProtectedRoute from "./components/route-protection/ProtectedRoute";
+import FallbackUI from "./components/main/FallbackUI";
+import ErrorBoundary from "./components/main/ErrorBoundary";
 
 // Layouts
 import MainLayout from "./layouts/MainLayout";
@@ -114,8 +116,8 @@ const router = createBrowserRouter([
     },
     {
         path: "*",
-        element: <NotFound />
-    }
+        element: <NotFound />,
+    },
 ]);
 
 function App() {
@@ -136,36 +138,48 @@ function App() {
     }, [loginUser]);
 
     if (loading) {
-        return (
-            <Box
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                w="full"
-                h="100vh"
-            >
-                <Spinner />
-            </Box>
-        );
+        return <BigSpinner />;
     }
 
     if (error) {
-        return (
-            <Box
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                w="full"
-                h="100vh"
-            >
-                <Heading fontSize="2xl" color="red.700">
-                    {error}
-                </Heading>
-            </Box>
-        );
+        return <BigError error={error} />;
     }
 
-    return <RouterProvider router={router} />;
+    return (
+        <ErrorBoundary fallback={<FallbackUI />}>
+            <RouterProvider router={router} />
+        </ErrorBoundary>
+    );
+}
+
+function BigSpinner() {
+    return (
+        <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            w="full"
+            h="100vh"
+        >
+            <Spinner />
+        </Box>
+    );
+}
+
+function BigError({ error }: { error: string }) {
+    return (
+        <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            w="full"
+            h="100vh"
+        >
+            <Heading fontSize="2xl" color="red.700">
+                {error}
+            </Heading>
+        </Box>
+    );
 }
 
 export default App;
