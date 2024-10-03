@@ -19,7 +19,7 @@ export default function SubProfilePage() {
         <Box display="flex" flexDirection={"column"}>
             {loading && <Spinner />}
             {err && <Text color="red.600">{err}</Text>}
-            {data && <DataList type={type!} data={data} />}
+            {!loading && !err && data && <DataList type={type!} data={data} />}
         </Box>
     );
 }

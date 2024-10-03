@@ -2,7 +2,15 @@ import { Button, Image } from "@chakra-ui/react";
 
 export default function ContinueWithGoogle() {
     const onClickHandler = () => {
-        window.open("/api/auth/google", "_self");
+        const serverPrefixedURL =
+            import.meta.env.VITE_SERVER_URL + "/api/auth/google";
+
+        const url =
+            import.meta.env.VITE_ENV === "production"
+                ? "/api/auth/google"
+                : serverPrefixedURL;
+
+        window.open(url, "_self");
     };
     return (
         <Button

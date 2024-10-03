@@ -4,10 +4,10 @@ import UserItem from "./UserItem";
 
 export default function UserList({ users }: { users: IUser[] }) {
     return (
-        <VStack>
+        <VStack alignItems={"start"}>
             {users.length > 0 ? (
                 users.map((user) => {
-                    return <UserItem user={user} />;
+                    return <UserItem key={user._id} user={user} />;
                 })
             ) : (
                 <Text>Nothing to show</Text>
