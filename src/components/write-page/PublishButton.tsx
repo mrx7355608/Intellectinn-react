@@ -1,4 +1,4 @@
-import { Button, Spinner } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
 export default function PublishButton({
     isLoading,
@@ -12,16 +12,18 @@ export default function PublishButton({
             bg="gray.800"
             color="white"
             rounded="full"
-            flex="1"
             px="5"
+            w="full"
             size="lg"
             onClick={publish}
+            isLoading={isLoading}
+            disabled={isLoading}
             _hover={{
                 bg: "gray.900",
                 color: "white",
             }}
         >
-            {isLoading ? <Spinner /> : "Publish"}
+            Create article
         </Button>
     );
 }

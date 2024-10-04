@@ -59,6 +59,22 @@ export default function Writepage() {
                 onChange={onChangeHandler}
                 name="title"
             />
+
+            {/* Summary textarea */}
+            <Text color="gray.800" mb={1}>
+                Summary:
+            </Text>
+            <Textarea
+                variant={"flushed"}
+                size="lg"
+                fontSize={"xl"}
+                rows={3}
+                mb={12}
+                resize={"none"}
+                onChange={onChangeHandler}
+                name="summary"
+            ></Textarea>
+
             {/* WYSIWYG editor */}
             <Editor
                 editorState={editorState}
@@ -89,21 +105,8 @@ export default function Writepage() {
                 name="timeToReadInMinutes"
             />
 
-            {/* Summary textarea */}
-            <Text color="gray.800" mt="12">
-                Summary:
-            </Text>
-            <Textarea
-                variant={"flushed"}
-                size="lg"
-                fontSize={"xl"}
-                rows={2}
-                onChange={onChangeHandler}
-                name="summary"
-            ></Textarea>
-
             {/* Select thumbnail */}
-            <ThumbnailSelector setArticleData={setArticleData} />
+            <ThumbnailSelector setArticleData={setArticleData as any} />
 
             {/* Error messages */}
             <Text color="red.500" mt="8">
