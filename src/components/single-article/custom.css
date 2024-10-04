@@ -1,8 +1,8 @@
 .container * {
     font-weight: revert;
-    font-size: 15pt;
     margin: revert;
     padding: revert;
+    white-space: pre-wrap;
 }
 
 pre {
