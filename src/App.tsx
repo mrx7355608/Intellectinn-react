@@ -12,6 +12,7 @@ import GuestRoute from "./components/route-protection/GuestRoute";
 import UserPageArticles from "./components/user-page/UserPageArticles";
 import SubProfilePage from "./components/profile-page/SubProfilePage";
 import NotFound from "./pages/NotFound";
+import SomethingWentWrong from "./pages/SomethingWentWrong";
 
 // Pages
 const Home = lazy(() => import("./pages/Home"));
@@ -28,6 +29,7 @@ const SingleArticle = lazy(() => import("./pages/SingleArticle"));
 const router = createBrowserRouter([
     {
         path: "/",
+        errorElement: <SomethingWentWrong />,
         element: <MainLayout />,
         children: [
             {
