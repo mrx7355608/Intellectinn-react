@@ -20,10 +20,13 @@ export default function PeopleList() {
         <Box display="flex" flexDirection={"column"}>
             {loading && <Spinner />}
             {err && <Text color="red.600">{err}</Text>}
-            {users &&
+            {users && users.length > 0 ? (
                 users.map((user) => {
                     return <UserBox user={user} />; // TODO: rename this to UserItem
-                })}
+                })
+            ) : (
+                <Text>Nothing to show</Text>
+            )}
         </Box>
     );
 }

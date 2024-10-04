@@ -4,8 +4,6 @@ import { useAuth } from "./context/auth";
 import { getUser } from "./api/user";
 import { Box, Spinner, Heading } from "@chakra-ui/react";
 import ProtectedRoute from "./components/route-protection/ProtectedRoute";
-import FallbackUI from "./components/main/FallbackUI";
-import ErrorBoundary from "./components/main/ErrorBoundary";
 
 // Layouts
 import MainLayout from "./layouts/MainLayout";
@@ -13,6 +11,7 @@ import AuthLayout from "./layouts/AuthLayout";
 import GuestRoute from "./components/route-protection/GuestRoute";
 import UserPageArticles from "./components/user-page/UserPageArticles";
 import SubProfilePage from "./components/profile-page/SubProfilePage";
+import NotFound from "./pages/NotFound";
 
 // Pages
 const Home = lazy(() => import("./pages/Home"));
@@ -24,7 +23,6 @@ const UserDasboard = lazy(() => import("./pages/UserDasboard"));
 const Searchpage = lazy(() => import("./pages/Searchpage"));
 const Profile = lazy(() => import("./pages/Profile"));
 const SingleArticle = lazy(() => import("./pages/SingleArticle"));
-const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Routes
 const router = createBrowserRouter([
@@ -140,11 +138,7 @@ function App() {
         return <BigError error={error} />;
     }
 
-    return (
-        <ErrorBoundary fallback={<FallbackUI />}>
-            <RouterProvider router={router} />
-        </ErrorBoundary>
-    );
+    return <RouterProvider router={router} />;
 }
 
 function BigSpinner() {
