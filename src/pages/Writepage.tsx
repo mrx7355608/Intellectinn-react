@@ -15,6 +15,7 @@ import PublishButton from "../components/write-page/PublishButton";
 import { createArticle } from "../api/articles";
 import { useNavigate } from "react-router-dom";
 import useCustomToast from "../hooks/useCustomToast";
+import ArticlePublishStatus from "../components/write-page/ArticlePublishStatus";
 
 export default function Writepage() {
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -35,6 +36,7 @@ export default function Writepage() {
         summary: "",
         thumbnail: "",
         timeToReadInMinutes: 0,
+        is_published: true,
     });
 
     return (
@@ -108,6 +110,12 @@ export default function Writepage() {
             {/* Select thumbnail */}
             <ThumbnailSelector setArticleData={setArticleData as any} />
 
+            {/* Article status */}
+            <Text color="gray.800" mt="7" mb={2}>
+                Select article status:
+            </Text>
+            <ArticlePublishStatus setArticleData={setArticleData as any} />
+
             {/* Error messages */}
             <Text color="red.500" mt="8">
                 {error}
@@ -132,7 +140,6 @@ export default function Writepage() {
         const article = Object.assign({}, articleData, {
             tags,
             content: draftToHtml(convertToRaw(editorState.getCurrentContent())),
-            is_published: true,
         });
         return article;
     }

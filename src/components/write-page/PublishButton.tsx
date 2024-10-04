@@ -15,6 +15,7 @@ export default function PublishButton({
             px="5"
             w="full"
             size="lg"
+            mt={7}
             onClick={publish}
             isLoading={isLoading}
             disabled={isLoading}
